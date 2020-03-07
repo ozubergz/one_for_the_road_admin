@@ -8,6 +8,7 @@ import {
     TextInput,
     NumberField,
     NumberInput,
+    ChipField,
     ReferenceField,
     ReferenceInput,
     SelectInput,
@@ -16,14 +17,14 @@ import {
 
 export const ItemList = props => (
     <List {...props}>
-        <Datagrid rowClick="edit">
+        <Datagrid>
             <TextField source="id" />
             <TextField source="name" />
             <TextField source="description" />
             <NumberField source="price" />
             {/* <TextField source="selections" /> */}
             <ReferenceField source="category_id" reference="categories">
-                <TextField source="name" />
+                <ChipField source="name" />
             </ReferenceField>
             <EditButton />
         </Datagrid>
@@ -33,7 +34,7 @@ export const ItemList = props => (
 export const ItemEdit = props => (
     <Edit {...props}>
         <SimpleForm>
-            <TextInput source="id" />
+            <TextInput disabled source="id" />
             <TextInput source="name" />
             <TextInput source="description" />
             <NumberInput source="price" />
