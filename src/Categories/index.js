@@ -1,7 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import Chip from '@material-ui/core/Chip';
-
 import {
     Edit,
     List,
@@ -9,7 +8,7 @@ import {
     TextField,
     TextInput,
     EditButton,
-    SimpleForm,
+    SimpleForm
 } from 'react-admin'
 
 export const CategoryList = props => (
@@ -22,12 +21,11 @@ export const CategoryList = props => (
     </List>
 );
 
-
-
 const TagField = ({record}) => {
     let history = useHistory();
     return (
         <div>
+            <div className="items-label">Items</div>
             {record.items.map(item => 
                 <Chip 
                     className="chip_field"
