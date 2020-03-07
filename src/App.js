@@ -1,5 +1,7 @@
 import React from 'react';
 import './styles/App.css';
+import { Route, Router } from 'react-router';
+
 import simpleRestProvider from 'ra-data-simple-rest';
 import { 
   Admin, 
@@ -20,6 +22,9 @@ function App() {
         <Resource name="categories" list={CategoryList} edit={CategoryEdit} />
         <Resource name="items" list={ItemList} edit={ItemEdit} />
       </Admin>
+      {/* <Router>
+        <Route exact path="/items/:itemId" />
+      </Router> */}
     </div>
   );
 }

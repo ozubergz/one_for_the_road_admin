@@ -1,22 +1,15 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
+import Chip from '@material-ui/core/Chip';
+
 import {
     Edit,
     List,
-    ArrayField,
     Datagrid,
     TextField,
     TextInput,
     EditButton,
     SimpleForm,
-    ReferenceField,
-    ReferenceArrayField,
-    SingleFieldList,
-    ChipField,
-    ArrayInput,
-    SimpleFormIterator,
-    ReferenceManyField,
-    SimpleList
-
 } from 'react-admin'
 
 export const CategoryList = props => (
@@ -29,14 +22,21 @@ export const CategoryList = props => (
     </List>
 );
 
+
+
 const TagField = ({record}) => {
-    // console.log(record)
+    let history = useHistory();
     return (
-        <ul>
+        <div>
             {record.items.map(item => 
-                <li key={item.id}>{item.name}</li>
+                <Chip 
+                    className="chip_field"
+                    key={item.id}
+                    label={item.name}
+                    onClick={() => history.push(`/items/${item.id}`)}
+                />
             )}
-        </ul>
+        </div>
     );
 }
 
@@ -46,12 +46,6 @@ export const CategoryEdit = props => (
             <TextInput disabled source="id" />
             <TextInput source="name" />
             <TagField />
-            {/* <ArrayField source="items">
-                <SingleFieldList >
-                    <ChipField source="name" onClick={() => { console.log('click')}} />
-                </SingleFieldList>
-            </ArrayField> */}
         </SimpleForm>
-        
     </Edit>
 );
