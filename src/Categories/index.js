@@ -2,6 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import Chip from '@material-ui/core/Chip';
 import {
+    Create,
     Edit,
     List,
     Datagrid,
@@ -9,7 +10,15 @@ import {
     TextInput,
     EditButton,
     SimpleForm
-} from 'react-admin'
+} from 'react-admin';
+
+export const CategoryCreate = props => (
+    <Create {...props}>
+        <SimpleForm>
+            <TextInput source="name" />
+        </SimpleForm>
+    </Create>
+)
 
 export const CategoryList = props => (
     <List {...props}>
@@ -26,14 +35,19 @@ const TagField = ({record}) => {
     return (
         <div>
             <div className="items-label">Items</div>
-            {record.items.map(item => 
-                <Chip 
-                    className="chip_field"
-                    key={item.id}
-                    label={item.name}
-                    onClick={() => history.push(`/items/${item.id}`)}
-                />
-            )}
+            {
+                record.items ?
+                record.items.map(item => 
+                    <Chip 
+                        className="chip_field"
+                        key={item.id}
+                        label={item.name}
+                        onClick={() => history.push(`/items/${item.id}`)}
+                    />
+                )
+                :
+                null
+            }
         </div>
     );
 }

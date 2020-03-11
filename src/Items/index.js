@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+    Create,
     List,
     Edit,
     SimpleForm,
@@ -29,6 +30,19 @@ export const ItemList = props => (
             <EditButton />
         </Datagrid>
     </List>
+);
+
+export const ItemCreate = props => (
+    <Create {...props}>
+        <SimpleForm>
+            <TextInput source="name" />
+            <TextInput source="description" />
+            <NumberInput source="price" />
+            <ReferenceInput source="category_id" reference="categories">
+                <SelectInput optionText="name" />
+            </ReferenceInput>
+        </SimpleForm>
+    </Create>
 );
 
 export const ItemEdit = props => (
