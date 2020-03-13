@@ -4,17 +4,16 @@ import {
     Datagrid,
     TextField,
     EmailField,
-    NumberField
 } from 'react-admin'
 
 export const UserList = props => (
     <List {...props}>
-        <Datagrid rowClick="edit">
+        <Datagrid>
             <TextField source="id" />
             <EmailField source="email" />
             <TextField source="first_name" />
             <TextField source="last_name" />
-            <NumberField source="telephone" />
+            <TextField source="phone" />
         </Datagrid>
     </List>
 );
