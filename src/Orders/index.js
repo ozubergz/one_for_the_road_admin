@@ -8,6 +8,7 @@ import {
     ArrayField,
     ReferenceField,
     DateField,
+    EmailField,
     ShowButton,
     SimpleShowLayout
 } from 'react-admin';
@@ -16,9 +17,10 @@ export const OrderList = props => (
     <List {...props}>
         <Datagrid >
             <TextField source="id" />
-            <ReferenceField source="user_id" reference="users">
-                <TextField source="email" />
-            </ReferenceField>
+            <TextField source="customer" />
+            <EmailField source="email" />
+            <TextField source="phone" />
+            <NumberField source="amount" />
             <DateField source="created_at" />
             <ShowButton />
         </Datagrid>
@@ -29,9 +31,10 @@ export const OrderShow = props => (
     <Show {...props}>
         <SimpleShowLayout>
             <TextField source="id" />
-            <ReferenceField reference="users" source="user_id">
-                <TextField source="email" />
-            </ReferenceField>
+            <TextField source="customer" />
+            <TextField source="address" />
+            <EmailField source="email" />
+            <TextField source="phone" />
             <ArrayField source="items">
                 <Datagrid>
                     <TextField source="id" />
@@ -41,7 +44,9 @@ export const OrderShow = props => (
                     <TextField source="selections" />
                 </Datagrid>
             </ArrayField>
+            <NumberField source="amount" />
             <DateField source="created_at" />
+            <DateField source="updated_at" />
         </SimpleShowLayout>
     </Show>
 );

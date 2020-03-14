@@ -3,6 +3,7 @@ import {
     Show,
     List,
     Datagrid,
+    DateField,
     TextField,
     EmailField,
     SimpleShowLayout,
