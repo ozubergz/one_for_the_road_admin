@@ -7,6 +7,15 @@ import { store } from 'react-notifications-component';
 //Action Cable
 import actionCable from 'actioncable';
 
+//audio
+import bellAudio from './sounds/bell.mp3'
+import UIfx from 'uifx'
+
+const bell = new UIfx(bellAudio, {
+    volume: 0.4,
+    throttleMs: 100
+});
+
 const CableApp = {};
 CableApp.cable = actionCable.createConsumer("ws://localhost:3000/cable");
 
@@ -18,21 +27,22 @@ class Dashboard extends Component {
             received: (message) => {
                 //receive notification when client makes an order
                 this.handleNotification(message);
+                bell.play();
             }
         })
     }
 
     handleNotification(message) {
         store.addNotification({
-            title: "Pending Order!",
-            message,
+            title: "Success!",
+            message: message,
             type: "success",
             insert: "top",
             container: "top-right",
             animationIn: ["animated", "fadeIn"],
             animationOut: ["animated", "fadeOut"],
             dismiss: {
-                duration: 2000,
+                duration: 5000,
                 onScreen: true
             },
             slidingEnter: {
