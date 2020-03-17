@@ -1,35 +1,52 @@
 import React, { Component } from 'react';
 
 //React Notification Components
-import ReactNotification from 'react-notifications-component';
 import 'react-notifications-component/dist/theme.css';
 import { store } from 'react-notifications-component';
-// import actionCable from 'actioncable';
 
+//Action Cable
+import actionCable from 'actioncable';
+
+const CableApp = {};
+CableApp.cable = actionCable.createConsumer("ws://localhost:3000/cable");
 
 class Dashboard extends Component {
+    componentDidMount() {
+        CableApp.cable.subscriptions.create({
+            channel: 'NotificationChannel'
+        }, {
+            received: (message) => {
+                //receive notification when client makes an order
+                this.handleNotification(message);
+            }
+        })
+    }
+
+    handleNotification(message) {
+        store.addNotification({
+            title: "Pending Order!",
+            message,
+            type: "success",
+            insert: "top",
+            container: "top-right",
+            animationIn: ["animated", "fadeIn"],
+            animationOut: ["animated", "fadeOut"],
+            dismiss: {
+                duration: 2000,
+                onScreen: true
+            },
+            slidingEnter: {
+                duration: 300,
+                timingFunction: 'ease-in',
+                delay: 0
+            }
+        });
+    }
+
     render() {
         return (
             <div>
-                <ReactNotification />
                 <h1>Welcome to the administration page</h1>
-                <button
-                    onClick={() => {
-                        store.addNotification({
-                            title: 'Dropbox',
-                            message: 'Files were synced',
-                            type: 'default',                         // 'default', 'success', 'info', 'warning'
-                            container: 'top-right',                // where to position the notifications
-                            animationIn: ["animated", "fadeIn"],     // animate.css classes that's applied
-                            animationOut: ["animated", "fadeOut"],   // animate.css classes that's applied
-                            dismiss: {
-                                duration: 3000 
-                            }
-                        })
-                    }}
-                >
-                    Add notification
-                </button>
             </div>
         );
     }
