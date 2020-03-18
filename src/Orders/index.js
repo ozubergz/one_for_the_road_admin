@@ -13,22 +13,22 @@ import {
 } from 'react-admin';
 import moment from 'moment';
 
-const TimeField = props => {
+const DateTimeField = props => {
     const utc = props.record.created_at;
-    const localTime = moment(utc).format('h:mm:ss a');
-    return <div>{localTime}</div>
+    const localTime = moment(utc).format('L h:mm a');
+    return <span>{localTime}</span>
 }
+DateTimeField.defaultProps = {label: "Date"}
 
 export const OrderList = props => (
-    <List {...props}>
+    <List {...props} sort={{ field: 'created_at', order: 'DESC'}}>
         <Datagrid >
             <TextField source="id" />
             <TextField source="customer" />
             <EmailField source="email" />
             <TextField source="phone" />
             <NumberField source="amount" />
-            <DateField source="created_at" />
-            <TimeField />
+            <DateTimeField source="created_at" />
             <ShowButton />
         </Datagrid>
     </List>
