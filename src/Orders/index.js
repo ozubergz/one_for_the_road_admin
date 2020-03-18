@@ -12,6 +12,13 @@ import {
     SimpleShowLayout
 } from 'react-admin';
 
+const TimeField = props => {
+    const recordWithTimestampAsInteger = {
+        [props.source]: parseInt(props.record[props.source], 10)
+    };
+    return <DateField {...props} record={recordWithTimestampAsInteger} />
+}
+
 export const OrderList = props => (
     <List {...props}>
         <Datagrid >
@@ -21,6 +28,7 @@ export const OrderList = props => (
             <TextField source="phone" />
             <NumberField source="amount" />
             <DateField source="created_at" />
+            <TimeField />
             <ShowButton />
         </Datagrid>
     </List>
