@@ -14,7 +14,7 @@ import {
 
 const TimeField = props => {
     // const int = parseInt(props.record[props.source], 10);
-    console.log(props.record.created_at)
+    console.log(props.record.created_at.toDate())
     // const recordWithTimestampAsInteger = {
     //     [props.source]: parseInt(props.record[props.source], 10)
     // };
