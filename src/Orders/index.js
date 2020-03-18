@@ -11,14 +11,12 @@ import {
     ShowButton,
     SimpleShowLayout
 } from 'react-admin';
+import moment from 'moment';
 
 const TimeField = props => {
-    // const int = parseInt(props.record[props.source], 10);
-    console.log(props.record.created_at.toDate())
-    // const recordWithTimestampAsInteger = {
-    //     [props.source]: parseInt(props.record[props.source], 10)
-    // };
-    // return <DateField {...props} record={recordWithTimestampAsInteger} />
+    const utc = props.record.created_at;
+    const localTime = moment(utc).format('h:mm:ss a');
+    return <div>{localTime}</div>
 }
 
 export const OrderList = props => (
