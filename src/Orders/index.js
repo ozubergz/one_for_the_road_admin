@@ -13,10 +13,12 @@ import {
 } from 'react-admin';
 
 const TimeField = props => {
-    const recordWithTimestampAsInteger = {
-        [props.source]: parseInt(props.record[props.source], 10)
-    };
-    return <DateField {...props} record={recordWithTimestampAsInteger} />
+    // const int = parseInt(props.record[props.source], 10);
+    console.log(props.record)
+    // const recordWithTimestampAsInteger = {
+    //     [props.source]: parseInt(props.record[props.source], 10)
+    // };
+    // return <DateField {...props} record={recordWithTimestampAsInteger} />
 }
 
 export const OrderList = props => (
