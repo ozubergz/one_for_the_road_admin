@@ -13,7 +13,7 @@ import {
     ReferenceField,
     ReferenceInput,
     SelectInput,
-    EditButton
+    EditButton,
 } from 'react-admin';
 
 const PriceField = props => {
@@ -57,7 +57,7 @@ export const ItemEdit = props => (
             <TextInput disabled source="id" />
             <TextInput source="name" />
             <TextInput source="description" />
-            <NumberInput source="price" />
+            <NumberInput source="price" step={1} format={price => price.toFixed(2)} />
             {/* <TextInput source="selections" /> */}
             <ReferenceInput source="category_id" reference="categories">
                 <SelectInput optionText="name" />
