@@ -20,6 +20,12 @@ const DateTimeField = props => {
 }
 DateTimeField.defaultProps = {label: "Date"}
 
+const AmountField = props => {
+    const amount = props.record.amount;
+    const fixedAmount = amount.toFixed(2);
+    return <span>{`$${fixedAmount}`}</span>    
+}
+
 export const OrderList = props => (
     <List {...props} sort={{ field: 'created_at', order: 'DESC'}}>
         <Datagrid >
@@ -27,7 +33,8 @@ export const OrderList = props => (
             <TextField source="customer" />
             <EmailField source="email" />
             <TextField source="phone" />
-            <NumberField source="amount" />
+            <AmountField source="amount" />
+            {/* <NumberField source="amount" /> */}
             <DateTimeField source="created_at" />
             <ShowButton />
         </Datagrid>
