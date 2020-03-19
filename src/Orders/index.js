@@ -11,14 +11,6 @@ import {
     ShowButton,
     SimpleShowLayout
 } from 'react-admin';
-import moment from 'moment';
-
-const DateTimeField = props => {
-    const utc = props.record.created_at;
-    const localTime = moment(utc).format('L h:mm a');
-    return <span>{localTime}</span>
-}
-DateTimeField.defaultProps = {label: "Date"}
 
 export const OrderList = props => (
     <List {...props} sort={{ field: 'created_at', order: 'DESC'}}>
@@ -28,7 +20,7 @@ export const OrderList = props => (
             <EmailField source="email" />
             <TextField source="phone" />
             <NumberField source="amount" options={{ style: 'currency', currency: 'USD' }} />
-            <DateTimeField source="created_at" />
+            <DateField source="created_at" showTime label="Date" />
             <ShowButton />
         </Datagrid>
     </List>
