@@ -16,13 +16,19 @@ import {
     EditButton
 } from 'react-admin';
 
+const PriceField = props => {
+    const price = props.record.price;
+    const fixedPrice = price.toFixed(2);
+    return <span>{`$${fixedPrice}`}</span>    
+}
+
 export const ItemList = props => (
     <List {...props}>
         <Datagrid>
             <TextField source="id" />
             <TextField source="name" />
             <TextField source="description" />
-            <NumberField source="price" />
+            <PriceField source="price" />
             {/* <TextField source="selections" /> */}
             <ReferenceField source="category_id" reference="categories">
                 <ChipField source="name" />
