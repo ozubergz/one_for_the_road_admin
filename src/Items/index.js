@@ -22,12 +22,17 @@ const PriceField = props => {
     return <span>{`$${fixedPrice}`}</span>    
 }
 
+const Description = props => {
+    const description = props.record.description;
+    return <span>{description ? description : null}</span>
+}
+
 export const ItemList = props => (
     <List {...props}>
         <Datagrid>
             <TextField source="id" />
             <TextField source="name" />
-            <TextField source="description" />
+            <Description source="description" />
             <PriceField source="price" />
             {/* <TextField source="selections" /> */}
             <ReferenceField source="category_id" reference="categories">
@@ -50,6 +55,7 @@ export const ItemCreate = props => (
         </SimpleForm>
     </Create>
 );
+
 
 export const ItemEdit = props => (
     <Edit {...props}>
