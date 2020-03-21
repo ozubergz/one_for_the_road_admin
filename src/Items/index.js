@@ -34,7 +34,6 @@ export const ItemList = props => (
             <TextField source="name" />
             <Description source="description" />
             <PriceField source="price" />
-            {/* <TextField source="selections" /> */}
             <ReferenceField source="category_id" reference="categories">
                 <ChipField source="name" />
             </ReferenceField>
@@ -64,7 +63,6 @@ export const ItemEdit = props => (
             <TextInput source="name" />
             <TextInput source="description" />
             <NumberInput source="price" step={1} format={price => price.toFixed(2)} />
-            {/* <TextInput source="selections" /> */}
             <ReferenceInput source="category_id" reference="categories">
                 <SelectInput optionText="name" />
             </ReferenceInput>

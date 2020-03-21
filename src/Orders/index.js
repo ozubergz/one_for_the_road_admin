@@ -15,8 +15,8 @@ import moment from 'moment';
 
 const TimeField = props => {
     const utc = props.record.created_at;
-    const localTime = moment(utc).format('h:mm a');
-    return <span>{localTime}</span>
+    const localTime = moment(utc).format('h:mm:ss a');
+    return <span>{localTime.toUpperCase()}</span>
 }
 TimeField.defaultProps = {label: "Time"}
 
