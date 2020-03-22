@@ -4,10 +4,10 @@ import simpleRestProvider from 'ra-data-simple-rest';
 
 //React Admin Components
 import { Admin, Resource } from 'react-admin';
-import { UserList, UserShow } from './Users/index';
-import { OrderList, OrderShow } from './Orders/index';
-import { ItemList, ItemEdit, ItemCreate } from './Items/index';
-import { CategoryList, CategoryEdit, CategoryCreate } from './Categories/index';
+import { Users } from './Users/index';
+import { Orders } from './Orders/index';
+import { Items } from './Items/index';
+import { Categories } from './Categories/index';
 import Dashboard from './Dashboard';
 
 //React Notification Components
@@ -73,10 +73,10 @@ class App extends Component {
         <div className="App">
         <ReactNotification />
         <Admin dashboard={Dashboard} dataProvider={dataProvider}>
-          <Resource name="categories" list={CategoryList} edit={CategoryEdit} create={CategoryCreate} />
-          <Resource name="items" list={ItemList} edit={ItemEdit} create={ItemCreate} />
-          <Resource name="users" list={UserList}  show={UserShow} />
-          <Resource name="orders" list={OrderList} show={OrderShow} />
+          <Resource name="categories" {...Categories} />
+          <Resource name="items" {...Items} />
+          <Resource name="users" {...Users} />
+          <Resource name="orders" {...Orders} />
         </Admin>
       </div>
     );
