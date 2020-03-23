@@ -7,6 +7,30 @@ import {
     ReferenceInput,
     SelectInput,
 } from 'react-admin';
+// import { Button } from '@material-ui/core';
+// import AddCircleIcon from '@material-ui/icons/AddCircle';
+
+
+// let state = {
+//     toggleForm: false
+// }
+
+// const handleToggle = e => {
+//     state.toggleForm = !state.toggleForm;
+// }
+
+// const AddButton = () => {
+//     return (
+//         <Button
+//             variant="contained"
+//             color="secondary"
+//             onClick={handleToggle}
+//             startIcon={<AddCircleIcon />}
+//         >
+//             Add Options
+//         </Button>
+//     );
+// }
 
 const ItemEdit = props => (
     <Edit {...props}>

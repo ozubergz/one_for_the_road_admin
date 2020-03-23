@@ -20,8 +20,8 @@ const ItemList = props => (
             <TextField source="id" />
             <TextField source="name" />
             <Description source="description" />
-            <NumberField source="price" options={{ style: 'currency', currency: 'USD' }} />
-            <ReferenceField source="category_id" reference="categories">
+            <NumberField source="price" options={{ style: "currency", currency: "USD" }} />
+            <ReferenceField source="category.id" reference="categories" sortBy="categories.name" >
                 <ChipField source="name" />
             </ReferenceField>
             <EditButton />

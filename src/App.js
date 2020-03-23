@@ -3,7 +3,7 @@ import './styles/App.css';
 import simpleRestProvider from 'ra-data-simple-rest';
 
 //React Admin Components
-import { Admin, Resource } from 'react-admin';
+import { Admin, Resource, ListGuesser } from 'react-admin';
 import { Users } from './Users/index';
 import { Orders } from './Orders/index';
 import { Items } from './Items/index';
@@ -71,14 +71,14 @@ class App extends Component {
   render() {
     return (
         <div className="App">
-        <ReactNotification />
-        <Admin dashboard={Dashboard} dataProvider={dataProvider}>
-          <Resource name="categories" {...Categories} />
-          <Resource name="items" {...Items} />
-          <Resource name="users" {...Users} />
-          <Resource name="orders" {...Orders} />
-        </Admin>
-      </div>
+          <ReactNotification />
+          <Admin dashboard={Dashboard} dataProvider={dataProvider}>
+            <Resource name="categories" {...Categories} />
+            <Resource name="items" {...Items} />
+            <Resource name="users" {...Users} />
+            <Resource name="orders" {...Orders} />
+          </Admin>
+        </div>
     );
   }
 }
