@@ -3,7 +3,7 @@ import './styles/App.css';
 import simpleRestProvider from 'ra-data-simple-rest';
 
 //React Admin Components
-import { Admin, Resource, ListGuesser } from 'react-admin';
+import { Admin, Resource } from 'react-admin';
 import { Users } from './Users/index';
 import { Orders } from './Orders/index';
 import { Items } from './Items/index';

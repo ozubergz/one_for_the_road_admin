@@ -21,7 +21,7 @@ const ItemList = props => (
             <TextField source="name" />
             <Description source="description" />
             <NumberField source="price" options={{ style: "currency", currency: "USD" }} />
-            <ReferenceField source="category.id" reference="categories" sortBy="categories.name" >
+            <ReferenceField source="category_id" reference="categories" sortBy="categories.name" >
                 <ChipField source="name" />
             </ReferenceField>
             <EditButton />
