@@ -9,23 +9,9 @@ import {
     TabbedShowLayout,
     Tab,
     // EditButton,
-    Button
 } from 'react-admin';
-import VisibilityIcon from '@material-ui/icons/Visibility';
-import { Link } from 'react-router-dom';
 import AddItemOptionsButton from './AddItemOptionsButton';
-
-
-const ShowButton = ({record}) => {
-    return (
-        <Button 
-            component={Link}
-            to={`/item_options/${record.id}/show`}
-        >
-            <VisibilityIcon/>
-        </Button>
-    )
-}
+import ShowButton from './ShowButton';
 
 const ItemShow = props => (
     <Show {...props} >
