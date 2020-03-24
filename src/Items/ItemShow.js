@@ -8,18 +8,20 @@ import {
     ReferenceField,
     TabbedShowLayout,
     Tab,
-    // ShowButton,
-    EditButton,
+    // EditButton,
+    Button
 } from 'react-admin';
 import VisibilityIcon from '@material-ui/icons/Visibility';
-import Button from '@material-ui/core/Button';
-import { useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import AddItemOptionsButton from './AddItemOptionsButton';
 
 
 const ShowButton = ({record}) => {
-    const history = useHistory();
     return (
-        <Button onClick={() => history.push(`/item_options/${record.id}/show`)}>
+        <Button 
+            component={Link}
+            to={`/item_options/${record.id}/show`}
+        >
             <VisibilityIcon/>
         </Button>
     )
@@ -51,6 +53,7 @@ const ItemShow = props => (
                         <ShowButton/>
                     </Datagrid>
                 </ArrayField>
+                <AddItemOptionsButton/>
             </Tab>
         </TabbedShowLayout>
     </Show>

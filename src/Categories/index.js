@@ -1,6 +1,6 @@
-import CategoryCreate from './create';
-import CategoryList from './list';
-import CategoryEdit from './edit';
+import CategoryCreate from './CategoryCreate';
+import CategoryList from './CategoryList';
+import CategoryEdit from './CategoryEdit';
 
 export const Categories = {
     list: CategoryList,

@@ -1,5 +1,5 @@
-import OrderList from './list';
-import OrderShow from './show';
+import OrderList from './OrderList';
+import OrderShow from './OrderShow';
 
 export const Orders = {
     list: OrderList,

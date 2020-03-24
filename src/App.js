@@ -3,27 +3,12 @@ import './styles/App.css';
 import simpleRestProvider from 'ra-data-simple-rest';
 
 //React Admin Components
-import { 
-  Admin, 
-  Resource, 
-  Show,
-  SimpleShowLayout,
-  NumberField,
-  ShowGuesser, 
-  ListGuesser, 
-  ShowButton,
-  List,
-  Datagrid,
-  TextField,
-  ArrayField,
-  SingleFieldList,
-  ChipField,
-  ReferenceField
- } from 'react-admin';
+import { Admin, Resource } from 'react-admin';
 import { Users } from './Users/index';
 import { Orders } from './Orders/index';
 import { Items } from './Items/index';
 import { Categories } from './Categories/index';
+import { ItemOptions } from './ItemOptions/index';
 import Dashboard from './Dashboard';
 
 //React Notification Components
@@ -83,32 +68,6 @@ class App extends Component {
         }
     });
   }
-
-  // Item_optionList = props => (
-  //     <List {...props}>
-  //         <Datagrid rowClick="edit">
-  //             <TextField source="id" />
-  //             <TextField source="name" />
-  //             <ReferenceField source="item_id" reference="items"><TextField source="id" /></ReferenceField>
-  //             <ArrayField source="options"><SingleFieldList><ChipField source="id" /></SingleFieldList></ArrayField>
-  //             <ShowButton/>
-  //         </Datagrid>
-  //     </List>
-  // );
-
-  Item_optionShow = props => (
-    <Show {...props}>
-        <SimpleShowLayout>
-            <TextField source="id" />
-            <TextField source="name" />
-            <ReferenceField source="item_id" reference="items"><TextField source="id" /></ReferenceField>
-            <ArrayField source="options"><Datagrid><TextField source="id" />
-            <TextField source="name" />
-            <TextField source="price" />
-            <NumberField source="input_type.id" /></Datagrid></ArrayField>
-        </SimpleShowLayout>
-    </Show>
-  );
   
   render() {
     return (
@@ -119,7 +78,7 @@ class App extends Component {
             <Resource name="items" {...Items} />
             <Resource name="users" {...Users} />
             <Resource name="orders" {...Orders} />
-            <Resource name="item_options" show={this.Item_optionShow} />
+            <Resource name="item_options" {...ItemOptions} />
           </Admin>
         </div>
     );

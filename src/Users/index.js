@@ -1,5 +1,5 @@
-import UserList from './list';
-import UserShow from './show';
+import UserList from './UserList';
+import UserShow from './UserShow';
 
 export const Users = {
     list: UserList,
