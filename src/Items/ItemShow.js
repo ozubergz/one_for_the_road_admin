@@ -10,7 +10,7 @@ import {
     Tab,
     // EditButton,
 } from 'react-admin';
-import AddItemOptionsButton from './AddItemOptionsButton';
+import CreateOptionsButton from './CreateOptionsButton';
 import ShowButton from './ShowButton';
 
 const ItemShow = props => (
@@ -42,7 +42,7 @@ const ItemShow = props => (
                         <ShowButton/>
                     </Datagrid>
                 </ArrayField>
-                <AddItemOptionsButton />
+                <CreateOptionsButton />
             </Tab>
 
         </TabbedShowLayout>
