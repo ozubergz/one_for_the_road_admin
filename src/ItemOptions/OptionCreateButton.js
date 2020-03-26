@@ -4,9 +4,9 @@ import {
     SaveButton,
     SimpleForm,
     TextInput,
-    // NumberInput,
+    NumberInput,
     // ReferenceInput,
-    // SelectInput
+    SelectInput
  } from 'react-admin';
 
 import AddCircleIcon from '@material-ui/icons/AddCircle';
@@ -30,36 +30,33 @@ class OptionCreateButton extends Component {
     }
     
     render() {
-        // console.log(console.log(this.props.record.id))
+        
         const { showDialog } = this.state;
         
         return (
             <Fragment>
                 <Button
                     onClick={this.handleClick}
-                    label="Create a Table of Options"
+                    label="Create Option"
                     // onClose={this.handleClose}
                 >
                     <AddCircleIcon/>
                 </Button>
                 
                 <Dialog fullWidth open={showDialog} >
-                    <DialogTitle>Table of Options</DialogTitle>
+                    <DialogTitle>Create Option</DialogTitle>
                     <DialogContent>
                         
                         <SimpleForm
-                            resource="item_options"
+                            resource="options"
                             toolbar={null}
                         >
-                            
-                            <TextInput label="Title" source="name" />
-                            
-                            {/* <TextInput source="name" />
+                            <TextInput source="name" />
                             <NumberInput source="price" step={1} />
                             <SelectInput source="input_type" choices={[
                                 { id: 1, name: "radio" },
                                 { id: 2, name: "checkbox" }
-                            ]}/> */}
+                            ]}/>
 
                         </SimpleForm>
 
@@ -71,7 +68,6 @@ class OptionCreateButton extends Component {
 
                         <Button onClick={this.handleClose} label="Cancel">
                         </Button>
-
                     </DialogActions>
                 </Dialog>
                 
@@ -82,24 +78,3 @@ class OptionCreateButton extends Component {
 }
 
 export default OptionCreateButton;
-
-
-// import React from 'react';
-// import { Button } from 'react-admin';
-// import AddCircleIcon from '@material-ui/icons/AddCircle';
-// import { Link } from 'react-router-dom';
-
-// const AddItemOptionsButton = ({ record}) => (
-//     <Button
-//         component={Link}
-//         to={{
-//             pathname: "/item_options/create",
-//             search: `?item_id=${record.id}`
-//         }}
-//         label="Add Item Options"
-//     >
-//         <AddCircleIcon />
-//     </Button>
-// )
-
-// export default AddItemOptionsButton;

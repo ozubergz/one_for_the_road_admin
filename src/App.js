@@ -79,6 +79,7 @@ class App extends Component {
             <Resource name="users" {...Users} />
             <Resource name="orders" {...Orders} />
             <Resource name="item_options" {...ItemOptions} />
+            {/* <Resource name="options" list={ListGuesser} show={ShowGuesser} /> */}
           </Admin>
         </div>
     );

@@ -16,6 +16,7 @@ import ShowButton from './ShowButton';
 const ItemShow = props => (
     <Show {...props} >
         <TabbedShowLayout>
+
             <Tab label="Info">
                 <TextField source="name" />
                 <NumberField 
@@ -24,6 +25,7 @@ const ItemShow = props => (
                 />
                 <TextField source="description" />
             </Tab>
+
             <Tab label="Menu Category">
                 <ReferenceField
                     source="category_id"
@@ -32,6 +34,7 @@ const ItemShow = props => (
                     <TextField source="name" />
                 </ReferenceField>
             </Tab>
+            
             <Tab label="Options">
                 <ArrayField source="item_options">
                     <Datagrid>
@@ -39,8 +42,9 @@ const ItemShow = props => (
                         <ShowButton/>
                     </Datagrid>
                 </ArrayField>
-                <AddItemOptionsButton/>
+                <AddItemOptionsButton />
             </Tab>
+
         </TabbedShowLayout>
     </Show>
 );

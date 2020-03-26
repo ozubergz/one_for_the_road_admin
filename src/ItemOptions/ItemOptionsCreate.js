@@ -2,9 +2,12 @@ import React from 'react';
 import {
     Create,
     SimpleForm,
-    TextInput
+    // TextInput,
+    // ReferenceInput,
+    // SelectInput
 } from 'react-admin';
 import { parse } from 'query-string';
+// import OptionCreateButton from './OptionCreateButton';
 
 const Item_optionCreate = props => {
 
@@ -21,7 +24,13 @@ const Item_optionCreate = props => {
                 initialValues={{ item_id }}
                 // redirect={redirect}
             >
-                <TextInput source="name" />
+                {/* <ReferenceInput source="item_options" reference="item_options">
+                    <SelectInput source="name" />
+                </ReferenceInput>  */}
+                
+                {/* <TextInput label="Title" source="name" />
+                <OptionCreateButton/> */}
+
             </SimpleForm>
         </Create>
     )
