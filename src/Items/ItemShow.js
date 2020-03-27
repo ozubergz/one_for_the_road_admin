@@ -10,13 +10,13 @@ import {
     Tab,
     // EditButton,
 } from 'react-admin';
-import CreateOptionsButton from './CreateOptionsButton';
-import ShowButton from './ShowButton';
+import CreateOptionButton from './CreateOptionButton';
+import ShowOptionButton from './ShowOptionButton';
+import DeleteOptionButton from './DeleteOptionButton';
 
 const ItemShow = props => (
     <Show {...props} >
         <TabbedShowLayout>
-
             <Tab label="Info">
                 <TextField source="name" />
                 <NumberField 
@@ -25,7 +25,6 @@ const ItemShow = props => (
                 />
                 <TextField source="description" />
             </Tab>
-
             <Tab label="Menu Category">
                 <ReferenceField
                     source="category_id"
@@ -34,17 +33,16 @@ const ItemShow = props => (
                     <TextField source="name" />
                 </ReferenceField>
             </Tab>
-            
             <Tab label="Options">
                 <ArrayField source="item_options">
                     <Datagrid>
                         <TextField source="name" label="Title" />
-                        <ShowButton/>
+                        <ShowOptionButton/>
+                        <DeleteOptionButton />
                     </Datagrid>
                 </ArrayField>
-                <CreateOptionsButton />
+                <CreateOptionButton />
             </Tab>
-
         </TabbedShowLayout>
     </Show>
 );

@@ -3,15 +3,16 @@ import { Button } from 'react-admin';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import { Link } from 'react-router-dom';
 
-const ShowButton = ({record}) => {
+const ShowOptionButton = ({record}) => {
     return (
         <Button 
             component={Link}
             to={`/item_options/${record.id}/show`}
+            startIcon={<VisibilityIcon/>}
+            label="ra.action.show"
         >
-            <VisibilityIcon/>
         </Button>
     )
 }
 
-export default ShowButton;
+export default ShowOptionButton;

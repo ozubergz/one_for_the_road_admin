@@ -15,14 +15,13 @@ const Item_optionShow = props => (
             <TextField source="id" />
             <TextField source="name" />
             <ReferenceField source="item_id" reference="items">
-                <TextField source="id" />
+                <TextField source="name" />
             </ReferenceField>
             <ArrayField source="options">
                 <Datagrid>
-                    <TextField source="id" />
                     <TextField source="name" />
                     <TextField source="price" />
-                    <NumberField source="input_type.id" />
+                    <NumberField source="input_type" />
                 </Datagrid>
             </ArrayField>
         </SimpleShowLayout>
