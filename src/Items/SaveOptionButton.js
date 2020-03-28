@@ -5,7 +5,7 @@ import {
     useCreate,
     useNotify,
  } from 'react-admin';
- import { v4 as uuidv4 } from 'uuid';
+//  import { v4 as uuidv4 } from 'uuid';
 
  const SaveOptionButton = props => {
 
@@ -16,7 +16,7 @@ import {
 
     const handleSave = useCallback(
         (values, redirect) => {
-            values.options.map(option => option.id = uuidv4());
+            // values.options.map(option => option.id = uuidv4());
             create(
                 {
                     payload: { data: { ...values } },
