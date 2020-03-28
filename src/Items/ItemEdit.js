@@ -6,6 +6,8 @@ import {
     NumberInput,
     ReferenceInput,
     SelectInput,
+    number,
+    minValue
 } from 'react-admin';
 
 const ItemEdit = props => (
@@ -14,7 +16,12 @@ const ItemEdit = props => (
             <TextInput disabled source="id" />
             <TextInput source="name" />
             <TextInput source="description" />
-            <NumberInput source="price" step={1} format={price => price.toFixed(2)} />
+            <NumberInput 
+                source="price" 
+                step={1} 
+                format={price => price.toFixed(2)}
+                validate={[number(), minValue(0)]}
+            />
             <ReferenceInput source="category_id" reference="categories">
                 <SelectInput optionText="name" />
             </ReferenceInput>

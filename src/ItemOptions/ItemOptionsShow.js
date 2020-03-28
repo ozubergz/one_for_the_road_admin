@@ -20,8 +20,8 @@ const Item_optionShow = props => (
             <ArrayField source="options">
                 <Datagrid>
                     <TextField source="name" />
-                    <TextField source="price" />
-                    <NumberField source="input_type" />
+                    <NumberField source="price" options={{ style: 'currency', currency: 'USD' }} />
+                    <TextField source="input_type" />
                 </Datagrid>
             </ArrayField>
         </SimpleShowLayout>

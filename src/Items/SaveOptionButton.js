@@ -16,7 +16,6 @@ import {
 
     const handleSave = useCallback(
         (values, redirect) => {
-            // values.options.map(option => option.id = uuidv4());
             create(
                 {
                     payload: { data: { ...values } },

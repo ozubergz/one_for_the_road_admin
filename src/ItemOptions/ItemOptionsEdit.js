@@ -3,24 +3,43 @@ import {
     Edit,
     SimpleForm,
     TextInput,
-    // ReferenceInput,
     SelectInput,
+    NumberInput,
     ArrayInput,
     SimpleFormIterator,
+    Toolbar,
+    SaveButton,
+    DeleteButton,
+    number,
+    minValue
 } from 'react-admin';
+
+const redirect = (basePath, id, data) => `/item_options/${id}/show`;
+
+const EditToolbar = props => (
+    <Toolbar {...props} >
+        <SaveButton />
+        <DeleteButton redirect={`/items/${props.record.item_id}/show/2`} />
+    </Toolbar>
+)
 
 const Item_optionEdit = props => (
     <Edit {...props}>
-        <SimpleForm>
+        <SimpleForm 
+            redirect={redirect}
+            toolbar={<EditToolbar />}
+        >
             <TextInput disabled source="id" />
             <TextInput label="Title" source="name" />
-            {/* <ReferenceInput source="item_id" reference="items">
-                <SelectInput optionText="name" />
-            </ReferenceInput> */}
             <ArrayInput source="options">
-                <SimpleFormIterator  >
+                <SimpleFormIterator >
                     <TextInput label="Name" source="name" />
-                    <TextInput label="Price" source="price" />
+                    <NumberInput 
+                        label="Price" 
+                        source="price" 
+                        validate={[number(), minValue(0)]}
+                        format={price => price.toFixed(2)}
+                    />
                     <SelectInput label="Input Type" source="input_type" choices={[
                         { id: "radio", name: "radio" },
                         { id: "checkbox", name: "checkbox" }

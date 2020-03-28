@@ -6,15 +6,26 @@ import {
     NumberInput,
     ReferenceInput,
     SelectInput,
+    required,
+    number,
+    minValue
 } from 'react-admin';
 
 const ItemCreate = (props) => (
     <Create {...props}>
         <SimpleForm>
-            <TextInput source="name" />
-            <TextInput source="description" />
-            <NumberInput source="price" />
-            <ReferenceInput source="category_id" reference="categories">
+            <TextInput source="name" validate={required()} />
+            <TextInput source="description" validate={required()} />
+            <NumberInput 
+                source="price" 
+                // validate={[number(), minValue(0)]}
+                validate={[required(), number(), minValue(0)]}
+            />
+            <ReferenceInput 
+                source="category_id" 
+                reference="categories"
+                validate={required()}
+            >
                 <SelectInput optionText="name" />
             </ReferenceInput>
         </SimpleForm>
