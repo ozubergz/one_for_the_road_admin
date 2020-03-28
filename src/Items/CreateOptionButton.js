@@ -7,7 +7,9 @@ import {
     SimpleFormIterator,
     NumberInput,
     SelectInput,
-    required
+    required,
+    number,
+    minValue
  } from 'react-admin';
 
 import SaveOptionButton from './SaveOptionButton';
@@ -60,8 +62,12 @@ class CreateOptionButton extends Component {
                             <TextInput label="Title" source="name" validate={required()} />
                             <ArrayInput source="options" validate={required()}>
                                 <SimpleFormIterator>
-                                    <TextInput label="Name" source="name"/>
-                                    <NumberInput label="Price" source="price" />
+                                    <TextInput label="Name" source="name" />
+                                    <NumberInput 
+                                        label="Price" 
+                                        source="price" 
+                                        validate={[number(), minValue(0)]}
+                                    />
                                     <SelectInput label="Input Type" source="input_type" choices={[
                                          { id: "radio", name: "radio" },
                                          { id: "checkbox", name: "checkbox" }

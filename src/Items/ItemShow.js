@@ -7,12 +7,13 @@ import {
     TextField,
     ReferenceField,
     TabbedShowLayout,
-    Tab,
+    Tab
     // EditButton,
 } from 'react-admin';
 import CreateOptionButton from './CreateOptionButton';
 import ShowOptionButton from './ShowOptionButton';
 import DeleteOptionButton from './DeleteOptionButton';
+import EditOptionButton from './EditOptionButton';
 
 const ItemShow = props => (
     <Show {...props} >
@@ -37,7 +38,8 @@ const ItemShow = props => (
                 <ArrayField source="item_options">
                     <Datagrid>
                         <TextField source="name" label="Title" />
-                        <ShowOptionButton/>
+                        <ShowOptionButton />
+                        <EditOptionButton />
                         <DeleteOptionButton />
                     </Datagrid>
                 </ArrayField>

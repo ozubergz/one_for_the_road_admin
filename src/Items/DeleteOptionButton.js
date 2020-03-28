@@ -1,8 +1,7 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { 
     Button,
     useNotify,
-    useRedirect,
     useRefresh,
     useMutation
  } from 'react-admin';
@@ -22,7 +21,7 @@ const useStyles = makeStyles({
 const DeleteOptionButton = ({record}) => {
     const classes = useStyles();
     const notify = useNotify();
-    const refresh = useRedirect();
+    const refresh = useRefresh();
     
     const [deleteOne, { loading }] = useMutation(
         {
