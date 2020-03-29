@@ -6,7 +6,7 @@ import {
     NumberField,
     ChipField,
     ReferenceField,
-    ShowButton
+    // ShowButton
 } from 'react-admin';
 
 const Description = props => {
@@ -20,11 +20,18 @@ const ItemList = props => (
             <TextField source="id" />
             <TextField source="name" />
             <Description source="description" />
-            <NumberField source="price" options={{ style: "currency", currency: "USD" }} />
-            <ReferenceField source="category_id" reference="categories" sortBy="categories.name" >
+            <NumberField 
+                source="price" 
+                options={{ style: "currency", currency: "USD" }}
+            />
+            <ReferenceField 
+                source="category_id" 
+                reference="categories" 
+                sortBy="categories.name"
+            >
                 <ChipField source="name" />
             </ReferenceField>
-            <ShowButton />
+            {/* <ShowButton /> */}
         </Datagrid>
     </List>
 );

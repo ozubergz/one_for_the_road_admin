@@ -38,7 +38,7 @@ const Item_optionEdit = props => (
                         label="Price" 
                         source="price" 
                         validate={[number(), minValue(0)]}
-                        format={price => price.toFixed(2)}
+                        // format={price => price.toFixed(2)}
                     />
                     <SelectInput label="Input Type" source="input_type" choices={[
                         { id: "radio", name: "radio" },

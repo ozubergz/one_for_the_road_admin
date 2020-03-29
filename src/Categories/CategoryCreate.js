@@ -2,13 +2,14 @@ import React from 'react';
 import {
     Create,
     TextInput,
-    SimpleForm
+    SimpleForm,
+    required
 } from 'react-admin';
 
 const CategoryCreate = props => (
     <Create {...props}>
         <SimpleForm>
-            <TextInput source="name" />
+            <TextInput source="name" validate={required()} />
         </SimpleForm>
     </Create>
 );

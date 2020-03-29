@@ -3,15 +3,15 @@ import {
     List,
     Datagrid,
     TextField,
-    EditButton,
+    // ShowButton
 } from 'react-admin';
 
 const CategoryList = props => (
     <List {...props}>
-        <Datagrid>
+        <Datagrid rowClick="show">
             <TextField disabled source="id" />
             <TextField source="name" />
-            <EditButton />
+            {/* <ShowButton /> */}
         </Datagrid>
     </List>
 );

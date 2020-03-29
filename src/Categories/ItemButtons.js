@@ -5,9 +5,31 @@ import {
     useRefresh,
     useMutation
  } from 'react-admin';
-import DeleteIcon from '@material-ui/icons/Delete';
-import { makeStyles } from '@material-ui/core/styles';
+ import ShowIcon from '@material-ui/icons/Visibility';
+ import EditIcon from '@material-ui/icons/Edit';
+ import DeleteIcon from '@material-ui/icons/Delete';
+ import { makeStyles } from '@material-ui/core/styles';
+ import { Link } from 'react-router-dom';
+ 
+export const ItemShowButton = ({record}) => (
+    <Button
+        component={Link}
+        to={`/items/${record.id}/show`}
+        startIcon={ <ShowIcon />}
+        label="ra.action.show"
+    >
+    </Button>
+)
 
+export const ItemEditButton = ({record}) => (
+    <Button
+        component={Link}
+        to={`/items/${record.id}`}
+        startIcon={ <EditIcon />}
+        label="ra.action.edit"
+    >
+    </Button>
+)
 
 const useStyles = makeStyles({
     button: {
@@ -17,15 +39,14 @@ const useStyles = makeStyles({
     },
 });
 
-
-const DeleteOptionButton = ({record}) => {
+export const ItemDeleteButton = ({record}) => {
     const classes = useStyles();
     const notify = useNotify();
     const refresh = useRefresh();
     const [deleteOne, { loading }] = useMutation(
         {
             type: 'delete',
-            resource: "item_options",
+            resource: "items",
             payload: { id: record.id }
         },
         {
@@ -38,7 +59,6 @@ const DeleteOptionButton = ({record}) => {
             onFailure: (error) => notify(error.message, 'warning')
         }
     );
-    
     return (
         <Button
             startIcon={<DeleteIcon/>}
@@ -51,4 +71,5 @@ const DeleteOptionButton = ({record}) => {
     );
 }
 
-export default DeleteOptionButton;
+
+
