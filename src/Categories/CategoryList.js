@@ -7,12 +7,15 @@ import {
     Datagrid,
     TextField,
     EditButton,
-    ShowButton
+    ShowButton,
+    CreateButton,
+    TopToolbar
 } from 'react-admin';
 import { Route } from 'react-router';
-import CategoryEdit from './CategoryEdit';
 import { Drawer } from '@material-ui/core';
 import { withStyles } from '@material-ui/core';
+import CategoryEdit from './CategoryEdit';
+import CategoryCreate from './CategoryCreate';
 
 const styles = {
     drawerContent: {
@@ -20,19 +23,25 @@ const styles = {
     }
 };
 
+const ListActions = ({ basePath }) => (
+    <TopToolbar>
+        <CreateButton basePath={basePath} />
+    </TopToolbar>
+)
+
 
 class CategoryList extends Component {
 
     handleClose = () => {
         //return to the category list
         this.props.push('/categories')
-    }
+    }    
 
     render() {
         const { classes, ...props} = this.props;
         return (
             <Fragment>
-                <List {...props}>
+                <List {...props} actions={<ListActions/>}>
                     <Datagrid >
                         <TextField disabled source="id" />
                         <TextField source="name" />
@@ -40,9 +49,30 @@ class CategoryList extends Component {
                         <ShowButton />
                     </Datagrid>
                 </List>
+                <Route path="/categories/create">
+                    {({ match }) => (                        
+                        <Drawer
+                            anchor="right"
+                            open={ !!match }
+                            onClose={ this.handleClose }
+                        >
+                            <CategoryCreate
+                                { ...props }
+                                className={ classes.drawerContent }
+                                onCancel={this.handleClose}
+                            />
+                        </Drawer>
+                    )}
+                </Route>
                 <Route path="/categories/:id">
-                    { ({ match }) => {
-                        let isMatch = match ? true : false
+                    {({ match }) => {
+
+                        //check if params id is not create
+                         const isMatch =
+                            match &&
+                            match.params &&
+                            match.params.id !== 'create';
+                            
                         return ( 
                             <Drawer 
                                 anchor="right"

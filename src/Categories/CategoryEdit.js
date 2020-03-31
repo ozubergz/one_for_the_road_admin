@@ -16,9 +16,9 @@ const ToolbarEdit = ({onCancel, ...props}) => (
     </Toolbar>
 )
 
-const CategoryEdit = ({ onCancel, ...props}) => (
+const CategoryEdit = ({onCancel, ...props}) => (
     <Edit title=" " {...props}>
-        <SimpleForm toolbar={<ToolbarEdit onCancel={onCancel} />}>
+        <SimpleForm variant="standard" toolbar={<ToolbarEdit onCancel={onCancel} />}>
             <TextInput source="name" validate={required()} />
         </SimpleForm>
     </Edit>

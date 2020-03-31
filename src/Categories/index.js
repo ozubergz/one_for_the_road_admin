@@ -1,11 +1,11 @@
-import CategoryCreate from './CategoryCreate';
 import CategoryList from './CategoryList';
-// import CategoryEdit from './CategoryEdit';
 import CategoryShow from './CategoryShow';
+// import CategoryCreate from './CategoryCreate';
+// import CategoryEdit from './CategoryEdit';
 
 export const Categories = {
     list: CategoryList,
-    create: CategoryCreate,
+    show: CategoryShow,
+    // create: CategoryCreate,
     // edit: CategoryEdit,
-    show: CategoryShow
 }

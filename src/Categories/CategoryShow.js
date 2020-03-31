@@ -22,7 +22,7 @@ const Description = props => {
 const CategoryShow = props => (
     <Show  {...props}>
         <TabbedShowLayout>
-            <Tab label="Name">
+            <Tab label="Info">
                 <TextField source="id" />
                 <TextField source="name" />
             </Tab>
