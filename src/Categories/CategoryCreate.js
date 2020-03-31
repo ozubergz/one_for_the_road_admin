@@ -14,7 +14,7 @@ const ToolbarCreate = ({onCancel, ...props}) => (
         <SaveButton />
         <Button label="cancel" onClick={onCancel} />
     </Toolbar>
-)
+);
 
 const CategoryCreate = ({onCancel, ...props}) => (
     <Create title=" " {...props}>

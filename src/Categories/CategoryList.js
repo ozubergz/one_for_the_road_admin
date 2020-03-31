@@ -14,6 +14,8 @@ import {
 import { Route } from 'react-router';
 import { Drawer } from '@material-ui/core';
 import { withStyles } from '@material-ui/core';
+import Chip from '@material-ui/core/Chip';
+
 import CategoryEdit from './CategoryEdit';
 import CategoryCreate from './CategoryCreate';
 
@@ -29,6 +31,11 @@ const ListActions = ({ basePath }) => (
     </TopToolbar>
 )
 
+// const NumberOfItems = props => (
+//     <Chip label={props.record.number_of_items} />
+// )
+// NumberOfItems.defaultProps = {label: "#Items"}
+
 
 class CategoryList extends Component {
 
@@ -43,8 +50,10 @@ class CategoryList extends Component {
             <Fragment>
                 <List {...props} actions={<ListActions/>}>
                     <Datagrid >
-                        <TextField disabled source="id" />
+                        <TextField source="id" />
                         <TextField source="name" />
+                        {/* <NumberOfItems /> */}
+                        <TextField label="#Items" source="number_of_items" />
                         <EditButton />
                         <ShowButton />
                     </Datagrid>

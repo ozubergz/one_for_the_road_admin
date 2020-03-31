@@ -4,13 +4,13 @@ import {
     TextField,
     ArrayField,
     Datagrid,
-    ReferenceField,
+    // ReferenceField,
     NumberField,
     TabbedShowLayout,
     Tab,
-    TopToolbar,
-    EditButton,
-    DeleteButton
+    // TopToolbar,
+    // EditButton,
+    // DeleteButton
 } from 'react-admin';
 import { ItemShowButton, ItemEditButton, ItemDeleteButton} from './ItemButtons';
 
@@ -18,6 +18,7 @@ const Description = props => {
     const description = props.record.description;
     return <span>{description ? description : null}</span>
 }
+Description.defaultProps = { label: "Description"}
 
 const CategoryShow = props => (
     <Show  {...props}>
@@ -25,6 +26,7 @@ const CategoryShow = props => (
             <Tab label="Info">
                 <TextField source="id" />
                 <TextField source="name" />
+                <TextField label="#Items" source="number_of_items" />
             </Tab>
             <Tab label="Items">
                 <ArrayField source="items">
@@ -32,13 +34,13 @@ const CategoryShow = props => (
                         <TextField source="id" />
                         <TextField source="name" />
                         <Description />
-                        <ReferenceField 
+                        {/* <ReferenceField 
                             link={false} 
                             source="category_id" 
                             reference="categories"
                         >
                             <TextField source="name" />
-                        </ReferenceField>
+                        </ReferenceField> */}
                         <NumberField 
                             source="price" 
                             options={{ style: "currency", currency: "USD" }}
