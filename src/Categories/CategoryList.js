@@ -6,7 +6,8 @@ import {
     List,
     Datagrid,
     TextField,
-    EditButton
+    EditButton,
+    ShowButton
 } from 'react-admin';
 import { Route } from 'react-router';
 import CategoryEdit from './CategoryEdit';
@@ -32,34 +33,31 @@ class CategoryList extends Component {
         return (
             <Fragment>
                 <List {...props}>
-                    <Datagrid rowClick="show">
+                    <Datagrid >
                         <TextField disabled source="id" />
                         <TextField source="name" />
                         <EditButton />
+                        <ShowButton />
                     </Datagrid>
                 </List>
                 <Route path="/categories/:id">
                     { ({ match }) => {
-                        const isMatch = match && match.params && match.params.id !== "create";
-                        
-                        // console.log(!!isMatch)
-
+                        let isMatch = match ? true : false
                         return ( 
                             <Drawer 
                                 anchor="right"
-                                // open
-                                open={!!isMatch}
-                                onClick={this.handleClose}
+                                open={isMatch}
+                                onClose={this.handleClose}
                             >
                                 {isMatch ? (
                                     <CategoryEdit 
                                         {...props}
                                         className={classes.drawerContent}
                                         id={isMatch ? match.params.id : null}
-                                        // onCancel={this.handleClose}
+                                        onCancel={this.handleClose}
                                     />
                                 ) : (
-                                    <div className={classes.drawerContent} /> 
+                                    <div className={classes.drawerContent} />
                                 )}
                             </Drawer>
                         );

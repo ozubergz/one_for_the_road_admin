@@ -3,13 +3,22 @@ import {
     Edit,
     TextInput,
     SimpleForm,
+    Toolbar,
+    SaveButton,
+    Button,
     required
 } from 'react-admin';
 
-const CategoryEdit = props => (
-    <Edit {...props}>
-        <SimpleForm>
-            <TextInput disabled source="id" />
+const ToolbarEdit = ({onCancel, ...props}) => (
+    <Toolbar {...props}>
+        <SaveButton />
+        <Button label="cancel" onClick={onCancel} />
+    </Toolbar>
+)
+
+const CategoryEdit = ({ onCancel, ...props}) => (
+    <Edit title=" " {...props}>
+        <SimpleForm toolbar={<ToolbarEdit onCancel={onCancel} />}>
             <TextInput source="name" validate={required()} />
         </SimpleForm>
     </Edit>
