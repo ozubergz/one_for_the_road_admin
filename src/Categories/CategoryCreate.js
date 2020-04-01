@@ -18,7 +18,7 @@ const ToolbarCreate = ({onCancel, ...props}) => (
 
 const CategoryCreate = ({onCancel, ...props}) => (
     <Create title=" " {...props}>
-        <SimpleForm toolbar={<ToolbarCreate onCancel={onCancel} {...props}/>}>
+        <SimpleForm variant="standard" toolbar={<ToolbarCreate onCancel={onCancel} {...props}/>}>
             <TextInput source="name" validate={required()} />
         </SimpleForm>
     </Create>

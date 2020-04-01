@@ -5,7 +5,6 @@ import {
     useCreate,
     useNotify,
  } from 'react-admin';
-//  import { v4 as uuidv4 } from 'uuid';
 
  const SaveOptionButton = props => {
 

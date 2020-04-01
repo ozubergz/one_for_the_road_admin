@@ -1,6 +1,4 @@
 import React,{ Fragment, Component } from 'react';
-import { connect } from "react-redux";
-import { push } from "react-router-redux";
 import compose from 'recompose/compose';
 import {
     List,
@@ -11,11 +9,11 @@ import {
     CreateButton,
     TopToolbar
 } from 'react-admin';
+import { connect } from "react-redux";
+import { push } from "react-router-redux";
 import { Route } from 'react-router';
 import { Drawer } from '@material-ui/core';
 import { withStyles } from '@material-ui/core';
-import Chip from '@material-ui/core/Chip';
-
 import CategoryEdit from './CategoryEdit';
 import CategoryCreate from './CategoryCreate';
 
@@ -29,13 +27,7 @@ const ListActions = ({ basePath }) => (
     <TopToolbar>
         <CreateButton basePath={basePath} />
     </TopToolbar>
-)
-
-// const NumberOfItems = props => (
-//     <Chip label={props.record.number_of_items} />
-// )
-// NumberOfItems.defaultProps = {label: "#Items"}
-
+);
 
 class CategoryList extends Component {
 
@@ -52,8 +44,11 @@ class CategoryList extends Component {
                     <Datagrid >
                         <TextField source="id" />
                         <TextField source="name" />
-                        {/* <NumberOfItems /> */}
-                        <TextField label="#Items" source="number_of_items" />
+                        <TextField 
+                            label="# of Items" 
+                            source="number_of_items"
+                            textAlign="center"
+                        />
                         <EditButton />
                         <ShowButton />
                     </Datagrid>

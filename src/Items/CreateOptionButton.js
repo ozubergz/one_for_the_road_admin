@@ -13,7 +13,6 @@ import {
  } from 'react-admin';
 
 import SaveOptionButton from './SaveOptionButton';
-
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
