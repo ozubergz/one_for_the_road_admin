@@ -20,6 +20,7 @@ import {
                     payload: { data: { ...values } },
                 },
                 {
+                    undoable: true,
                     onSuccess: ({ data: newRecord }) => {
                         notify('ra.notification.created', 'info', {
                             smart_count: 1,

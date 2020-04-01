@@ -6,21 +6,60 @@ import {
     SelectInput,
     TextInput,
     NumberInput,
+    // Toolbar,
+    useMutation,
+    useNotify,
+    useRefresh,
     number,
     minValue,
-    required
+    required,
+    SaveButton
 } from 'react-admin';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
+import DialogActions from '@material-ui/core/DialogActions';
 import EditIcon from '@material-ui/icons/Edit';
-// import RichTextInput from 'ra-input-rich-text';
-// import { TextField } from '@material-ui/core';
+// import { connect } from "react-redux";
+// import { change, submit, isSubmitting } from "redux-form";
+
+const SaveEditButton = ({record}) => {
+    const {id, name, price, description, category_id } = record;
+    const [mutate, { loading }] = useMutation();
+    const refresh = useRefresh();
+    const notify = useNotify();
+    const isEnabled = !name || !price || loading;
+
+    const update = () => mutate(
+        {
+            type: 'update',
+            resource: 'items',
+            payload: {
+                id,
+                data: { name, price, description, category_id }
+            },
+       },
+       {
+            // undoable: true,
+            onSuccess: ({ data }) => {
+                notify('ra.notification.updated', 'info', {
+                    smart_count:1
+                });
+                refresh();
+            },
+            onFailure: (error) => notify(`Error: ${error.message}`, 'warning'),
+        }
+    );
+
+    return <SaveButton disabled={isEnabled} handleSubmitWithRedirect={update} />
+}
+
 
 class ItemEditButton extends Component {
     state = {
-        name: "",
-        price: 0,
+        id: null,
+        name: null,
+        price: null,
         description: "",
         category_id: null,
         showDialog: false
@@ -28,9 +67,10 @@ class ItemEditButton extends Component {
 
     handleShowClick = () => {
         const { record } = this.props;
-        const { name, description, price, category_id } = record;
+        const { id, name, description, price, category_id } = record;
         this.setState({
             showDialog: true,
+            id,
             name,
             price,
             description,
@@ -47,6 +87,14 @@ class ItemEditButton extends Component {
             [e.target.name]: e.target.value
         });
     }
+
+    handleSaveClick = () => {
+        const {id, name, price, description, category_id } = this.state;
+        if(name && price) {
+            
+        }
+    }
+    
 
     render() {
         
@@ -75,7 +123,7 @@ class ItemEditButton extends Component {
                     <DialogContent>
                         
                         <SimpleForm
-                            // toolbar={<SaveOptionButton />}
+                            toolbar={null}
                             variant="standard"
                         >
                             <TextInput 
@@ -104,16 +152,23 @@ class ItemEditButton extends Component {
                                 multiline
                                 fullWidth
                                 source="description"
-                                validate={required()}
                                 value={description}
                                 onChange={this.handleChange}
                             />
                         </SimpleForm>
                     </DialogContent>
+                    <DialogActions>
+                        <SaveEditButton record={this.state} />
+                        <Button label="cancel" onClick={this.handleCloseClick}/>
+                    </DialogActions>
                 </Dialog>
             </Fragment>
         );
     }
 }
+
+// const mapStateToProps = state => ({
+//     isSubmitting: isSubmitting("item-quick-update")(state),
+// });
 
 export default ItemEditButton;
