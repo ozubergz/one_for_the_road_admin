@@ -5,31 +5,8 @@ import {
     useRefresh,
     useMutation
  } from 'react-admin';
- import ShowIcon from '@material-ui/icons/Visibility';
- import EditIcon from '@material-ui/icons/Edit';
  import DeleteIcon from '@material-ui/icons/Delete';
- import { makeStyles } from '@material-ui/core/styles';
- import { Link } from 'react-router-dom';
- 
-export const ItemShowButton = ({record}) => (
-    <Button
-        component={Link}
-        to={`/items/${record.id}/show`}
-        startIcon={ <ShowIcon />}
-        label="ra.action.show"
-    >
-    </Button>
-)
-
-export const ItemEditButton = ({record}) => (
-    <Button
-        component={Link}
-        to={`/items/${record.id}`}
-        startIcon={ <EditIcon />}
-        label="ra.action.edit"
-    >
-    </Button>
-)
+ import { makeStyles } from '@material-ui/core/styles'; 
 
 const useStyles = makeStyles({
     button: {
@@ -39,7 +16,7 @@ const useStyles = makeStyles({
     },
 });
 
-export const ItemDeleteButton = ({record}) => {
+const ItemDeleteButton = ({record}) => {
     const classes = useStyles();
     const notify = useNotify();
     const refresh = useRefresh();
@@ -50,13 +27,12 @@ export const ItemDeleteButton = ({record}) => {
             payload: { id: record.id }
         },
         {
+            undoable: true,
             onSuccess: ({ data }) => {
-                notify('ra.notification.deleted', 'info', {
-                    smart_count:1
-                });
+                notify('Item deleted', 'info', {}, true);
                 refresh();
             },
-            onFailure: (error) => notify(error.message, 'warning')
+            onFailure: (error) => notify(`Error: ${error.message}`, 'warning')
         }
     );
     return (
@@ -71,5 +47,4 @@ export const ItemDeleteButton = ({record}) => {
     );
 }
 
-
-
+export default ItemDeleteButton;

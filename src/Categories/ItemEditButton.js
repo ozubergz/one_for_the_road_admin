@@ -6,22 +6,20 @@ import {
     SelectInput,
     TextInput,
     NumberInput,
-    // Toolbar,
     useMutation,
     useNotify,
     useRefresh,
     number,
     minValue,
     required,
-    SaveButton
+    SaveButton,
+    
 } from 'react-admin';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
 import EditIcon from '@material-ui/icons/Edit';
-// import { connect } from "react-redux";
-// import { change, submit, isSubmitting } from "redux-form";
 
 const SaveEditButton = ({record}) => {
     const {id, name, price, description, category_id } = record;
@@ -42,15 +40,12 @@ const SaveEditButton = ({record}) => {
        {
             // undoable: true,
             onSuccess: ({ data }) => {
-                notify('ra.notification.updated', 'info', {
-                    smart_count:1
-                });
+                notify('Item updated', 'info', {smart_count: 1});
                 refresh();
             },
             onFailure: (error) => notify(`Error: ${error.message}`, 'warning'),
         }
     );
-
     return <SaveButton disabled={isEnabled} handleSubmitWithRedirect={update} />
 }
 
@@ -88,13 +83,7 @@ class ItemEditButton extends Component {
         });
     }
 
-    handleSaveClick = () => {
-        const {id, name, price, description, category_id } = this.state;
-        if(name && price) {
-            
-        }
-    }
-    
+
 
     render() {
         
@@ -137,6 +126,7 @@ class ItemEditButton extends Component {
                                 onChange={this.handleChange} 
                                 source="category_id" 
                                 reference="categories"
+                                sort={{ field: 'name', order: 'ASC' }}
                             >
                                 <SelectInput 
                                     optionText="name"

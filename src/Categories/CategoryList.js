@@ -17,11 +17,17 @@ import { withStyles } from '@material-ui/core';
 import CategoryEdit from './CategoryEdit';
 import CategoryCreate from './CategoryCreate';
 
+
 const styles = {
     drawerContent: {
         width: 300
     }
 };
+
+const NumberOfItems = ({record}) => {
+    return <span>{record.items.length}</span>
+}
+NumberOfItems.defaultProps = { label: "# of Items"}
 
 const ListActions = ({ basePath }) => (
     <TopToolbar>
@@ -44,11 +50,7 @@ class CategoryList extends Component {
                     <Datagrid >
                         <TextField source="id" />
                         <TextField source="name" />
-                        <TextField 
-                            label="# of Items" 
-                            source="number_of_items"
-                            textAlign="center"
-                        />
+                        <NumberOfItems />                 
                         <EditButton />
                         <ShowButton />
                     </Datagrid>

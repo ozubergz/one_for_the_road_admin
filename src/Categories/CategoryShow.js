@@ -7,21 +7,25 @@ import {
     NumberField,
     TabbedShowLayout,
     Tab,
-    // TopToolbar,
-    // EditButton,
-    // DeleteButton
 } from 'react-admin';
 import ItemEditButton from './ItemEditButton';
+import ItemDeleteButton from './ItemDeleteButton';
+import ItemShowButton from './ItemShowButton';
 
-// import { ItemShowButton, ItemEditButton, ItemDeleteButton} from './ItemActionButtons';
+const Description = ({record, ...rest}) => (
+    record.description 
+        ? <TextField source="description" record={record} />
+         : null
+)
+Description.defaultProps = { label: "Description" }
 
-const Description = props => {
-    const description = props.record.description;
-    return <span>{description ? description : null}</span>
+const NumberOfItems = ({record = {}}) => (
+    <span>{record.items.length}</span>
+)
+NumberOfItems.defaultProps = {
+    label: "Number of Items",
+    addLabel: true
 }
-Description.defaultProps = { label: "Description"};
-
-
 
 const CategoryShow = (props) => (
     <Show  {...props}>
@@ -29,20 +33,22 @@ const CategoryShow = (props) => (
             <Tab label="Info">
                 <TextField source="id" />
                 <TextField source="name" />
-                <TextField label="# of Items" source="number_of_items" />
+                <NumberOfItems />
             </Tab>
             <Tab label="Items">
-                <ArrayField source="items">
+                <ArrayField source="items" sortBy="item_id" fieldKey='id'>
                     <Datagrid>
-                        <TextField source="id" />
-                        <TextField source="name" />
+                        <TextField source="id" sortable={false}/>
+                        <TextField source="name" sortable={false} />
                         <Description />
                         <NumberField 
+                            sortable={false}
                             source="price" 
                             options={{ style: "currency", currency: "USD" }}
                         />
                         <ItemEditButton />
-
+                        <ItemShowButton />
+                        <ItemDeleteButton />
                     </Datagrid>
                 </ArrayField>
             </Tab>
