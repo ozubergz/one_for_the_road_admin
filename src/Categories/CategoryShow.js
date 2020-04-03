@@ -43,7 +43,7 @@ const CategoryShow = (props) => (
                         <Description />
                         <NumberField 
                             sortable={false}
-                            source="price" 
+                            source="price"
                             options={{ style: "currency", currency: "USD" }}
                         />
                         <ItemEditButton />

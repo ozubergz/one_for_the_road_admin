@@ -1,4 +1,8 @@
-import React, { Component, Fragment } from 'react';
+import React, { 
+    Component, 
+    Fragment,
+ } from 'react';
+
 import { 
     Button,
     SimpleForm,
@@ -13,8 +17,8 @@ import {
     minValue,
     required,
     SaveButton,
-    
 } from 'react-admin';
+
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -38,9 +42,8 @@ const SaveEditButton = ({record}) => {
             },
        },
        {
-            // undoable: true,
             onSuccess: ({ data }) => {
-                notify('Item updated', 'info', {smart_count: 1});
+                notify('ra.notification.updated', 'info', {smart_count: 1});
                 refresh();
             },
             onFailure: (error) => notify(`Error: ${error.message}`, 'warning'),
@@ -52,25 +55,24 @@ const SaveEditButton = ({record}) => {
 
 class ItemEditButton extends Component {
     state = {
-        id: null,
-        name: null,
-        price: null,
+        id: "",
+        name: "",
+        price: "",
         description: "",
-        category_id: null,
+        category_id: "",
         showDialog: false
     }
 
-    handleShowClick = () => {
+    componentDidMount() {
         const { record } = this.props;
-        const { id, name, description, price, category_id } = record;
-        this.setState({
-            showDialog: true,
-            id,
-            name,
-            price,
-            description,
-            category_id
+        this.setState({ 
+            ...record,
+            description: record.description ? record.description : ""
         });
+    }
+
+    handleShowClick = () => {
+        this.setState({ showDialog: true });
     }
 
     handleCloseClick = () => {
@@ -82,8 +84,6 @@ class ItemEditButton extends Component {
             [e.target.name]: e.target.value
         });
     }
-
-
 
     render() {
         
@@ -136,7 +136,7 @@ class ItemEditButton extends Component {
                                 validate={[number(), minValue(0)]}
                                 onChange={this.handleChange}
                                 source="price"
-                                value={price}
+                                value={price ? price.toFixed(2) : ""}
                             />
                             <TextInput
                                 multiline
@@ -156,9 +156,5 @@ class ItemEditButton extends Component {
         );
     }
 }
-
-// const mapStateToProps = state => ({
-//     isSubmitting: isSubmitting("item-quick-update")(state),
-// });
 
 export default ItemEditButton;

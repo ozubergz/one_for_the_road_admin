@@ -17,7 +17,6 @@ import { withStyles } from '@material-ui/core';
 import CategoryEdit from './CategoryEdit';
 import CategoryCreate from './CategoryCreate';
 
-
 const styles = {
     drawerContent: {
         width: 300
