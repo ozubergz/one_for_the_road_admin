@@ -42,9 +42,10 @@ const SaveEditButton = ({record}) => {
             },
        },
        {
+            undoable: true,
             onSuccess: ({ data }) => {
-                notify('ra.notification.updated', 'info', {smart_count: 1});
                 refresh();
+                notify('ra.notification.updated', 'info', {smart_count: 1}, true);
             },
             onFailure: (error) => notify(`Error: ${error.message}`, 'warning'),
         }
@@ -63,16 +64,14 @@ class ItemEditButton extends Component {
         showDialog: false
     }
 
-    componentDidMount() {
+    handleShowClick = () => {
         const { record } = this.props;
+
         this.setState({ 
             ...record,
-            description: record.description ? record.description : ""
-        });
-    }
-
-    handleShowClick = () => {
-        this.setState({ showDialog: true });
+            description: record.description ? record.description : "",
+            showDialog: true
+         });
     }
 
     handleCloseClick = () => {

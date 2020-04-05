@@ -2,6 +2,7 @@ import React from 'react';
 import {
     Show,
     TextField,
+    ReferenceManyField,
     ArrayField,
     Datagrid,
     NumberField,
@@ -36,13 +37,18 @@ const CategoryShow = (props) => (
                 <NumberOfItems />
             </Tab>
             <Tab label="Items">
-                <ArrayField source="items" sortBy="item_id" fieldKey='id'>
+                <ReferenceManyField 
+                    source="items" 
+                    reference="items" 
+                    target="items"
+                    sort={{ field: 'id', order: 'ASC' }}
+                >
                     <Datagrid>
-                        <TextField source="id" sortable={false}/>
-                        <TextField source="name" sortable={false} />
+                        <TextField source="id" />
+                        <TextField source="name"  />
                         <Description />
                         <NumberField 
-                            sortable={false}
+                            // sortable={false}
                             source="price"
                             options={{ style: "currency", currency: "USD" }}
                         />
@@ -50,7 +56,7 @@ const CategoryShow = (props) => (
                         <ItemShowButton />
                         <ItemDeleteButton />
                     </Datagrid>
-                </ArrayField>
+                </ReferenceManyField>
             </Tab>
         </TabbedShowLayout>
     </Show>

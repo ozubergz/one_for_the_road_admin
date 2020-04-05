@@ -1,17 +1,15 @@
-import React, { Fragment, useState } from 'react';
+import React from 'react';
 import { 
     Button,
     useNotify,
-    useRefresh,
+    // useRefresh,
     useMutation
  } from 'react-admin';
 import DeleteIcon from '@material-ui/icons/Delete';
-// import { red } from '@material-ui/core/colors';
- import { makeStyles } from '@material-ui/core/styles';
- import Dialog from '@material-ui/core/Dialog';
-//  import DialogContent from '@material-ui/core/DialogContent';
- import DialogActions from '@material-ui/core/DialogActions';
- import DialogTitle from '@material-ui/core/DialogTitle';
+import { makeStyles } from '@material-ui/core/styles';
+// import Dialog from '@material-ui/core/Dialog';
+// import DialogActions from '@material-ui/core/DialogActions';
+// import DialogTitle from '@material-ui/core/DialogTitle';
 
 
 const useStyles = makeStyles({
@@ -23,9 +21,8 @@ const useStyles = makeStyles({
 });
 
 const DeleteButton = ({record}) => {
-    // const classes = useStyles();
     const notify = useNotify();
-    const refresh = useRefresh();
+    // const refresh = useRefresh();
     const [deleteOne, { loading }] = useMutation(
         {
             type: 'delete',
@@ -33,9 +30,10 @@ const DeleteButton = ({record}) => {
             payload: { id: record.id }
         },
         {
+            undoable: true,
             onSuccess: ({ data }) => {
-                notify('ra.notification.deleted', 'info', {smart_count: 1});
-                refresh();
+                notify('ra.notification.deleted', 'info', {smart_count: 1}, true);
+                // refresh();
             },
             onFailure: (error) => notify(`Error: ${error.message}`, 'warning')
         }
@@ -43,7 +41,8 @@ const DeleteButton = ({record}) => {
 
     return (
         <Button
-            label="yes"
+            startIcon={<DeleteIcon />}
+            label="delete"
             color="secondary"
             onClick={deleteOne}
             disabled={loading}
@@ -52,38 +51,36 @@ const DeleteButton = ({record}) => {
     );
 }
 
-const ItemDeleteButton = (props) => {
-    const [showDialog, setShowDialog] = useState(false);
-        const classes = useStyles();
+// const ItemDeleteButton = (props) => {
+//     const [showDialog, setShowDialog] = useState(false);
+//     const classes = useStyles();
 
     
-    const handleShowClick = () => {
-        setShowDialog(true);
-    }
+//     const handleShowClick = () => {
+//         setShowDialog(true);
+//     }
 
-    const handleCloseClick = () => {
-        setShowDialog(false);
-    }
+//     const handleCloseClick = () => {
+//         setShowDialog(false);
+//     }
     
-    return (
-        <Fragment>
-            <Button 
-                startIcon={<DeleteIcon />}
-                label="delete"
-                onClick={handleShowClick}
-                className={classes.button}
-            />
-            <Dialog open={showDialog} onClose={handleCloseClick}>
-                <DialogTitle>Do you want to delete item?</DialogTitle>
-                <DialogActions>
-                    <DeleteButton {...props} />
-                    <Button label="no" onClick={handleCloseClick} />
-                </DialogActions>
-            </Dialog>
-        </Fragment>
-    )
-}
+//     return (
+//         <Fragment>
+//             <Button 
+//                 startIcon={<DeleteIcon />}
+//                 label="delete"
+//                 onClick={handleShowClick}
+//                 className={classes.button}
+//             />
+//             <Dialog open={showDialog} onClose={handleCloseClick}>
+//                 <DialogTitle>Do you want to delete item?</DialogTitle>
+//                 <DialogActions>
+//                     <DeleteButton {...props} />
+//                     <Button label="no" onClick={handleCloseClick} />
+//                 </DialogActions>
+//             </Dialog>
+//         </Fragment>
+//     )
+// }
 
-
-
-export default ItemDeleteButton;
+export default DeleteButton;
