@@ -3,7 +3,6 @@ import {
     Show,
     TextField,
     ReferenceManyField,
-    ArrayField,
     Datagrid,
     NumberField,
     TabbedShowLayout,
