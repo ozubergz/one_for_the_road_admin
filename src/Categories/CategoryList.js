@@ -71,7 +71,6 @@ class CategoryList extends Component {
                 </Route>
                 <Route path="/categories/:id">
                     {({ match }) => {
-
                         //check if params id is not create
                          const isMatch =
                             match &&
@@ -81,7 +80,7 @@ class CategoryList extends Component {
                         return ( 
                             <Drawer 
                                 anchor="right"
-                                open={isMatch}
+                                open={!!isMatch}
                                 onClose={this.handleClose}
                             >
                                 {isMatch ? (

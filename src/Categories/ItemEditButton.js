@@ -1,5 +1,4 @@
 import React, { 
-    // Component, 
     Fragment,
     useState,
     useReducer,
@@ -14,7 +13,6 @@ import {
     NumberInput,
     useMutation,
     useNotify,
-    // useRefresh,
     number,
     minValue,
     required,
@@ -36,9 +34,9 @@ const ItemEditButton = (props) => {
     ), {
         id: "",
         name: "",
-        price: 0,
+        price: "",
         description: "",
-        category_id: null
+        category_id: ""
      });
 
     const handleShowClick = () => {        
@@ -81,9 +79,9 @@ const ItemEditButton = (props) => {
             }
         );
         return <SaveButton 
-            disabled={isEnabled} 
-            handleSubmitWithRedirect={update}
-            />
+                    disabled={isEnabled} 
+                    handleSubmitWithRedirect={update}
+                />
     }
 
     return (

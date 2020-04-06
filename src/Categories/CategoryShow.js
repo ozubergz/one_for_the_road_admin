@@ -11,6 +11,7 @@ import {
 import ItemEditButton from './ItemEditButton';
 import ItemDeleteButton from './ItemDeleteButton';
 import ItemShowButton from './ItemShowButton';
+import ItemCreateButton from './ItemCreateButton';
 
 const Description = ({record, ...rest}) => (
     record.description 
@@ -56,6 +57,7 @@ const CategoryShow = (props) => (
                         <ItemDeleteButton />
                     </Datagrid>
                 </ReferenceManyField>
+                <ItemCreateButton />
             </Tab>
         </TabbedShowLayout>
     </Show>
