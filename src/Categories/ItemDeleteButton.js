@@ -2,15 +2,10 @@ import React from 'react';
 import { 
     Button,
     useNotify,
-    // useRefresh,
     useMutation
  } from 'react-admin';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { makeStyles } from '@material-ui/core/styles';
-// import Dialog from '@material-ui/core/Dialog';
-// import DialogActions from '@material-ui/core/DialogActions';
-// import DialogTitle from '@material-ui/core/DialogTitle';
-
 
 const useStyles = makeStyles({
     button: {
@@ -22,7 +17,6 @@ const useStyles = makeStyles({
 
 const DeleteButton = ({record}) => {
     const notify = useNotify();
-    // const refresh = useRefresh();
     const [deleteOne, { loading }] = useMutation(
         {
             type: 'delete',
@@ -33,7 +27,6 @@ const DeleteButton = ({record}) => {
             undoable: true,
             onSuccess: ({ data }) => {
                 notify('ra.notification.deleted', 'info', {smart_count: 1}, true);
-                // refresh();
             },
             onFailure: (error) => notify(`Error: ${error.message}`, 'warning')
         }
@@ -50,37 +43,5 @@ const DeleteButton = ({record}) => {
         />
     );
 }
-
-// const ItemDeleteButton = (props) => {
-//     const [showDialog, setShowDialog] = useState(false);
-//     const classes = useStyles();
-
-    
-//     const handleShowClick = () => {
-//         setShowDialog(true);
-//     }
-
-//     const handleCloseClick = () => {
-//         setShowDialog(false);
-//     }
-    
-//     return (
-//         <Fragment>
-//             <Button 
-//                 startIcon={<DeleteIcon />}
-//                 label="delete"
-//                 onClick={handleShowClick}
-//                 className={classes.button}
-//             />
-//             <Dialog open={showDialog} onClose={handleCloseClick}>
-//                 <DialogTitle>Do you want to delete item?</DialogTitle>
-//                 <DialogActions>
-//                     <DeleteButton {...props} />
-//                     <Button label="no" onClick={handleCloseClick} />
-//                 </DialogActions>
-//             </Dialog>
-//         </Fragment>
-//     )
-// }
 
 export default DeleteButton;
