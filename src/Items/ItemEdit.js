@@ -12,10 +12,13 @@ import {
 
 const ItemEdit = props => (
     <Edit {...props}>
-        <SimpleForm>
-            <TextInput disabled source="id" />
+        <SimpleForm variant="standard">
             <TextInput source="name" />
-            <TextInput source="description" />
+            <TextInput 
+                fullWidth
+                multiline
+                source="description"
+            />
             <NumberInput 
                 source="price" 
                 step={1} 

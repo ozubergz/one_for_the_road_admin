@@ -16,6 +16,14 @@ import ShowOptionButton from './ShowOptionButton';
 import DeleteOptionButton from './DeleteOptionButton';
 import EditOptionButton from './EditOptionButton';
 
+const Description = props => {
+    const description = props.record.description;
+    return <span>{description ? description : null}</span>
+}
+Description.defaultProps = {
+    label: "Description",
+    addLabel: true
+}
 
 const ItemShow = props => (
     <Show {...props} >
@@ -26,10 +34,11 @@ const ItemShow = props => (
                     source="price"
                     options={{style: "currency", currency: "USD"}}
                 />
-                <TextField source="description" />
+                <Description source="description" />
             </Tab>
             <Tab label="Menu Category">
                 <ReferenceField
+                    link="show"
                     source="category_id"
                     reference="categories"
                 >

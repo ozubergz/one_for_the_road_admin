@@ -29,7 +29,11 @@ const ItemCreate = (props) => (
             toolbar={<ToolbarCreate onCancel={props.onCancel} {...props}/>}
         >
             <TextInput source="name" validate={required()} />
-            <TextInput source="description" validate={required()} />
+            <TextInput 
+                fullWidth
+                multiline
+                source="description" 
+            />
             <NumberInput 
                 source="price" 
                 validate={[required(), number(), minValue(0)]}
