@@ -1,5 +1,8 @@
 import React from 'react';
 import {
+    Button,
+    Toolbar,
+    SaveButton,
     Create,
     SimpleForm,
     TextInput,
@@ -11,14 +14,24 @@ import {
     minValue
 } from 'react-admin';
 
+const ToolbarCreate = ({onCancel, ...props}) => (
+    <Toolbar {...props} >
+        <SaveButton />
+        <Button label="cancel" onClick={onCancel} />
+    </Toolbar>
+);
+
 const ItemCreate = (props) => (
-    <Create {...props}>
-        <SimpleForm variant="standard">
+    <Create title=" " {...props}>
+        <SimpleForm 
+            variant="standard" 
+            redirect="list"
+            toolbar={<ToolbarCreate onCancel={props.onCancel} {...props}/>}
+        >
             <TextInput source="name" validate={required()} />
             <TextInput source="description" validate={required()} />
             <NumberInput 
                 source="price" 
-                // validate={[number(), minValue(0)]}
                 validate={[required(), number(), minValue(0)]}
             />
             <ReferenceInput 

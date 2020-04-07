@@ -10,7 +10,7 @@ import {
     ChipField,
     ReferenceField,
     TopToolbar,
-    // CreateButton
+    // CreateButton,
     ShowButton,
     EditButton
 } from 'react-admin';
@@ -89,12 +89,12 @@ const ItemList = (props) => {
                 <Drawer
                     anchor="right"
                     open={showDrawer}
-                    onClose={ handleClose }
+                    onClose={handleClose}
                 >
                     <ItemCreate
                         { ...props }
                         // className={classes.drawerContent}
-                        // onCancel={ this.handleClose }
+                        onCancel={handleClose}
                     />
                 </Drawer>
                 
