@@ -55,7 +55,7 @@ class CategoryList extends Component {
                     </Datagrid>
                 </List>
                 <Route path="/categories/create">
-                    {({ match }) => (                        
+                    {({ match }) =>  (
                         <Drawer
                             anchor="right"
                             open={ !!match }

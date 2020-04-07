@@ -13,7 +13,7 @@ import {
 
 const ItemCreate = (props) => (
     <Create {...props}>
-        <SimpleForm>
+        <SimpleForm variant="standard">
             <TextInput source="name" validate={required()} />
             <TextInput source="description" validate={required()} />
             <NumberInput 
