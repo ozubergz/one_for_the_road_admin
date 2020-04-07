@@ -25,7 +25,7 @@ const ItemCreate = (props) => (
     <Create title=" " {...props}>
         <SimpleForm 
             variant="standard" 
-            redirect="list"
+            redirect="show"
             toolbar={<ToolbarCreate onCancel={props.onCancel} {...props}/>}
         >
             <TextInput source="name" validate={required()} />

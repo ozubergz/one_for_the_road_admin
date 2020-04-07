@@ -21,7 +21,7 @@ const Description = ({record, ...rest}) => (
 Description.defaultProps = { label: "Description" }
 
 const NumberOfItems = ({record = {}}) => (
-    <span>{record.items.length}</span>
+    <span>{record.items ? record.items.length : 0}</span>
 )
 NumberOfItems.defaultProps = {
     label: "Number of Items",

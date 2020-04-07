@@ -65,9 +65,9 @@ const ItemCreateButton = (props) => {
                 payload: { data: { ...userInput } },
             },
             {
-                undoable: true,
+                // undoable: true,
                 onSuccess: ({ data }) => {
-                    notify('ra.notification.created', 'info', {smart_count: 1}, true);
+                    notify('ra.notification.created', 'info', {smart_count: 1});
                     // redirect();
                     refresh();
                 },

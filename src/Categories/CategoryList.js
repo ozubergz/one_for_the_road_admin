@@ -24,7 +24,7 @@ const styles = {
 };
 
 const NumberOfItems = ({record}) => {
-    return <span>{record.items.length}</span>
+    return <span>{record.items ? record.items.length : 0}</span>
 }
 NumberOfItems.defaultProps = { label: "# of Items"}
 
