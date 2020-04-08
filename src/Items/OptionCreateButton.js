@@ -3,23 +3,14 @@ import {
     Button,
     SimpleForm,
     TextInput,
-    ArrayInput,
-    SimpleFormIterator,
-    NumberInput,
-    SelectInput,
     required,
-    number,
-    minValue,
-    useNotify,
-    useRefresh,
-    SaveButton,
-    useMutation,
     Toolbar
  } from 'react-admin';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
+import { CreateButton } from './SaveOptionButtons';
 
 const CreateOptionButton = (props) => {
     const [showDialog, setShowDialog] = useState(false);
@@ -32,37 +23,12 @@ const CreateOptionButton = (props) => {
         setShowDialog(false)
     }
 
-    const SaveOptionButton = props => {
-        const [mutate, { loading }] = useMutation();
-        const notify = useNotify();
-        const refresh = useRefresh();
-
-        const handleSave = (values) => {
-            mutate(
-                {   
-                    type: "create",
-                    resource: "item_options",
-                    payload: { data: {...values} }
-                },
-                {
-                    undoable: true,
-                    onSuccess: ({ data }) => {
-                        notify('ra.notification.created', 'info', {smart_count: 1}, true);
-                        refresh();
-                    },
-                    onFailure: (error) => notify(`Error ${error.message}`, 'warning')
-                }
-            );
-        }
-        return <SaveButton {...props} disabled={loading} onSave={handleSave} />
-     }
-
-     const CustomToolbar = (props) => (
-         <Toolbar {...props}> 
-            <SaveOptionButton />
+    const CustomToolbar = () => (
+        <Toolbar {...props}> 
+            <CreateButton />
             <Button onClick={handleCloseClick} label="Cancel" />
-         </Toolbar>
-     );
+        </Toolbar>
+    );
     
     const { record } = props;  
 
@@ -70,7 +36,7 @@ const CreateOptionButton = (props) => {
         <Fragment>
             <Button 
                 onClick={handleShowClick} 
-                label="Create a Table of Options"
+                label="Create Table of Options"
             >
                 <AddCircleIcon/>
             </Button>
@@ -79,7 +45,7 @@ const CreateOptionButton = (props) => {
                 open={showDialog}
                 onClose={handleCloseClick}
             >
-                <DialogTitle>Table of Options</DialogTitle>
+                <DialogTitle>Create Table of Options</DialogTitle>
                 <DialogContent>
                     <SimpleForm
                         toolbar={<CustomToolbar />}
@@ -87,20 +53,6 @@ const CreateOptionButton = (props) => {
                         variant="standard"
                     >
                         <TextInput label="Title" source="name" validate={required()} />
-                        <ArrayInput source="options" validate={required()}>
-                            <SimpleFormIterator>
-                                <TextInput label="Name" source="name" />
-                                <NumberInput 
-                                    label="Price" 
-                                    source="price" 
-                                    validate={[number(), minValue(0)]}
-                                />
-                                <SelectInput label="Input Type" source="input_type" choices={[
-                                        { id: "radio", name: "radio" },
-                                        { id: "checkbox", name: "checkbox" }
-                                ]}/>
-                            </SimpleFormIterator>
-                        </ArrayInput>
                     </SimpleForm>
                 </DialogContent>
             </Dialog>

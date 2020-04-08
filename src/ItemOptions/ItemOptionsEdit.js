@@ -3,15 +3,15 @@ import {
     Edit,
     SimpleForm,
     TextInput,
-    SelectInput,
-    NumberInput,
-    ArrayInput,
-    SimpleFormIterator,
+    // SelectInput,
+    // NumberInput,
+    // ArrayInput,
+    // SimpleFormIterator,
     Toolbar,
     SaveButton,
     DeleteButton,
-    number,
-    minValue
+    // number,
+    // minValue
 } from 'react-admin';
 
 const redirect = (basePath, id, data) => `/item_options/${id}/show`;
@@ -30,7 +30,7 @@ const Item_optionEdit = props => (
             toolbar={<EditToolbar />}
         >
             <TextInput label="Title" source="name" />
-            <ArrayInput source="options">
+            {/* <ArrayInput source="options">
                 <SimpleFormIterator >
                     <TextInput label="Name" source="name" />
                     <NumberInput 
@@ -44,7 +44,7 @@ const Item_optionEdit = props => (
                         { id: "checkbox", name: "checkbox" }
                     ]}/>
                 </SimpleFormIterator>
-            </ArrayInput>
+            </ArrayInput> */}
         </SimpleForm>
     </Edit>
 );

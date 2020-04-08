@@ -15,8 +15,7 @@ import {
     useMutation,
     useNotify,
     useRefresh,
-    // useRedirect,
-    SaveButton
+    SaveButton,
  } from "react-admin";
 
 import Dialog from '@material-ui/core/Dialog';
@@ -57,25 +56,23 @@ const ItemCreateButton = (props) => {
         const refresh = useRefresh();
         const [mutate, { loading }] = useMutation();
         const isEnabled = !name || !price || loading;
-
-        const create = () => mutate(
+    
+        const handleSave = () => mutate(
             {
                 type: 'create',
                 resource: 'items',
                 payload: { data: { ...userInput } },
             },
             {
-                // undoable: true,
                 onSuccess: ({ data }) => {
                     notify('ra.notification.created', 'info', {smart_count: 1});
-                    // redirect();
                     refresh();
                 },
                 onFailure: (error) => notify(`Error: ${error.message}`, 'warning')
             }
         );
-
-        return <SaveButton disabled={isEnabled} handleSubmitWithRedirect={create} />
+        
+        return <SaveButton {...props} disabled={isEnabled} handleSubmitWithRedirect={handleSave} />
     }
 
     return (
@@ -114,7 +111,7 @@ const ItemCreateButton = (props) => {
                             />
                         </ReferenceInput>
                         <NumberInput 
-                            validate={[number(), minValue(0)]}
+                            validate={[required(), number(), minValue(0)]}
                             source="price"
                             value={userInput.price}
                             onChange={handleChange}
