@@ -1,6 +1,5 @@
 import React, { useState, Fragment } from 'react';
 import {
-    Button,
     List,
     Datagrid,
     TextField,
@@ -27,7 +26,6 @@ const Description = props => {
 
 const ItemList = (props) => {
     const [showCreateDrawer, setShowCreateDrawer] = useState(false);
-    // const [showEditDrawer, setShowEditDrawer] = useState(false);
 
     const handleCloseCreate = () => {
         setShowCreateDrawer(false);
@@ -40,10 +38,6 @@ const ItemList = (props) => {
     const handleShowCreate = () => {
         setShowCreateDrawer(true);
     }
-
-    // const handleShowEdit = () => {
-    //     setShowEditDrawer(true)
-    // }
 
     const ListActions = () => (
         <TopToolbar>
@@ -60,7 +54,7 @@ const ItemList = (props) => {
                 <Datagrid >
                     <TextField source="id" />
                     <TextField source="name" />
-                    <Description source="description" />
+                    <Description source="description" sortable={false} />
                     <NumberField 
                         source="price" 
                         options={{ style: "currency", currency: "USD" }}

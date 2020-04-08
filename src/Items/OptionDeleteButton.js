@@ -29,10 +29,9 @@ const DeleteOptionButton = ({record}) => {
             payload: { id: record.id }
         },
         {
+            undoable: true,
             onSuccess: ({ data }) => {
-                notify('ra.notification.deleted', 'info', {
-                    smart_count:1
-                });
+                notify('ra.notification.deleted', 'info', {smart_count:1}, true);
                 refresh();
             },
             onFailure: (error) => notify(error.message, 'warning')

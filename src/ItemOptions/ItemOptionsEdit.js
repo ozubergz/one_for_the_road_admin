@@ -29,7 +29,6 @@ const Item_optionEdit = props => (
             redirect={redirect}
             toolbar={<EditToolbar />}
         >
-            <TextInput disabled source="id" />
             <TextInput label="Title" source="name" />
             <ArrayInput source="options">
                 <SimpleFormIterator >

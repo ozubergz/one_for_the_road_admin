@@ -14,7 +14,7 @@ const Item_optionShow = props => (
         <SimpleShowLayout>
             <TextField source="id" />
             <TextField source="name" />
-            <ReferenceField source="item_id" reference="items">
+            <ReferenceField source="item_id" reference="items" link="show">
                 <TextField source="name" />
             </ReferenceField>
             <ArrayField source="options">

@@ -7,12 +7,22 @@ import {
     ReferenceInput,
     SelectInput,
     number,
-    minValue
+    minValue,
+    Toolbar,
+    SaveButton,
+    Button
 } from 'react-admin';
 
-const ItemEdit = props => (
+const CustomToolBar = ({onCancel, ...props}) => (
+    <Toolbar {...props}>
+        <SaveButton />
+        <Button label="cancel" onClick={onCancel} />
+    </Toolbar>
+);
+
+const ItemEdit = ({ onCancel, ...props}) => (
     <Edit {...props}>
-        <SimpleForm variant="standard">
+        <SimpleForm variant="standard" toolbar={<CustomToolBar onCancel={onCancel} />}>
             <TextInput source="name" />
             <TextInput 
                 fullWidth

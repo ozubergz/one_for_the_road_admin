@@ -71,7 +71,7 @@ const ItemCreateButton = (props) => {
                     // redirect();
                     refresh();
                 },
-                onFailure: (error) => notify(`Error: ${error.message}`, 'warning'),
+                onFailure: (error) => notify(`Error: ${error.message}`, 'warning')
             }
         );
 

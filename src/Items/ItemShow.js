@@ -8,13 +8,11 @@ import {
     ReferenceField,
     TabbedShowLayout,
     Tab,
-    // Title
-    // EditButton,
 } from 'react-admin';
-import CreateOptionButton from './CreateOptionButton';
+import CreateButton from './OptionCreateButton';
 import ShowOptionButton from './ShowOptionButton';
-import DeleteOptionButton from './DeleteOptionButton';
-import EditOptionButton from './EditOptionButton';
+import DeleteButton from './OptionDeleteButton';
+import EditButton from './OptionEditButton';
 
 const Description = props => {
     const description = props.record.description;
@@ -50,11 +48,11 @@ const ItemShow = props => (
                     <Datagrid>
                         <TextField source="name" label="Title" />
                         <ShowOptionButton />
-                        <EditOptionButton />
-                        <DeleteOptionButton />
+                        <EditButton />
+                        <DeleteButton />
                     </Datagrid>
                 </ArrayField>
-                <CreateOptionButton />
+                <CreateButton />
             </Tab>
         </TabbedShowLayout>
     </Show>
