@@ -6,7 +6,6 @@ import React, {
 import { 
     Button,
     SimpleForm,
-    ReferenceInput,
     SelectInput,
     TextInput,
     NumberInput,
@@ -16,6 +15,7 @@ import {
     minValue,
     required,
     SaveButton,
+    useRefresh
 } from 'react-admin';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
@@ -23,14 +23,14 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
 import EditIcon from '@material-ui/icons/Edit';
 
-const ItemEditButton = (props) => {
+const OptionEditButton = (props) => {
     const { record } = props;
     const [showDialog, setShowDialog] = useState(false);    
     const [userInput, setUserInput] = useReducer((state, newState) => (
         {...state, ...newState}
     ), {
         ...record,
-        description: record.description ? record.description : ""
+        price: record.price ? record.price : ""
      });
 
     const handleShowClick = () => {        
@@ -48,25 +48,27 @@ const ItemEditButton = (props) => {
     }
 
     const SaveEditButton = () => {
-        const {id, name, price, description, category_id} = userInput;
+        const { name, price, input_type } = userInput;
         const [mutate, { loading }] = useMutation();
+        const refresh = useRefresh();
         const notify = useNotify();
-        const isEnabled = !name || !price || loading;
+        const isEnabled = !name || loading;
 
         const update = () => mutate(
             {
                 type: 'update',
-                resource: 'items',
+                resource: 'options',
                 payload: {
-                    id,
-                    data: { name, price, description, category_id }
+                    id: record.id,
+                    data: { name, price, input_type }
                 },
            },
            {
-                undoable: true,
+                // undoable: true,
                 onSuccess: ({ data }) => {
-                    notify('ra.notification.updated', 'info', {smart_count: 1}, true);
-                    setShowDialog(false)
+                    notify('ra.notification.updated', 'info', {smart_count: 1});
+                    refresh();
+                    // setShowDialog(false)
                 },
                 onFailure: (error) => notify(`Error: ${error.message}`, 'warning'),
             }
@@ -79,16 +81,14 @@ const ItemEditButton = (props) => {
             <Button
                 label="edit"
                 onClick={handleShowClick}
-                startIcon={<EditIcon />}
-            />
+            ><EditIcon/></Button>
             <Dialog
                 fullWidth
                 open={showDialog}
                 onClose={handleCloseClick}
             >
-                <DialogTitle>Item #{record.id}</DialogTitle>
+                <DialogTitle>Option #{record.id}</DialogTitle>
                 <DialogContent>
-                    
                     <SimpleForm
                         toolbar={null}
                         variant="standard"
@@ -99,28 +99,21 @@ const ItemEditButton = (props) => {
                             value={userInput.name}
                             onChange={handleChange}
                         />
-                        <ReferenceInput 
-                            value={userInput.category_id} 
-                            source="category_id" 
-                            reference="categories"
-                            sort={{ field: 'name', order: 'ASC' }}
-                            onChange={handleChange} 
-                        >
-                            <SelectInput 
-                                optionText="name"
-                            />
-                        </ReferenceInput>
                         <NumberInput 
+                            label="Price" 
+                            source="price" 
                             validate={[number(), minValue(0)]}
-                            source="price"
                             value={userInput.price}
                             onChange={handleChange}
                         />
-                        <TextInput
-                            multiline
-                            fullWidth
-                            source="description"
-                            value={userInput.description}
+                        <SelectInput 
+                            validate={required()} 
+                            label="Input Type" 
+                            value={userInput.input_type}
+                            source="input_type" choices={[
+                                { id: "radio", name: "radio" },
+                                { id: "checkbox", name: "checkbox" }
+                            ]}
                             onChange={handleChange}
                         />
                     </SimpleForm>
@@ -134,4 +127,4 @@ const ItemEditButton = (props) => {
     )
 }
 
-export default ItemEditButton;
+export default OptionEditButton;

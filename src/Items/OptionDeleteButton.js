@@ -39,12 +39,11 @@ const DeleteOptionButton = ({record}) => {
     
     return (
         <Button
-            startIcon={<DeleteIcon/>}
             label="ra.action.delete"
             className={classes.button}
             onClick={deleteOne}
             disabled={loading}
-        >
+        ><DeleteIcon />
         </Button>
     );
 }

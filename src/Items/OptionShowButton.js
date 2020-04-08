@@ -8,9 +8,8 @@ const OptionShowButton = ({record}) => {
         <Button 
             component={Link}
             to={`/item_options/${record.id}/show`}
-            startIcon={<VisibilityIcon/>}
             label="ra.action.show"
-        >
+        ><VisibilityIcon />
         </Button>
     )
 }

@@ -28,8 +28,8 @@ const NumberOfItems = ({record}) => {
 }
 NumberOfItems.defaultProps = { label: "# of Items"}
 
-const ListActions = ({ basePath }) => (
-    <TopToolbar>
+const ListActions = ({basePath}) => (
+    <TopToolbar >
         <CreateButton basePath={basePath} />
     </TopToolbar>
 );

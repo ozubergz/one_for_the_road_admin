@@ -1,30 +1,42 @@
 import React from 'react';
 import { 
     Show,
-    SimpleShowLayout,
     NumberField,
     Datagrid,
     TextField,
     ArrayField,
-    ReferenceField
+    ReferenceField,
+    TabbedShowLayout,
+    Tab,
 } from 'react-admin';
+import CreateButton from './OptionCreateButton';
+import DeleteButton from './OptionDeleteButton';
+import EditButton from './OptionEditButton';
 
 const Item_optionShow = props => (
     <Show {...props}>
-        <SimpleShowLayout>
-            <TextField source="id" />
-            <TextField source="name" />
-            <ReferenceField source="item_id" reference="items" link="show">
+        <TabbedShowLayout>
+            <Tab label="info">
+                <TextField source="id" />
                 <TextField source="name" />
-            </ReferenceField>
-            <ArrayField source="options">
-                <Datagrid>
+                <ReferenceField source="item_id" reference="items" link="show">
                     <TextField source="name" />
-                    <NumberField source="price" options={{ style: 'currency', currency: 'USD' }} />
-                    <TextField source="input_type" />
-                </Datagrid>
-            </ArrayField>
-        </SimpleShowLayout>
+                </ReferenceField>
+            </Tab>
+            <Tab label="options">
+                <ArrayField source="options">
+                    <Datagrid>
+                        <TextField source="id" />
+                        <TextField source="name" />
+                        <NumberField source="price" options={{ style: 'currency', currency: 'USD' }} />
+                        <TextField source="input_type" />
+                        <EditButton />
+                        <DeleteButton />
+                    </Datagrid>
+                </ArrayField>
+                <CreateButton />
+            </Tab>
+        </TabbedShowLayout>
     </Show>
   );
 

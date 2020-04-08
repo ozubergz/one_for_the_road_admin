@@ -1,29 +1,31 @@
 import React, { 
     Fragment, 
     useState,
-    useReducer
  } from 'react';
 import { 
     Button,
     SimpleForm,
     TextInput,
     required,
-    Toolbar
- } from 'react-admin';
+    useMutation,
+    useNotify,
+    useRefresh,
+    SaveButton
+} from 'react-admin';
 import EditIcon from '@material-ui/icons/Edit';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
-import { UpdateButton } from './SaveOptionButtons'
+import { DialogActions } from '@material-ui/core';
 
 const EditOptionButton = (props) => {
+    const { record } = props;
     const [showDialog, setShowDialog] = useState(false);
-    const [userInput, setUserInput] = useReducer((state, newState) => (
-        {...state, ...newState}
-    ), { name: record.name });
+    const [userInput, setUserInput] = useState(0);
 
     const handleShowClick = () => {
         setShowDialog(true);
+        setUserInput({name: record.name})
     }
 
     const handleCloseClick = () => {
@@ -31,27 +33,44 @@ const EditOptionButton = (props) => {
     }
 
     const handleChange = (evt) => {
-        setUserInput({
-            [evt.target.name]: evt.target.value
-        });
+        setUserInput({ name: evt.target.value });
     }
 
-    const CustomToolbar = () => (
-        <Toolbar {...props}> 
-            <UpdateButton />
-            <Button onClick={handleCloseClick} label="Cancel" />
-        </Toolbar>
-    );
+    const SaveOptionButton = () => {
+        const [mutate, { loading }] = useMutation();
+        const notify = useNotify();
+        const refresh = useRefresh();
+    
+        const handleSave = () => {
+            mutate(
+                {   
+                    type: "update",
+                    resource: "item_options",
+                    payload: { 
+                        id: record.id, 
+                        data: { name: userInput.name }
+                    }
+                },
+                {
+                    onSuccess: ({ data }) => {
+                        notify('ra.notification.updated', 'info', {smart_count: 1});
+                        refresh();
+                    },
+                    onFailure: (error) => notify(`Error ${error.message}`, 'warning')
+                }
+            );
+        }
+        return <SaveButton {...props} disabled={loading} handleSubmitWithRedirect={handleSave} />
+     }
 
-    const { record } = props;  
     
     return (
         <Fragment>
             <Button
                 onClick={handleShowClick}
-                startIcon={ <EditIcon />}
                 label="ra.action.edit"
-            />
+            ><EditIcon/>
+            </Button>
             <Dialog 
                 fullWidth 
                 open={showDialog}
@@ -60,7 +79,7 @@ const EditOptionButton = (props) => {
                 <DialogTitle>Edit Title</DialogTitle>
                 <DialogContent>
                     <SimpleForm
-                        toolbar={<CustomToolbar />}
+                        toolbar={null}
                         initialValues={{id: record.id}}
                         variant="standard"
                     >
@@ -73,6 +92,10 @@ const EditOptionButton = (props) => {
                         />
                     </SimpleForm>
                 </DialogContent>
+                <DialogActions>
+                    <SaveOptionButton />
+                    <Button onClick={handleCloseClick} label="Cancel" />
+                </DialogActions>
             </Dialog>
         </Fragment>
     )

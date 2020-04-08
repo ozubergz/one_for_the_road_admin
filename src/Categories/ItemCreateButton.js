@@ -25,7 +25,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import AddIcon from '@material-ui/icons/Add';
 
 const ItemCreateButton = (props) => {
-    const record = props.record;
+    const { record } = props;
     const [showDialog, setShowDialog] = useState(false);
     const [userInput, setUserInput] = useReducer((state, newState) => (
         {...state, ...newState}

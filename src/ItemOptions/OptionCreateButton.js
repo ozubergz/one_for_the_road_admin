@@ -1,4 +1,8 @@
-import React, { Fragment, useState } from 'react';
+import React, { 
+    Fragment, 
+    useState,
+    useReducer
+} from 'react';
 import { 
     Button,
     SimpleForm,
@@ -8,16 +12,28 @@ import {
     useMutation,
     useRefresh,
     SaveButton,
+    number,
+    minValue,
+    NumberInput,
+    SelectInput,
  } from 'react-admin';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
-import { DialogActions } from '@material-ui/core';
+import DialogActions from '@material-ui/core/DialogActions';
 
 const CreateOptionButton = (props) => {
+    const { record } = props;
     const [showDialog, setShowDialog] = useState(false);
-    const [userInput, setUserInput] = useState({name: ""});
+    const [userInput, setUserInput] = useReducer((state, newState) => (
+        {...state, ...newState}
+    ), {
+        name: "",
+        price: "",
+        input_type: "",
+        item_option_id: record.id
+    })
 
     const handleShowClick = () => {
         setShowDialog(true);
@@ -28,7 +44,9 @@ const CreateOptionButton = (props) => {
     }
 
     const handleChange = evt => {
-        setUserInput({name: evt.target.value});
+        setUserInput({
+            [evt.target.name]: evt.target.value
+        });
     }
 
     const SaveOptionButton = () => {
@@ -39,13 +57,8 @@ const CreateOptionButton = (props) => {
         const handleSave = () => mutate(
             {   
                 type: "create",
-                resource: "item_options",
-                payload: { 
-                    data: { 
-                        name: userInput.name,
-                        item_id: props.record.id
-                        }
-                }
+                resource: "options",
+                payload: { data: { ...userInput } }
             },
             {
                 onSuccess: ({ data }) => {
@@ -55,7 +68,6 @@ const CreateOptionButton = (props) => {
                 onFailure: (error) => notify(`Error ${error.message}`, 'warning')
             }
         );
-        
         return <SaveButton {...props} disabled={loading} handleSubmitWithRedirect={handleSave} />
      }
     
@@ -64,7 +76,7 @@ const CreateOptionButton = (props) => {
         <Fragment>
             <Button 
                 onClick={handleShowClick} 
-                label="Create Table of Options"
+                label="Create Options"
             >
                 <AddCircleIcon/>
             </Button>
@@ -80,10 +92,26 @@ const CreateOptionButton = (props) => {
                         variant="standard"
                     >
                         <TextInput 
-                            label="Title" 
                             source="name" 
                             validate={required()}
                             value={userInput.name}
+                            onChange={handleChange}
+                        />
+                        <NumberInput 
+                            label="Price" 
+                            source="price" 
+                            validate={[number(), minValue(0)]}
+                            value={userInput.price}
+                            onChange={handleChange}
+                        />
+                        <SelectInput 
+                            validate={required()} 
+                            label="Input Type" 
+                            value={userInput.input_type}
+                            source="input_type" choices={[
+                                { id: "radio", name: "radio" },
+                                { id: "checkbox", name: "checkbox" }
+                            ]}
                             onChange={handleChange}
                         />
                     </SimpleForm>

@@ -23,6 +23,11 @@ Description.defaultProps = {
     addLabel: true
 }
 
+const NumberOfOptions = props => {
+    const options = props.record.options.length;
+    return <span>{options}</span>
+}
+
 const ItemShow = props => (
     <Show {...props} >
         <TabbedShowLayout>
@@ -43,10 +48,12 @@ const ItemShow = props => (
                     <TextField source="name" />
                 </ReferenceField>
             </Tab>
-            <Tab label="Options">
+            <Tab label="Item Options">
                 <ArrayField source="item_options">
                     <Datagrid>
+                        <TextField source="id" />
                         <TextField source="name" label="Title" />
+                        <NumberOfOptions label="# of Options" />
                         <EditButton />
                         <ShowButton />
                         <DeleteButton />
