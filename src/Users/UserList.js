@@ -4,7 +4,7 @@ import {
     Datagrid,
     TextField,
     EmailField,
-    ShowButton
+    ShowButton,
 } from 'react-admin'
 
 const UserList = props => (

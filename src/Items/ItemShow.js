@@ -2,7 +2,6 @@ import React from 'react';
 import {
     Show,
     Datagrid,
-    ArrayField,
     NumberField,
     TextField,
     ReferenceField,

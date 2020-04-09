@@ -26,10 +26,14 @@ const Item_optionShow = props => (
             <Tab label="options">
                 <ArrayField source="options">
                     <Datagrid>
-                        <TextField source="id" />
-                        <TextField source="name" />
-                        <NumberField source="price" options={{ style: 'currency', currency: 'USD' }} />
-                        <TextField source="input_type" />
+                        <TextField source="id" sortable={false} />
+                        <TextField source="name" sortable={false} />
+                        <NumberField 
+                            source="price" 
+                            sortable={false}
+                            options={{ style: 'currency', currency: 'USD' }}
+                        />
+                        <TextField source="input_type" sortable={false} />
                         <EditButton />
                         <DeleteButton />
                     </Datagrid>

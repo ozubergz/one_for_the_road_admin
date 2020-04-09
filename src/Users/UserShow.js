@@ -3,18 +3,25 @@ import {
     Show,
     TextField,
     EmailField,
-    SimpleShowLayout
+    SimpleShowLayout,
+    TabbedShowLayout,
+    Tab,
 } from 'react-admin'
 
 const UserShow = props => (
     <Show {...props}>
-        <SimpleShowLayout>
-            <TextField source="id" />
-            <EmailField source="email" />
-            <TextField source="first_name" />
-            <TextField source="last_name" />
-            <TextField source="phone" />
-        </SimpleShowLayout>
+        <TabbedShowLayout>
+            <Tab label="Info">
+                <TextField source="first_name" />
+                <TextField source="last_name" />
+            </Tab>
+            <Tab label="Email">
+                <EmailField source="email" />
+            </Tab>
+            <Tab label="Phone">
+                <TextField source="phone" />
+            </Tab>
+        </TabbedShowLayout>
     </Show>
 );
 

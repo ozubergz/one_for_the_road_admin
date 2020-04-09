@@ -7,7 +7,8 @@ import {
     ArrayField,
     DateField,
     EmailField,
-    SimpleShowLayout
+    TabbedShowLayout,
+    Tab,
 } from 'react-admin';
 import moment from 'moment';
 
@@ -16,29 +17,41 @@ const TimeField = props => {
     const localTime = moment(utc).format('h:mm:ss a');
     return <span>{localTime.toUpperCase()}</span>
 }
-TimeField.defaultProps = {label: "Time"}
+TimeField.defaultProps = { 
+    label: "Time",
+    addLabel: true
+}
 
 const OrderShow = props => (
     <Show {...props}>
-        <SimpleShowLayout>
-            <TextField source="id" />
-            <TextField source="customer" />
-            <TextField source="address" />
-            <EmailField source="email" />
-            <TextField source="phone" />
-            <NumberField source="amount" options={{ style: 'currency', currency: 'USD' }} />
-            <DateField source="created_at" options={{ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }}  label="Date"/>
-            <TimeField source="created_at" />
-            <ArrayField source="items">
-                <Datagrid>
-                    <TextField source="id" />
-                    <TextField source="name" />
-                    <TextField source="description" />
-                    <NumberField source="price" />
-                    <TextField source="selections" />
-                </Datagrid>
-            </ArrayField>
-        </SimpleShowLayout>
+        <TabbedShowLayout>
+            <Tab label="Customer">
+                <TextField source="customer" />
+            </Tab>
+            <Tab label="Contact">
+                <TextField source="phone" />
+                <EmailField source="email" />
+            </Tab>
+            <Tab label="amount">
+                <NumberField source="amount" options={{ style: 'currency', currency: 'USD' }} />
+            </Tab>
+            <Tab label="Delivery Address">
+                <TextField source="address" />
+            </Tab>
+            <Tab label="Date/Time Order">
+                <DateField source="created_at" options={{ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }}  label="Date"/>
+                <TimeField source="created_at" />
+            </Tab>
+            <Tab label="Delivery Items">
+                <ArrayField source="items">
+                    <Datagrid>
+                        <TextField source="id" sortable={false} />
+                        <TextField source="name" sortable={false} />
+                        <TextField source="description" sortable={false} />
+                    </Datagrid>
+                </ArrayField>
+            </Tab>
+        </TabbedShowLayout>
     </Show>
 );
 
