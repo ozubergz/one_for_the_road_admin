@@ -6,6 +6,7 @@ import {
     NumberField,
     TextField,
     ReferenceField,
+    ReferenceManyField,
     TabbedShowLayout,
     Tab,
 } from 'react-admin';
@@ -49,7 +50,11 @@ const ItemShow = props => (
                 </ReferenceField>
             </Tab>
             <Tab label="Item Options">
-                <ArrayField source="item_options">
+                <ReferenceManyField 
+                    source="item_options"
+                    reference="item_options"
+                    sort={{field: 'id', order: 'ASC'}}
+                >
                     <Datagrid>
                         <TextField source="id" />
                         <TextField source="name" label="Title" />
@@ -58,7 +63,7 @@ const ItemShow = props => (
                         <ShowButton />
                         <DeleteButton />
                     </Datagrid>
-                </ArrayField>
+                </ReferenceManyField>
                 <CreateButton />
             </Tab>
         </TabbedShowLayout>
