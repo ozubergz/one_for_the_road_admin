@@ -19,6 +19,7 @@ const Item_optionShow = props => (
             <Tab label="info">
                 <TextField source="id" />
                 <TextField source="name" />
+                <TextField source="required" />
                 <ReferenceField source="item_id" reference="items" link="show">
                     <TextField source="name" />
                 </ReferenceField>

@@ -52,6 +52,7 @@ const ItemShow = props => (
                 <ReferenceManyField 
                     source="item_options"
                     reference="item_options"
+                    target="item_option"
                     sort={{field: 'id', order: 'ASC'}}
                 >
                     <Datagrid>

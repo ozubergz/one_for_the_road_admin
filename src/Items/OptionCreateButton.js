@@ -1,4 +1,8 @@
-import React, { Fragment, useState } from 'react';
+import React, { 
+    Fragment, 
+    useState,
+    useReducer
+} from 'react';
 import { 
     Button,
     SimpleForm,
@@ -8,6 +12,7 @@ import {
     useMutation,
     useRefresh,
     SaveButton,
+    SelectInput
  } from 'react-admin';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import Dialog from '@material-ui/core/Dialog';
@@ -17,7 +22,9 @@ import { DialogActions } from '@material-ui/core';
 
 const CreateOptionButton = (props) => {
     const [showDialog, setShowDialog] = useState(false);
-    const [userInput, setUserInput] = useState({name: ""});
+    const [userInput, setUserInput] = useReducer((state, newState) => (
+        {...state, ...newState}
+    ), { name: "", required: "" });
 
     const handleShowClick = () => {
         setShowDialog(true);
@@ -28,13 +35,17 @@ const CreateOptionButton = (props) => {
     }
 
     const handleChange = evt => {
-        setUserInput({name: evt.target.value});
+        setUserInput({
+            [evt.target.name]: evt.target.value
+        });
     }
 
     const SaveOptionButton = () => {
         const [mutate, { loading }] = useMutation();
         const notify = useNotify();
         const refresh = useRefresh();
+        const {name, required} = userInput;
+        const isEnabled = !name || !required || loading
         
         const handleSave = () => mutate(
             {   
@@ -42,8 +53,8 @@ const CreateOptionButton = (props) => {
                 resource: "item_options",
                 payload: { 
                     data: { 
-                        name: userInput.name,
-                        item_id: props.record.id
+                            ...userInput,
+                            item_id: props.record.id
                         }
                 }
             },
@@ -56,7 +67,7 @@ const CreateOptionButton = (props) => {
             }
         );
         
-        return <SaveButton {...props} disabled={loading} handleSubmitWithRedirect={handleSave} />
+        return <SaveButton {...props} disabled={isEnabled} handleSubmitWithRedirect={handleSave} />
      }
     
 
@@ -84,6 +95,15 @@ const CreateOptionButton = (props) => {
                             source="name" 
                             validate={required()}
                             value={userInput.name}
+                            onChange={handleChange}
+                        />
+                        <SelectInput 
+                            validate={required()}
+                            value={userInput.required}
+                            source="required" choices={[
+                                { id: "true", name: "true" },
+                                { id: "false", name: "false" }
+                            ]}
                             onChange={handleChange}
                         />
                     </SimpleForm>
