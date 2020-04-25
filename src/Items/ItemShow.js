@@ -4,15 +4,16 @@ import {
     Datagrid,
     NumberField,
     TextField,
+    ArrayField,
     ReferenceField,
-    ReferenceManyField,
+    // ReferenceManyField,
     TabbedShowLayout,
     Tab,
 } from 'react-admin';
-import CreateButton from './OptionCreateButton';
-import ShowButton from './OptionShowButton';
-import DeleteButton from './OptionDeleteButton';
-import EditButton from './OptionEditButton';
+import CreateButton from './GroupOptionCreateButton';
+// import ShowButton from './OptionShowButton';
+// import DeleteButton from './OptionDeleteButton';
+// import EditButton from './OptionEditButton';
 
 const Description = props => {
     const description = props.record.description;
@@ -23,10 +24,10 @@ Description.defaultProps = {
     addLabel: true
 }
 
-const NumberOfOptions = props => {
-    const options = props.record.options.length;
-    return <span>{options}</span>
-}
+// const NumberOfOptions = props => {
+//     const options = props.record.options.length;
+//     return <span>{options}</span>
+// }
 
 const ItemShow = props => (
     <Show {...props} >
@@ -48,23 +49,23 @@ const ItemShow = props => (
                     <TextField source="name" />
                 </ReferenceField>
             </Tab>
-            <Tab label="Item Options">
-                <ReferenceManyField 
-                    source="item_options"
-                    reference="item_options"
-                    target="item_option"
-                    sort={{field: 'id', order: 'ASC'}}
-                >
+            <Tab label="Group Options">
+                <ArrayField source="group_options">
                     <Datagrid>
-                        <TextField source="id" />
-                        <TextField source="name" label="Title" />
-                        <NumberOfOptions label="# of Options" />
-                        <EditButton />
-                        <ShowButton />
-                        <DeleteButton />
+                        <TextField source="id" sortable={false} />
+                        <TextField source="name" sortable={false} />
+                        <TextField source="required" sortable={false} />
+                        <ArrayField source="options" sortable={false}>
+                            <Datagrid>
+                                <TextField source="id" sortable={false} />
+                                <TextField source="name" sortable={false} />
+                                <TextField source="input_type" sortable={false} />
+                                <TextField source="price" sortable={false} />
+                            </Datagrid>
+                        </ArrayField>
                     </Datagrid>
-                </ReferenceManyField>
-                <CreateButton />
+                </ArrayField>
+                <CreateButton/>
             </Tab>
         </TabbedShowLayout>
     </Show>

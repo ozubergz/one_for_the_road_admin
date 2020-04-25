@@ -7,21 +7,23 @@ import {
     Button,
     SimpleForm,
     TextInput,
-    required,
+    // required,
     useNotify,
     useMutation,
     useRefresh,
     SaveButton,
-    SelectInput
+    SelectInput,
+    ReferenceInput
  } from 'react-admin';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import Dialog from '@material-ui/core/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle';
+// import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import { DialogActions } from '@material-ui/core';
 
 const CreateOptionButton = (props) => {
     const [showDialog, setShowDialog] = useState(false);
+    const [userSelectInput, setUserSelectInput] = useState({item_option_id: ""})
     const [userInput, setUserInput] = useReducer((state, newState) => (
         {...state, ...newState}
     ), { name: "", required: "" });
@@ -38,6 +40,20 @@ const CreateOptionButton = (props) => {
         setUserInput({
             [evt.target.name]: evt.target.value
         });
+
+        setUserSelectInput({
+            item_option_id: ""
+        });
+    }
+
+    const handleSelectInput = evt => {
+        setUserSelectInput({
+            item_option_id: evt.target.value
+        });
+
+        setUserInput({
+            name: "", required: ""
+        });
     }
 
     const SaveOptionButton = () => {
@@ -45,12 +61,12 @@ const CreateOptionButton = (props) => {
         const notify = useNotify();
         const refresh = useRefresh();
         const {name, required} = userInput;
-        const isEnabled = !name || !required || loading
+        const isEnabled = !name || !required || loading;
         
         const handleSave = () => mutate(
             {   
                 type: "create",
-                resource: "item_options",
+                resource: "group_options",
                 payload: { 
                     data: { 
                             ...userInput,
@@ -66,7 +82,6 @@ const CreateOptionButton = (props) => {
                 onFailure: (error) => notify(`Error ${error.message}`, 'warning')
             }
         );
-        
         return <SaveButton {...props} disabled={isEnabled} handleSubmitWithRedirect={handleSave} />
      }
     
@@ -84,21 +99,31 @@ const CreateOptionButton = (props) => {
                 open={showDialog}
                 onClose={handleCloseClick}
             >
-                <DialogTitle>Create Table of Options</DialogTitle>
+                {/* <DialogTitle>Create Table of Options</DialogTitle> */}
                 <DialogContent>
                     <SimpleForm
                         toolbar={null}
                         variant="standard"
                     >
+                        {/* <ReferenceInput onChange={handleSelectInput} source="item_option" reference="item_options">
+                            <SelectInput 
+                                optionText="name"
+                                value={userSelectInput.item_option_id}
+                                // onChange={handleSelectInput}
+                            />
+                        </ReferenceInput> */}
+
+                        {/* <div>or</div> */}
+
                         <TextInput 
                             label="Title" 
                             source="name" 
-                            validate={required()}
+                            // validate={required()}
                             value={userInput.name}
                             onChange={handleChange}
                         />
                         <SelectInput 
-                            validate={required()}
+                            // validate={required()}
                             value={userInput.required}
                             source="required" choices={[
                                 { id: "true", name: "true" },

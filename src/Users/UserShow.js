@@ -3,7 +3,7 @@ import {
     Show,
     TextField,
     EmailField,
-    SimpleShowLayout,
+    // SimpleShowLayout,
     TabbedShowLayout,
     Tab,
 } from 'react-admin'

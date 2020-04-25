@@ -23,11 +23,6 @@ const styles = {
     }
 };
 
-const NumberOfItems = ({record}) => {
-    return <span>{record.items ? record.items.length : 0}</span>
-}
-NumberOfItems.defaultProps = { label: "# of Items"}
-
 const ListActions = ({basePath}) => (
     <TopToolbar >
         <CreateButton basePath={basePath} />
@@ -49,7 +44,6 @@ class CategoryList extends Component {
                     <Datagrid >
                         <TextField source="id" />
                         <TextField source="name" />
-                        <NumberOfItems />                 
                         <EditButton />
                         <ShowButton />
                     </Datagrid>
