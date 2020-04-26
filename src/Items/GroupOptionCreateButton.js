@@ -13,7 +13,7 @@ import {
     useRefresh,
     SaveButton,
     SelectInput,
-    ReferenceInput
+    // ReferenceInput
  } from 'react-admin';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import Dialog from '@material-ui/core/Dialog';
@@ -23,7 +23,7 @@ import { DialogActions } from '@material-ui/core';
 
 const CreateOptionButton = (props) => {
     const [showDialog, setShowDialog] = useState(false);
-    const [userSelectInput, setUserSelectInput] = useState({item_option_id: ""})
+    // const [userSelectInput, setUserSelectInput] = useState({item_option_id: ""})
     const [userInput, setUserInput] = useReducer((state, newState) => (
         {...state, ...newState}
     ), { name: "", required: "" });
@@ -41,20 +41,20 @@ const CreateOptionButton = (props) => {
             [evt.target.name]: evt.target.value
         });
 
-        setUserSelectInput({
-            item_option_id: ""
-        });
+        // setUserSelectInput({
+        //     item_option_id: ""
+        // });
     }
 
-    const handleSelectInput = evt => {
-        setUserSelectInput({
-            item_option_id: evt.target.value
-        });
+    // const handleSelectInput = evt => {
+    //     setUserSelectInput({
+    //         item_option_id: evt.target.value
+    //     });
 
-        setUserInput({
-            name: "", required: ""
-        });
-    }
+    //     setUserInput({
+    //         name: "", required: ""
+    //     });
+    // }
 
     const SaveOptionButton = () => {
         const [mutate, { loading }] = useMutation();

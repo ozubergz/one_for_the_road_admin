@@ -10,6 +10,7 @@ import {
     TabbedShowLayout,
     Tab,
 } from 'react-admin';
+
 import CreateButton from './GroupOptionCreateButton';
 // import ShowButton from './OptionShowButton';
 // import DeleteButton from './OptionDeleteButton';
@@ -50,7 +51,7 @@ const ItemShow = props => (
                 </ReferenceField>
             </Tab>
             <Tab label="Group Options">
-                <ArrayField source="group_options">
+                <ArrayField source="group_options" label="Group of Options">
                     <Datagrid>
                         <TextField source="id" sortable={false} />
                         <TextField source="name" sortable={false} />
@@ -60,7 +61,8 @@ const ItemShow = props => (
                                 <TextField source="id" sortable={false} />
                                 <TextField source="name" sortable={false} />
                                 <TextField source="input_type" sortable={false} />
-                                <TextField source="price" sortable={false} />
+                                <NumberField source="price" sortable={false} />
+                                {/* <TextField source="price" sortable={false} /> */}
                             </Datagrid>
                         </ArrayField>
                     </Datagrid>
