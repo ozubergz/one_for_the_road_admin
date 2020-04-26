@@ -69,7 +69,7 @@ const CreateOptionButton = (props) => {
                 resource: "group_options",
                 payload: { 
                     data: { 
-                            ...userInput,
+                            group_option: { ...userInput },
                             item_id: props.record.id
                         }
                 }
