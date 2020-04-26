@@ -87,7 +87,7 @@ const ItemCreateButton = (props) => {
                 open={showDialog}
                 onClose={handleCloseClick}
             >
-                <DialogTitle>Create New Category</DialogTitle>
+                <DialogTitle>Create New Item</DialogTitle>
                 <DialogContent>
                     <SimpleForm
                         toolbar={null}
