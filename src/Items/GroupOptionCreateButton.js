@@ -17,12 +17,13 @@ import {
  } from 'react-admin';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import Dialog from '@material-ui/core/Dialog';
-// import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import { DialogActions } from '@material-ui/core';
 
 const CreateOptionButton = (props) => {
     const [showDialog, setShowDialog] = useState(false);
+    // const [enableSaveBtn, setEnableSaveBtn] = useState(true);
     const [userSelectInput, setUserSelectInput] = useState({group_option_id: ""})
     const [userInput, setUserInput] = useReducer((state, newState) => (
         {...state, ...newState}
@@ -41,27 +42,34 @@ const CreateOptionButton = (props) => {
             [evt.target.name]: evt.target.value
         });
 
-        // setUserSelectInput({
-        //     item_option_id: ""
-        // });
+        
+
+        setUserSelectInput({
+            group_option_id: ""
+        });
     }
 
     const handleSelectInput = evt => {
-        // setUserSelectInput({
-        //     group_option_id: evt.target.value
-        // });
+        setUserSelectInput({
+            group_option_id: evt.target.value
+        });
 
-        // setUserInput({
-        //     name: "", required: ""
-        // });
+
+        setUserInput({
+            name: "", 
+            required: ""
+        });
     }
 
     const SaveOptionButton = () => {
-        const [mutate, { loading }] = useMutation();
         const notify = useNotify();
         const refresh = useRefresh();
-        const {name, required} = userInput;
-        const isEnabled = !name || !required || loading;
+        const [mutate, { loading }] = useMutation();
+        
+        const { name, required } = userInput;
+        const { group_option_id } = userSelectInput;
+
+        const disableBtn = (name !== "" && required !== "") ? false : (!group_option_id);
         
         const handleSave = () => mutate(
             {   
@@ -82,7 +90,8 @@ const CreateOptionButton = (props) => {
                 onFailure: (error) => notify(`Error ${error.message}`, 'warning')
             }
         );
-        return <SaveButton {...props} disabled={isEnabled} handleSubmitWithRedirect={handleSave} />
+
+        return <SaveButton {...props} disabled={disableBtn} handleSubmitWithRedirect={handleSave} />
      }
     
     return (
@@ -98,27 +107,27 @@ const CreateOptionButton = (props) => {
                 open={showDialog}
                 onClose={handleCloseClick}
             >
-                {/* <DialogTitle>Create Table of Options</DialogTitle> */}
+
                 <DialogContent>
                     <SimpleForm
                         toolbar={null}
                         variant="standard"
                     >
-                        {/* <ReferenceInput onChange={handleSelectInput} source="group_option" reference="group_options">
-                            <SelectInput 
-                                optionText="id"
-                                // value={userSelectInput.group_option_id}
-                                onChange={handleSelectInput}
-                            />
-                        </ReferenceInput> */}
+                        <DialogTitle className="dialog-title">Select defined options</DialogTitle>
 
-                        <ReferenceInput source="group_options" reference="group_options" >
+                        <ReferenceInput onChange={handleSelectInput} 
+                            label="Choose Options" 
+                            source="group_options" 
+                            reference="group_options" 
+                        >
                             <SelectInput
                                 optionText="name"
-                                
+                                value={userSelectInput.group_option_id}
                             />
                         </ReferenceInput>
 
+
+                        <DialogTitle className="dialog-title">Create a new one</DialogTitle>
 
                         <TextInput 
                             label="Title" 
