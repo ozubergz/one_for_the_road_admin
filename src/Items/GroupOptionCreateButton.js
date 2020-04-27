@@ -42,8 +42,6 @@ const CreateOptionButton = (props) => {
             [evt.target.name]: evt.target.value
         });
 
-        
-
         setUserSelectInput({
             group_option_id: ""
         });
@@ -54,7 +52,6 @@ const CreateOptionButton = (props) => {
             group_option_id: evt.target.value
         });
 
-
         setUserInput({
             name: "", 
             required: ""
@@ -64,7 +61,7 @@ const CreateOptionButton = (props) => {
     const SaveOptionButton = () => {
         const notify = useNotify();
         const refresh = useRefresh();
-        const [mutate, { loading }] = useMutation();
+        const [mutate] = useMutation();
         
         const { name, required } = userInput;
         const { group_option_id } = userSelectInput;
@@ -74,12 +71,12 @@ const CreateOptionButton = (props) => {
         const handleSave = () => mutate(
             {   
                 type: "create",
-                resource: "group_options",
+                resource: group_option_id ? "item_group_options" : "group_options",
                 payload: { 
-                    data: { 
-                            group_option: { ...userInput },
-                            item_id: props.record.id
-                        }
+                    data: group_option_id ?
+                        {item_id: props.record.id, group_option_id}
+                            :
+                        {group_option: { ...userInput }, item_id: props.record.id}
                 }
             },
             {
