@@ -13,7 +13,7 @@ import {
     useRefresh,
     SaveButton,
     SelectInput,
-    // ReferenceInput
+    ReferenceInput
  } from 'react-admin';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import Dialog from '@material-ui/core/Dialog';
@@ -23,7 +23,7 @@ import { DialogActions } from '@material-ui/core';
 
 const CreateOptionButton = (props) => {
     const [showDialog, setShowDialog] = useState(false);
-    // const [userSelectInput, setUserSelectInput] = useState({item_option_id: ""})
+    const [userSelectInput, setUserSelectInput] = useState({group_option_id: ""})
     const [userInput, setUserInput] = useReducer((state, newState) => (
         {...state, ...newState}
     ), { name: "", required: "" });
@@ -46,15 +46,15 @@ const CreateOptionButton = (props) => {
         // });
     }
 
-    // const handleSelectInput = evt => {
-    //     setUserSelectInput({
-    //         item_option_id: evt.target.value
-    //     });
+    const handleSelectInput = evt => {
+        // setUserSelectInput({
+        //     group_option_id: evt.target.value
+        // });
 
-    //     setUserInput({
-    //         name: "", required: ""
-    //     });
-    // }
+        // setUserInput({
+        //     name: "", required: ""
+        // });
+    }
 
     const SaveOptionButton = () => {
         const [mutate, { loading }] = useMutation();
@@ -85,12 +85,11 @@ const CreateOptionButton = (props) => {
         return <SaveButton {...props} disabled={isEnabled} handleSubmitWithRedirect={handleSave} />
      }
     
-
     return (
         <Fragment>
             <Button 
                 onClick={handleShowClick} 
-                label="Create Table of Options"
+                label="Create Group of Options"
             >
                 <AddCircleIcon/>
             </Button>
@@ -105,15 +104,21 @@ const CreateOptionButton = (props) => {
                         toolbar={null}
                         variant="standard"
                     >
-                        {/* <ReferenceInput onChange={handleSelectInput} source="item_option" reference="item_options">
+                        {/* <ReferenceInput onChange={handleSelectInput} source="group_option" reference="group_options">
                             <SelectInput 
-                                optionText="name"
-                                value={userSelectInput.item_option_id}
-                                // onChange={handleSelectInput}
+                                optionText="id"
+                                // value={userSelectInput.group_option_id}
+                                onChange={handleSelectInput}
                             />
                         </ReferenceInput> */}
 
-                        {/* <div>or</div> */}
+                        <ReferenceInput source="group_options" reference="group_options" >
+                            <SelectInput
+                                optionText="name"
+                                
+                            />
+                        </ReferenceInput>
+
 
                         <TextInput 
                             label="Title" 

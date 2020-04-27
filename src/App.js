@@ -78,7 +78,7 @@ class App extends Component {
             <Resource name="items" {...Items} />
             <Resource name="users" {...Users} />
             <Resource name="orders" {...Orders} />
-            <Resource name="item_options" {...ItemOptions} />
+            <Resource name="group_options" {...ItemOptions} />
           </Admin>
         </div>
     );
