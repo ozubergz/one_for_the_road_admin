@@ -58,8 +58,11 @@ const ItemShow = props => (
                                 <TextField source="id" sortable={false} />
                                 <TextField source="name" sortable={false} />
                                 <TextField source="input_type" sortable={false} />
-                                <NumberField source="price" sortable={false} />
-                                {/* <TextField source="price" sortable={false} /> */}
+                                <NumberField 
+                                    source="price" 
+                                    sortable={false} 
+                                    options={{ style: "currency", currency: "USD" }}
+                                />
 
                             </Datagrid>
                         </ArrayField>
