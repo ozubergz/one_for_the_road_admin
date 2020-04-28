@@ -25,7 +25,7 @@ const DeleteOptionButton = ({record}) => {
     const [deleteOne, { loading }] = useMutation(
         {
             type: 'delete',
-            resource: "item_options",
+            resource: "group_options",
             payload: { id: record.id }
         },
         {

@@ -12,8 +12,10 @@ import {
 } from 'react-admin';
 
 import CreateButton from './GroupOptionCreateButton';
+import DeleteButton from './GroupOptionDeleteButton';
+import OptionCreateButton from '../ItemOptions/OptionCreateButton';
+
 // import ShowButton from './OptionShowButton';
-// import DeleteButton from './OptionDeleteButton';
 // import EditButton from './OptionEditButton';
 
 const Description = props => {
@@ -65,8 +67,13 @@ const ItemShow = props => (
                                 {/* <TextField source="price" sortable={false} /> */}
                             </Datagrid>
                         </ArrayField>
+                        
+                        <OptionCreateButton />
+                        <DeleteButton />
                     </Datagrid>
+
                 </ArrayField>
+
                 <CreateButton/>
             </Tab>
         </TabbedShowLayout>

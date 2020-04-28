@@ -32,7 +32,7 @@ const CreateOptionButton = (props) => {
         name: "",
         price: "",
         input_type: "",
-        item_option_id: record.id
+        group_option_id: record.id
     })
 
     const handleShowClick = () => {
@@ -76,7 +76,7 @@ const CreateOptionButton = (props) => {
         <Fragment>
             <Button 
                 onClick={handleShowClick} 
-                label="Create Options"
+                label="Add Option"
             >
                 <AddCircleIcon/>
             </Button>
@@ -85,7 +85,7 @@ const CreateOptionButton = (props) => {
                 open={showDialog}
                 onClose={handleCloseClick}
             >
-                <DialogTitle>Create Table of Options</DialogTitle>
+                <DialogTitle>Create Options</DialogTitle>
                 <DialogContent>
                     <SimpleForm
                         toolbar={null}

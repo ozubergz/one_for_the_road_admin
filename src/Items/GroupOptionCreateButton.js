@@ -13,7 +13,9 @@ import {
     useRefresh,
     SaveButton,
     SelectInput,
-    ReferenceInput
+    ReferenceInput,
+    // ArrayInput,
+    // SimpleFormIterator,
  } from 'react-admin';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import Dialog from '@material-ui/core/Dialog';
@@ -142,6 +144,13 @@ const CreateOptionButton = (props) => {
                             ]}
                             onChange={handleChange}
                         />
+
+                        {/* <ArrayInput source="options">
+                            <SimpleFormIterator>
+                                <TextInput source="name" />
+                            </SimpleFormIterator>
+                        </ArrayInput> */}
+
                     </SimpleForm>
                 </DialogContent>
                 <DialogActions>
