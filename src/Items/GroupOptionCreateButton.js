@@ -58,9 +58,9 @@ const CreateOptionButton = (props) => {
            return group_option.id === evt.target.value; 
         });
 
-        // if any group_option_ids already is exist set it the true
-        if (matchIds.length !== 0) setExistId(true);
-
+        // if any group_option_ids already exist, set it the true
+        matchIds.length !== 0 ? setExistId(true) : setExistId(false);
+        
         setUserInput({
             name: "", 
             required: ""
