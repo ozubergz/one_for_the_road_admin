@@ -27,11 +27,6 @@ Description.defaultProps = {
     addLabel: true
 }
 
-// const NumberOfOptions = props => {
-//     const options = props.record.options.length;
-//     return <span>{options}</span>
-// }
-
 const ItemShow = props => (
     <Show {...props} >
         <TabbedShowLayout>
@@ -65,6 +60,7 @@ const ItemShow = props => (
                                 <TextField source="input_type" sortable={false} />
                                 <NumberField source="price" sortable={false} />
                                 {/* <TextField source="price" sortable={false} /> */}
+
                             </Datagrid>
                         </ArrayField>
                         

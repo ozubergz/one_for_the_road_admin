@@ -7,15 +7,12 @@ import {
     Button,
     SimpleForm,
     TextInput,
-    // required,
     useNotify,
     useMutation,
     useRefresh,
     SaveButton,
     SelectInput,
     ReferenceInput,
-    // ArrayInput,
-    // SimpleFormIterator,
  } from 'react-admin';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import Dialog from '@material-ui/core/Dialog';
@@ -25,8 +22,8 @@ import { DialogActions } from '@material-ui/core';
 
 const CreateOptionButton = (props) => {
     const [showDialog, setShowDialog] = useState(false);
-    // const [enableSaveBtn, setEnableSaveBtn] = useState(true);
-    const [userSelectInput, setUserSelectInput] = useState({group_option_id: ""})
+    const [userSelectInput, setUserSelectInput] = useState({group_option_id: ""});
+    const [existId, setExistId] = useState(false);
     const [userInput, setUserInput] = useReducer((state, newState) => (
         {...state, ...newState}
     ), { name: "", required: "" });
@@ -44,6 +41,8 @@ const CreateOptionButton = (props) => {
             [evt.target.name]: evt.target.value
         });
 
+        setExistId(false);
+
         setUserSelectInput({
             group_option_id: ""
         });
@@ -54,11 +53,21 @@ const CreateOptionButton = (props) => {
             group_option_id: evt.target.value
         });
 
+        // match any group_option_ids that match ids that already exist in the group
+        let matchIds = props.record.group_options.filter(group_option => {
+           return group_option.id === evt.target.value; 
+        });
+
+        // if any group_option_ids already is exist set it the true
+        if (matchIds.length !== 0) setExistId(true);
+
         setUserInput({
             name: "", 
             required: ""
         });
     }
+    
+    console.log(existId)
 
     const SaveOptionButton = () => {
         const notify = useNotify();
@@ -90,10 +99,11 @@ const CreateOptionButton = (props) => {
             }
         );
 
-        return <SaveButton {...props} disabled={disableBtn} handleSubmitWithRedirect={handleSave} />
+        return <SaveButton {...props} disabled={disableBtn || existId} handleSubmitWithRedirect={handleSave} />
      }
     
     return (
+        
         <Fragment>
             <Button 
                 onClick={handleShowClick} 
@@ -112,8 +122,9 @@ const CreateOptionButton = (props) => {
                         toolbar={null}
                         variant="standard"
                     >
-                        <DialogTitle className="dialog-title">Select defined options</DialogTitle>
+                        <DialogTitle className="dialog-title">Select defined group of options</DialogTitle>
 
+                        {existId ? <span style={{color: 'red'}}>This option already exists in the group.</span> : null}
                         <ReferenceInput onChange={handleSelectInput} 
                             label="Choose Options" 
                             source="group_options" 
@@ -131,12 +142,11 @@ const CreateOptionButton = (props) => {
                         <TextInput 
                             label="Title" 
                             source="name" 
-                            // validate={required()}
                             value={userInput.name}
                             onChange={handleChange}
                         />
+
                         <SelectInput 
-                            // validate={required()}
                             value={userInput.required}
                             source="required" choices={[
                                 { id: "true", name: "true" },
@@ -144,12 +154,6 @@ const CreateOptionButton = (props) => {
                             ]}
                             onChange={handleChange}
                         />
-
-                        {/* <ArrayInput source="options">
-                            <SimpleFormIterator>
-                                <TextInput source="name" />
-                            </SimpleFormIterator>
-                        </ArrayInput> */}
 
                     </SimpleForm>
                 </DialogContent>
