@@ -27,7 +27,7 @@ const DeleteButton = ({record}) => {
     );
     return (
         <Button
-            label="delete"
+            // label="delete"
             color="secondary"
             onClick={deleteOne}
             disabled={loading}

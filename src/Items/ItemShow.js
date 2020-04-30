@@ -14,7 +14,12 @@ import {
 import CreateButton from './GroupOptionCreateButton';
 import DeleteButton from './GroupOptionDeleteButton';
 import EditButton from './GroupOptionEditButton';
+
 import OptionCreateButton from '../ItemOptions/OptionCreateButton';
+import OptionDeleteButton from '../ItemOptions/OptionDeleteButton';
+import OptionEditButton from '../ItemOptions/OptionEditButton';
+// import EditIcon from '@material-ui/icons/Edit';
+
 
 // import ShowButton from './OptionShowButton';
 
@@ -64,6 +69,8 @@ const ItemShow = props => (
                                     options={{ style: "currency", currency: "USD" }}
                                 />
 
+                                <OptionEditButton />
+                                <OptionDeleteButton />
                             </Datagrid>
                         </ArrayField>
                         

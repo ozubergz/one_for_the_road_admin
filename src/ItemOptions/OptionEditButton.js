@@ -79,7 +79,7 @@ const OptionEditButton = (props) => {
     return (
         <Fragment>
             <Button
-                label="edit"
+                // label="edit"
                 onClick={handleShowClick}
             ><EditIcon/></Button>
             <Dialog

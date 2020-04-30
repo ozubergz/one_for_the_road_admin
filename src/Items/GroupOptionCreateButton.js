@@ -67,8 +67,6 @@ const CreateOptionButton = (props) => {
         });
     }
     
-    console.log(existId)
-
     const SaveOptionButton = () => {
         const notify = useNotify();
         const refresh = useRefresh();
