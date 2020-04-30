@@ -1,5 +1,5 @@
-import Item_optionShow from './ItemOptionsShow';
+import OptionShow from './OptionShow';
 
 export const ItemOptions = {
-    show: Item_optionShow,
+    show: OptionShow,
 }

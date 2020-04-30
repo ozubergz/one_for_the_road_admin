@@ -58,7 +58,8 @@ const ItemShow = props => (
                         <TextField source="id" sortable={false} />
                         <TextField source="name" sortable={false} />
                         <TextField source="required" sortable={false} />
-                        <ArrayField source="options" sortable={false}>
+                        
+                        {/* <ArrayField source="options" sortable={false}>
                             <Datagrid>
                                 <TextField source="id" sortable={false} />
                                 <TextField source="name" sortable={false} />
@@ -72,9 +73,10 @@ const ItemShow = props => (
                                 <OptionEditButton />
                                 <OptionDeleteButton />
                             </Datagrid>
-                        </ArrayField>
+                        </ArrayField> */}
                         
-                        <OptionCreateButton />
+                        {/* <OptionCreateButton /> */}
+
                         <EditButton />
                         <DeleteButton />
                     </Datagrid>
