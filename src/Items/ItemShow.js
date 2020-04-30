@@ -15,13 +15,10 @@ import CreateButton from './GroupOptionCreateButton';
 import DeleteButton from './GroupOptionDeleteButton';
 import EditButton from './GroupOptionEditButton';
 
-import OptionCreateButton from '../ItemOptions/OptionCreateButton';
-import OptionDeleteButton from '../ItemOptions/OptionDeleteButton';
-import OptionEditButton from '../ItemOptions/OptionEditButton';
-// import EditIcon from '@material-ui/icons/Edit';
-
-
-// import ShowButton from './OptionShowButton';
+// import OptionCreateButton from '../Options/OptionCreateButton';
+// import OptionDeleteButton from '../Options/OptionDeleteButton';
+// import OptionEditButton from '../Options/OptionEditButton';
+import OptionShowButton from '../Options/OptionShowButton';
 
 const Description = props => {
     const description = props.record.description;
@@ -76,11 +73,12 @@ const ItemShow = props => (
                         </ArrayField> */}
                         
                         {/* <OptionCreateButton /> */}
-
+                        
+                        <OptionShowButton />
                         <EditButton />
                         <DeleteButton />
+                        
                     </Datagrid>
-
                 </ArrayField>
 
                 <CreateButton/>

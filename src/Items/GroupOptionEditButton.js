@@ -82,7 +82,7 @@ const EditOptionButton = (props) => {
                 open={showDialog}
                 onClose={handleCloseClick}
             >
-                <DialogTitle>Edit Title</DialogTitle>
+                <DialogTitle>Edit title and required</DialogTitle>
                 <DialogContent>
                     <SimpleForm
                         toolbar={null}

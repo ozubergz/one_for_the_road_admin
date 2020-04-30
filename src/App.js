@@ -8,7 +8,7 @@ import { Users } from './Users/index';
 import { Orders } from './Orders/index';
 import { Items } from './Items/index';
 import { Categories } from './Categories/index';
-import { ItemOptions } from './ItemOptions/index';
+// import { ItemOptions } from './ItemOptions/index';
 import Dashboard from './Dashboard';
 
 //React Notification Components
@@ -78,7 +78,9 @@ class App extends Component {
             <Resource name="items" {...Items} />
             <Resource name="users" {...Users} />
             <Resource name="orders" {...Orders} />
-            <Resource name="group_options" {...ItemOptions} />
+            <Resource name="group_options" />
+            
+            {/* <Resource name="group_options" {...ItemOptions} /> */}
           </Admin>
         </div>
     );
