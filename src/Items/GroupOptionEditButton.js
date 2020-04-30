@@ -51,7 +51,7 @@ const EditOptionButton = (props) => {
             mutate(
                 {   
                     type: "update",
-                    resource: "item_options",
+                    resource: "group_options",
                     payload: { 
                         id: record.id, 
                         data: { ...userInput }

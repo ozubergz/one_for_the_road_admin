@@ -13,10 +13,10 @@ import {
 
 import CreateButton from './GroupOptionCreateButton';
 import DeleteButton from './GroupOptionDeleteButton';
+import EditButton from './GroupOptionEditButton';
 import OptionCreateButton from '../ItemOptions/OptionCreateButton';
 
 // import ShowButton from './OptionShowButton';
-// import EditButton from './OptionEditButton';
 
 const Description = props => {
     const description = props.record.description;
@@ -68,6 +68,7 @@ const ItemShow = props => (
                         </ArrayField>
                         
                         <OptionCreateButton />
+                        <EditButton />
                         <DeleteButton />
                     </Datagrid>
 
