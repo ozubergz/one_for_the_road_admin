@@ -52,7 +52,6 @@ const OptionShow = props => {
                 <DialogTitle>{record.name}</DialogTitle>
                 <DialogContent>
                     
-                    {console.log(record)}
 
                     <ArrayField source={record.options} sortable={false}>
                         <Datagrid>
