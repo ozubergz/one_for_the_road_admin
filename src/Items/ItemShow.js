@@ -23,7 +23,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
-// import OptionCreateButton from '../Options/OptionCreateButton';
+import OptionCreateButton from '../Options/OptionCreateButton';
 // import OptionDeleteButton from '../Options/OptionDeleteButton';
 // import OptionEditButton from '../Options/OptionEditButton';
 // import OptionShowButton from '../Options/OptionShowButton';
@@ -37,28 +37,33 @@ Description.defaultProps = {
     addLabel: true
 }
 
-const ShowOption = ({ record }) => (
+const ShowOption = (props) => (
     <TableContainer component={Paper}>
-      <Table aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell align="right">Id</TableCell>
-            <TableCell align="right">Name</TableCell>
-            <TableCell align="right">Input Type</TableCell>
-            <TableCell align="right">Price</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {record.options.map((option) => (
-            <TableRow key={option.id}>
-                <TableCell align="right">{option.id}</TableCell>
-                <TableCell align="right">{option.name}</TableCell>
-                <TableCell align="right">{option.input_type}</TableCell>
-                <TableCell align="right">{option.price ? `$${option.price.toFixed(2)}` : "$0.00"}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+        <Table aria-label="simple table">
+            <TableHead>
+                <TableRow>
+                    <TableCell align="right">Id</TableCell>
+                    <TableCell align="right">Name</TableCell>
+                    <TableCell align="right">Input Type</TableCell>
+                    <TableCell align="right">Price</TableCell>
+                </TableRow>
+            </TableHead>
+            <TableBody>
+                {props.record.options.map((option) => (
+                    <TableRow key={option.id}>
+                        <TableCell align="right">{option.id}</TableCell>
+                        <TableCell align="right">{option.name}</TableCell>
+                        <TableCell align="right">{option.input_type}</TableCell>
+                        <TableCell align="right">{option.price ? `$${option.price.toFixed(2)}` : "$0.00"}</TableCell>
+
+                        {/* <OptionEditButton /> */}
+                        {/* <OptionDeleteButton /> */}
+
+                    </TableRow>
+                ))}
+            </TableBody>
+        </Table>
+        <OptionCreateButton {...props} />
     </TableContainer>
 )
 
@@ -88,31 +93,11 @@ const ItemShow = props => (
                         <TextField source="id" sortable={false} />
                         <TextField label="Title" source="name" sortable={false} />
                         <TextField source="required" sortable={false} />
-                        
-                        {/* <ArrayField source="options" sortable={false}>
-                            <Datagrid>
-                                <TextField source="id" sortable={false} />
-                                <TextField source="name" sortable={false} />
-                                <TextField source="input_type" sortable={false} />
-                                <NumberField 
-                                    source="price" 
-                                    sortable={false} 
-                                    options={{ style: "currency", currency: "USD" }}
-                                />
-
-                                <OptionEditButton />
-                                <OptionDeleteButton />
-                            </Datagrid>
-                        </ArrayField> */}
-                        
-                        {/* <OptionCreateButton /> */}
-                        
                         <EditButton />
                         <DeleteButton />
 
                     </Datagrid>
                 </ArrayField>
-
                 <CreateButton/>
             </Tab>
         </TabbedShowLayout>
