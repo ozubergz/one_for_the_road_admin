@@ -24,7 +24,6 @@ import DialogActions from '@material-ui/core/DialogActions';
 import EditIcon from '@material-ui/icons/Edit';
 
 const OptionEditButton = ({option}) => {
-    // const { record } = props;
     const [showDialog, setShowDialog] = useState(false);    
     const [userInput, setUserInput] = useReducer((state, newState) => (
         {...state, ...newState}

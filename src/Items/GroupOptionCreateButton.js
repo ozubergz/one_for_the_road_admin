@@ -21,20 +21,12 @@ import DialogContent from '@material-ui/core/DialogContent';
 import { DialogActions } from '@material-ui/core';
 
 const CreateOptionButton = (props) => {
-    const [showDialog, setShowDialog] = useState(false);
+    const { handleCloseClick, handleShowClick, showDialog, setShowDialog, record } = props;
     const [userSelectInput, setUserSelectInput] = useState({group_option_id: ""});
     const [existId, setExistId] = useState(false);
     const [userInput, setUserInput] = useReducer((state, newState) => (
         {...state, ...newState}
     ), { name: "", required: "" });
-
-    const handleShowClick = () => {
-        setShowDialog(true);
-    }
-
-    const handleCloseClick = () => {
-        setShowDialog(false)
-    }
 
     const handleChange = evt => {
         setUserInput({
@@ -54,7 +46,7 @@ const CreateOptionButton = (props) => {
         });
 
         // match any group_option_ids that match ids that already exist in the group
-        let matchIds = props.record.group_options.filter(group_option => {
+        let matchIds = record.group_options.filter(group_option => {
            return group_option.id === evt.target.value; 
         });
 
@@ -91,13 +83,14 @@ const CreateOptionButton = (props) => {
             {
                 onSuccess: ({ data }) => {
                     notify('ra.notification.created', 'info', {smart_count: 1});
+                    setShowDialog(false);
                     refresh();
                 },
                 onFailure: (error) => notify(`Error ${error.message}`, 'warning')
             }
         );
 
-        return <SaveButton {...props} disabled={disableBtn || existId} handleSubmitWithRedirect={handleSave} />
+        return <SaveButton disabled={disableBtn || existId} handleSubmitWithRedirect={handleSave} />
      }
     
     return (
