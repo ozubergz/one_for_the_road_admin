@@ -23,14 +23,14 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
 import EditIcon from '@material-ui/icons/Edit';
 
-const OptionEditButton = (props) => {
-    const { record } = props;
+const OptionEditButton = ({option}) => {
+    // const { record } = props;
     const [showDialog, setShowDialog] = useState(false);    
     const [userInput, setUserInput] = useReducer((state, newState) => (
         {...state, ...newState}
     ), {
-        ...record,
-        price: record.price ? record.price : ""
+        ...option,
+        price: option.price ? option.price : ""
      });
 
     const handleShowClick = () => {        
@@ -59,7 +59,7 @@ const OptionEditButton = (props) => {
                 type: 'update',
                 resource: 'options',
                 payload: {
-                    id: record.id,
+                    id: option.id,
                     data: { name, price, input_type }
                 },
            },
@@ -73,7 +73,7 @@ const OptionEditButton = (props) => {
                 onFailure: (error) => notify(`Error: ${error.message}`, 'warning'),
             }
         );
-        return <SaveButton {...props} disabled={isEnabled} handleSubmitWithRedirect={update} />
+        return <SaveButton disabled={isEnabled} handleSubmitWithRedirect={update} />
     }
 
     return (
@@ -87,7 +87,7 @@ const OptionEditButton = (props) => {
                 open={showDialog}
                 onClose={handleCloseClick}
             >
-                <DialogTitle>Option #{record.id}</DialogTitle>
+                <DialogTitle>Option #{option.id}</DialogTitle>
                 <DialogContent>
                     <SimpleForm
                         toolbar={null}

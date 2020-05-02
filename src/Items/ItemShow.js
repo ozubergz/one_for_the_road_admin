@@ -25,7 +25,7 @@ import Paper from '@material-ui/core/Paper';
 
 import OptionCreateButton from '../Options/OptionCreateButton';
 import OptionDeleteButton from '../Options/OptionDeleteButton';
-// import OptionEditButton from '../Options/OptionEditButton';
+import OptionEditButton from '../Options/OptionEditButton';
 
 const Description = props => {
     const description = props.record.description;
@@ -46,6 +46,7 @@ const ShowOption = (props) => (
                     <TableCell align="right">Input Type</TableCell>
                     <TableCell align="right">Price</TableCell>
                     <TableCell align="right"></TableCell>
+                    <TableCell align="right"></TableCell>
                 </TableRow>
             </TableHead>
             <TableBody>
@@ -55,7 +56,10 @@ const ShowOption = (props) => (
                         <TableCell align="right">{option.name}</TableCell>
                         <TableCell align="right">{option.input_type}</TableCell>
                         <TableCell align="right">{option.price ? `$${option.price.toFixed(2)}` : "$0.00"}</TableCell>
-                        {/* <OptionEditButton /> */}
+
+                        <TableCell align="right">
+                            <OptionEditButton option={option} />
+                        </TableCell>
                         <TableCell align="right">
                             <OptionDeleteButton optionId={option.id} />
                         </TableCell>
