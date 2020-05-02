@@ -21,12 +21,21 @@ import DialogContent from '@material-ui/core/DialogContent';
 import { DialogActions } from '@material-ui/core';
 
 const CreateOptionButton = (props) => {
-    const { handleCloseClick, handleShowClick, showDialog, setShowDialog, record } = props;
+    const { record } = props;
+    const [showDialog, setShowDialog] = useState(false);
     const [userSelectInput, setUserSelectInput] = useState({group_option_id: ""});
     const [existId, setExistId] = useState(false);
     const [userInput, setUserInput] = useReducer((state, newState) => (
         {...state, ...newState}
     ), { name: "", required: "" });
+
+    const handleShowClick = () => {
+        setShowDialog(true);
+    }
+
+    const handleCloseClick = () => {
+        setShowDialog(false);
+    }
 
     const handleChange = evt => {
         setUserInput({
@@ -83,7 +92,6 @@ const CreateOptionButton = (props) => {
             {
                 onSuccess: ({ data }) => {
                     notify('ra.notification.created', 'info', {smart_count: 1});
-                    setShowDialog(false);
                     refresh();
                 },
                 onFailure: (error) => notify(`Error ${error.message}`, 'warning')

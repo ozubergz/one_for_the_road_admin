@@ -7,7 +7,7 @@ import {
  } from 'react-admin';
 import DeleteIcon from '@material-ui/icons/Delete';
 
-const DeleteButton = ({optionId}) => {
+const OptionDeleteButton = ({optionId}) => {
     const notify = useNotify();
     const refresh = useRefresh();
 
@@ -38,4 +38,4 @@ const DeleteButton = ({optionId}) => {
     );
 }
 
-export default DeleteButton;
+export default OptionDeleteButton;

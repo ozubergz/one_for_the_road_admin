@@ -23,7 +23,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
 
-const CreateOptionButton = (props) => {
+const OptionCreateButton = (props) => {
     const { record } = props;
     const [showDialog, setShowDialog] = useState(false);
     const [userInput, setUserInput] = useReducer((state, newState) => (
@@ -125,4 +125,4 @@ const CreateOptionButton = (props) => {
     );
 }
 
-export default CreateOptionButton;
+export default OptionCreateButton;

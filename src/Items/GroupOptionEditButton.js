@@ -25,11 +25,10 @@ const EditOptionButton = (props) => {
     const [showDialog, setShowDialog] = useState(false);
     const [userInput, setUserInput] = useReducer((state, newState) => (
         {...state, ...newState}
-    ), { name: "", required: "" });
-
+    ), { ...record });
+    
     const handleShowClick = () => {
         setShowDialog(true);
-        setUserInput({ ...record})
     }
 
     const handleCloseClick = () => {
@@ -66,7 +65,7 @@ const EditOptionButton = (props) => {
                 }
             );
         }
-        return <SaveButton {...props} disabled={loading} handleSubmitWithRedirect={handleSave} />
+        return <SaveButton disabled={loading} handleSubmitWithRedirect={handleSave} />
      }
 
     
