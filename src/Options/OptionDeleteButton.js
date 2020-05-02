@@ -7,14 +7,15 @@ import {
  } from 'react-admin';
 import DeleteIcon from '@material-ui/icons/Delete';
 
-const DeleteButton = ({record}) => {
+const DeleteButton = ({optionId}) => {
     const notify = useNotify();
     const refresh = useRefresh();
+
     const [deleteOne, { loading }] = useMutation(
         {
             type: 'delete',
             resource: "options",
-            payload: { id: record.id }
+            payload: { id: optionId }
         },
         {
             // undoable: true,
@@ -25,6 +26,7 @@ const DeleteButton = ({record}) => {
             onFailure: (error) => notify(`Error: ${error.message}`, 'warning')
         }
     );
+
     return (
         <Button
             label="delete"
