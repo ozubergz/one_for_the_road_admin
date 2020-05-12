@@ -46,6 +46,11 @@ const OrderShow = props => (
                         <TextField source="id" sortable={false} />
                         <TextField source="name" sortable={false} />
                         <TextField source="description" sortable={false} />
+                        <ArrayField source="select_options" >
+                            <Datagrid>
+                                <TextField source="name" />
+                            </Datagrid>
+                        </ArrayField>
                     </Datagrid>
                 </ArrayField>
             </Tab>
