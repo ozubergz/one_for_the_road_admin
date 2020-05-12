@@ -27,8 +27,6 @@ const OrderShow = props => (
         <TabbedShowLayout>
             <Tab label="Customer">
                 <TextField source="customer" />
-            </Tab>
-            <Tab label="Contact">
                 <TextField source="phone" />
                 <EmailField source="email" />
             </Tab>

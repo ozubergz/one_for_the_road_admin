@@ -4,7 +4,7 @@ class Dashboard extends Component {
     render() {
         return (
             <div>
-                <h1>Welcome to the administration page</h1>
+                <h1>One for the Road Admin</h1>
             </div>
         );
     }

@@ -22,13 +22,8 @@ export default (type, params) => {
                 return response.json();
             })
             .then(({ token }) => {
-                
                 localStorage.setItem('token', token);
             });
-
-        // localStorage.setItem('username', username);
-        // // accept all username/password combinations
-        // return Promise.resolve();
     }
     // called when the user clicks on the logout button
     if (type === AUTH_LOGOUT) {
