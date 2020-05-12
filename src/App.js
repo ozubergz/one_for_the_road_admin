@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './styles/App.css';
 import simpleRestProvider from 'ra-data-simple-rest';
+import authProvider from './AuthProvider';
 
 //React Admin Components
 import { Admin, Resource } from 'react-admin';
@@ -73,14 +74,12 @@ class App extends Component {
     return (
         <div className="App">
           <ReactNotification />
-          <Admin dashboard={Dashboard} dataProvider={dataProvider}>
+          <Admin dashboard={Dashboard} dataProvider={dataProvider} authProvider={authProvider} >
             <Resource name="categories" {...Categories} />
             <Resource name="items" {...Items} />
             <Resource name="users" {...Users} />
             <Resource name="orders" {...Orders} />
-            <Resource name="group_options" />
-            
-            {/* <Resource name="group_options" {...ItemOptions} /> */}
+            <Resource name="group_options" />            
           </Admin>
         </div>
     );
