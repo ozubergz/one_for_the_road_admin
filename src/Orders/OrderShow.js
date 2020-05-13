@@ -17,6 +17,7 @@ const TimeField = props => {
     const localTime = moment(utc).format('h:mm:ss a');
     return <span>{localTime.toUpperCase()}</span>
 }
+
 TimeField.defaultProps = { 
     label: "Time",
     addLabel: true
@@ -46,9 +47,9 @@ const OrderShow = props => (
                         <TextField source="id" sortable={false} />
                         <TextField source="name" sortable={false} />
                         <TextField source="description" sortable={false} />
-                        <ArrayField source="select_options" >
+                        <ArrayField source="select_options" label="Selected Options" sortable={false} >
                             <Datagrid>
-                                <TextField source="name" />
+                                <TextField label='' source="name" sortable={false}/>
                             </Datagrid>
                         </ArrayField>
                     </Datagrid>
