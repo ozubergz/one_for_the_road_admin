@@ -37,7 +37,7 @@ const Dashboard = () => {
     const classes = useStyles();
     const [orders, setOrders] = useState([]);
     const [open, setOpen] = useState(false);
-    const [currOrder, setCurrOrder] = useState({});
+    const [currItems, setCurrItems] = useState([]);
     
     useEffect(() => {
         fetch(`${ROOT_URL}orders`)
@@ -47,9 +47,9 @@ const Dashboard = () => {
         })
     }, []);
 
-    const handleOpen = (order) => {
+    const handleOpen = (items) => {
         setOpen(true);
-        setCurrOrder(order)
+        setCurrItems(items)
     }
 
     const handleClose = () => {
@@ -62,13 +62,6 @@ const Dashboard = () => {
                 const date = moment(order.created_at)
                 const formatDate = date.format('MMMM Do YYYY');
                 const time = date.format('h:mm:ss a');
-                
-                // console.log(date)
-                // const date = new Date(order.created_at);
-                // const month = date.getMonth();
-                // const day = date.getDate();
-                // const year = date.getFullYear();
-                // console.log(date)
 
                 return (
                     <ListItem key={order.id}>
@@ -80,7 +73,7 @@ const Dashboard = () => {
                         </ul>
                         
                         <Button 
-                            onClick={() => handleOpen(order)}
+                            onClick={() => handleOpen(order.items)}
                             size="small"
                             variant="contained" 
                             color="primary"
@@ -105,10 +98,14 @@ const Dashboard = () => {
                 open={open}
                 onClose={handleClose}
             >
-                <DialogTitle>Order Items</DialogTitle>
+                <DialogTitle>Items</DialogTitle>
                 <DialogContent>
-                    {currOrder.customer}
-                    
+                    {
+                        currItems.map(item => {
+                            console.log(item);
+                            return <div>{item.name}</div>
+                        })
+                    }
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose} >
