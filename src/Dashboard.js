@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -10,23 +10,30 @@ import Typography from '@material-ui/core/Typography';
 
 const ROOT_URL = "http://localhost:3000/api/"
 
-class Dashboard extends Component {
+const useStyles = makeStyles((theme) => ({
+    root: {
+      width: '100%',
+      maxWidth: 360,
+      backgroundColor: theme.palette.background.paper,
+    },
+}));
+
+
+const Dashboard = () => {
+    const classes = useStyles();
+    const [orders, setOrders] = useState([]);
     
-    state = {
-        orders: []
-    }
-    
-    componentDidMount() {
+    useEffect(() => {
         fetch(`${ROOT_URL}orders`)
         .then(res => res.json())
-        .then(orders => {
-            this.setState({ orders })
+        .then(data => {
+            setOrders(data)
         })
-    }
+    }, []);
 
-    renderListItems() {
+    const renderListItems = () => {
         return ( 
-            this.state.orders.map(order => {
+            orders.map(order => {
                 return (
                     <ListItem key={order.id}>
                         <ListItemText 
@@ -39,18 +46,16 @@ class Dashboard extends Component {
         )
     }
     
-    render() {
-        return (
-            <div>
-                <h1>One for the Road Admin</h1>
-                
-                <List>
-                    {this.renderListItems()}
-                </List>
+    return (
+        <div>
+            <h1>One for the Road Admin</h1>
+            
+            <List className={classes.root}>
+                {renderListItems()}
+            </List>
 
-            </div>
-        );
-    }
+        </div>
+    );
 }
 
 export default Dashboard;
