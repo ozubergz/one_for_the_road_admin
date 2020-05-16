@@ -9,6 +9,12 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import Button from '@material-ui/core/Button';
+// import Modal from '@material-ui/core/Modal';
+import Dialog from '@material-ui/core/Dialog';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogActions from '@material-ui/core/DialogActions';
+// import EditIcon from '@material-ui/icons/Edit';
 
 
 const ROOT_URL = "http://localhost:3000/api/"
@@ -28,6 +34,7 @@ const useStyles = makeStyles((theme) => ({
 const Dashboard = () => {
     const classes = useStyles();
     const [orders, setOrders] = useState([]);
+    const [open, setOpen] = useState(false);
     
     useEffect(() => {
         fetch(`${ROOT_URL}orders`)
@@ -36,6 +43,14 @@ const Dashboard = () => {
             setOrders(data)
         })
     }, []);
+
+    const handleOpen = () => {
+        setOpen(true);
+    }
+
+    const handleClose = () => {
+        setOpen(false);
+    }
 
     const renderListItems = () => {
         return ( 
@@ -56,6 +71,7 @@ const Dashboard = () => {
                             }
                         />
                         <Button 
+                            onClick={handleOpen}
                             size="small"
                             variant="contained" 
                             color="primary"
@@ -68,20 +84,28 @@ const Dashboard = () => {
         )
     }
 
-    // const showOrder = () => {
-    //     return (
-            
-    //     )
-    // }
     
     return (
         <div>
-            <h1>One for the Road Admin</h1>
-            
+            <h1>One for the Road Admin</h1>            
             <List className={classes.root} subheader={<ListSubheader>Pending Orders</ListSubheader>}>
                 {renderListItems()}
             </List>
-
+            <Dialog
+                fullWidth
+                open={open}
+                onClose={handleClose}
+            >
+                <DialogTitle>Order Items</DialogTitle>
+                <DialogContent>
+                    
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleClose} >
+                        Close
+                    </Button>
+                </DialogActions>
+            </Dialog>
         </div>
     );
 }
