@@ -15,7 +15,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
 // import EditIcon from '@material-ui/icons/Edit';
-
+import moment from 'moment'
 
 const ROOT_URL = "http://localhost:3000/api/"
 
@@ -23,6 +23,8 @@ const useStyles = makeStyles((theme) => ({
     root: {
       width: '100%',
       maxWidth: '36ch',
+    //   backgroundColor: '#3f3f44',
+    //   borderRadius: '10px'
       backgroundColor: theme.palette.background.paper,
     },
     inline: {
@@ -35,6 +37,7 @@ const Dashboard = () => {
     const classes = useStyles();
     const [orders, setOrders] = useState([]);
     const [open, setOpen] = useState(false);
+    const [currOrder, setCurrOrder] = useState({});
     
     useEffect(() => {
         fetch(`${ROOT_URL}orders`)
@@ -44,8 +47,9 @@ const Dashboard = () => {
         })
     }, []);
 
-    const handleOpen = () => {
+    const handleOpen = (order) => {
         setOpen(true);
+        setCurrOrder(order)
     }
 
     const handleClose = () => {
@@ -55,23 +59,28 @@ const Dashboard = () => {
     const renderListItems = () => {
         return ( 
             orders.map(order => {
+                const date = moment(order.created_at)
+                const formatDate = date.format('MMMM Do YYYY');
+                const time = date.format('h:mm:ss a');
+                
+                // console.log(date)
+                // const date = new Date(order.created_at);
+                // const month = date.getMonth();
+                // const day = date.getDate();
+                // const year = date.getFullYear();
+                // console.log(date)
+
                 return (
                     <ListItem key={order.id}>
-                        <ListItemText 
-                            primary={order.customer}
-                            secondary={
-                                <Fragment>
-                                    <Typography
-                                        component="span"
-                                        variant="body2"
-                                    >
-                                        email: {order.email}
-                                    </Typography>
-                                </Fragment>
-                            }
-                        />
+                        <ul>
+                            <li>{order.customer}</li>
+                            <li>email: {order.email}</li>
+                            <li>date: {formatDate}</li>
+                            <li>time: {time}</li>
+                        </ul>
+                        
                         <Button 
-                            onClick={handleOpen}
+                            onClick={() => handleOpen(order)}
                             size="small"
                             variant="contained" 
                             color="primary"
@@ -98,6 +107,7 @@ const Dashboard = () => {
             >
                 <DialogTitle>Order Items</DialogTitle>
                 <DialogContent>
+                    {currOrder.customer}
                     
                 </DialogContent>
                 <DialogActions>
