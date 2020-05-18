@@ -1,21 +1,24 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
+// import Typography from '@material-ui/core/Typography';
+// import ListItemText from '@material-ui/core/ListItemText';
+
 // import Divider from '@material-ui/core/Divider';
-import ListItemText from '@material-ui/core/ListItemText';
 // import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 // import Avatar from '@material-ui/core/Avatar';
-import Typography from '@material-ui/core/Typography';
+
 import ListSubheader from '@material-ui/core/ListSubheader';
 import Button from '@material-ui/core/Button';
-// import Modal from '@material-ui/core/Modal';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
+import moment from 'moment';
+
+// import Modal from '@material-ui/core/Modal';
 // import EditIcon from '@material-ui/icons/Edit';
-import moment from 'moment'
 
 const ROOT_URL = "http://localhost:3000/api/"
 
@@ -65,8 +68,8 @@ const Dashboard = () => {
 
                 return (
                     <ListItem key={order.id}>
-                        <ul>
-                            <li>{order.customer}</li>
+                        <ul className="pending-list">
+                            <li className="customer-name">{order.customer}</li>
                             <li>email: {order.email}</li>
                             <li>date: {formatDate}</li>
                             <li>time: {time}</li>
@@ -90,7 +93,10 @@ const Dashboard = () => {
     return (
         <div>
             <h1>One for the Road Admin</h1>            
-            <List className={classes.root} subheader={<ListSubheader>Pending Orders</ListSubheader>}>
+            <List 
+                className={classes.root} 
+                subheader={<ListSubheader>Pending Orders</ListSubheader>}
+            >
                 {renderListItems()}
             </List>
             <Dialog
@@ -100,12 +106,20 @@ const Dashboard = () => {
             >
                 <DialogTitle>Items</DialogTitle>
                 <DialogContent>
-                    {
-                        currItems.map(item => {
-                            console.log(item);
-                            return <div>{item.name}</div>
-                        })
-                    }
+                    <ol>
+                        {currItems.map(item => {
+                            return (
+                                <li key={item.id}>
+                                    <span>{item.name}</span>
+                                    <ul>
+                                        {item.select_options.map(option => {
+                                            return <li key={option.id}>{option.name}</li>
+                                        })}
+                                    </ul>
+                                </li>
+                            )
+                        })}
+                    </ol>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose} >
