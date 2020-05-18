@@ -16,22 +16,36 @@ body {
     font-weight: 400;
 }
 
-.pending-list {
-    list-style-type: none;
-    padding: 0;
+.list-item {
     background-color: pink;
-    /* color: gray; */
+    margin-bottom: 10px;
 }
 
-/* .pending-list li {
-} */
+.list-item > ul {
+    list-style-type: none;
+    padding-left: 0;
+    width: 385px;
+}
 
-.pending-list li:first-child {
+.list-item > ul li:first-child {
     font-weight: 600;
     margin-bottom: 5px;
 }
 
-.pending-list li:nth-child(n+2) {
+.list-item > ul li:nth-child(n+2) {
     color: gray;
+}
+
+.btn-group {
+    height: 77px;
+}
+
+.btn-group > button:first-child {
+    margin-bottom: 7px;
+}
+
+.btn-group > button {
+    float: right;
+    width: 80px;
 }
 

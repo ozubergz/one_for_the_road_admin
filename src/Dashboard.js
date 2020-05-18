@@ -67,22 +67,31 @@ const Dashboard = () => {
                 const time = date.format('h:mm:ss a');
 
                 return (
-                    <ListItem key={order.id}>
-                        <ul className="pending-list">
-                            <li className="customer-name">{order.customer}</li>
+                    <ListItem key={order.id} className="list-item">
+                        <ul>
+                            <li>{order.customer}</li>
                             <li>email: {order.email}</li>
                             <li>date: {formatDate}</li>
                             <li>time: {time}</li>
                         </ul>
-                        
-                        <Button 
-                            onClick={() => handleOpen(order.items)}
-                            size="small"
-                            variant="contained" 
-                            color="primary"
-                        >
-                            Orders
-                        </Button>
+
+                        <div className="btn-group">
+                            <Button 
+                                onClick={() => handleOpen(order.items)}
+                                size="small"
+                                variant="contained" 
+                                color="primary"
+                                >
+                                Orders
+                            </Button>
+                            <Button
+                                size="small"
+                                variant="contained"
+                                color="secondary"
+                            >
+                                Pending
+                            </Button>
+                        </div>
                     </ListItem>
                 )
             })
