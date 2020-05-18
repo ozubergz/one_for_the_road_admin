@@ -19,6 +19,7 @@ body {
 .list-item {
     background-color: pink;
     margin-bottom: 10px;
+    border-radius: 5px;
 }
 
 .list-item > ul {

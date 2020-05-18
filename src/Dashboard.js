@@ -26,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
     root: {
       width: '100%',
       maxWidth: '36ch',
+      
     //   backgroundColor: '#3f3f44',
     //   borderRadius: '10px'
       backgroundColor: theme.palette.background.paper,
