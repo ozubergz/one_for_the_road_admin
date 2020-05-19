@@ -2,6 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
+
+import ListSubheader from '@material-ui/core/ListSubheader';
+import Button from '@material-ui/core/Button';
+import moment from 'moment';
+
 // import Typography from '@material-ui/core/Typography';
 // import ListItemText from '@material-ui/core/ListItemText';
 
@@ -9,16 +14,15 @@ import ListItem from '@material-ui/core/ListItem';
 // import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 // import Avatar from '@material-ui/core/Avatar';
 
-import ListSubheader from '@material-ui/core/ListSubheader';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogActions from '@material-ui/core/DialogActions';
-import moment from 'moment';
+// import Dialog from '@material-ui/core/Dialog';
+// import DialogTitle from '@material-ui/core/DialogTitle';
+// import DialogContent from '@material-ui/core/DialogContent';
+// import DialogActions from '@material-ui/core/DialogActions';
 
 // import Modal from '@material-ui/core/Modal';
 // import EditIcon from '@material-ui/icons/Edit';
+
+
 
 const ROOT_URL = "http://localhost:3000/api/"
 
@@ -39,15 +43,18 @@ const useStyles = makeStyles((theme) => ({
 const Dashboard = () => {
 
     const classes = useStyles();
-    const [orders, setOrders] = useState([]);
-    // const [open, setOpen] = useState(false);
-    // const [currItems, setCurrItems] = useState([]);
+    const [pending, setPending] = useState([]);
+    const [complete, setComplete] = useState([]);
     
     useEffect(() => {
         fetch(`${ROOT_URL}orders`)
         .then(res => res.json())
         .then(data => {
-            setOrders(data)
+            const pendingOrders = data.filter(order => order.pending);
+            const completeOrders = data.filter(order => !order.pending);
+            
+            setPending(pendingOrders);
+            setComplete(completeOrders);
         })
     }, []);
 
@@ -60,7 +67,24 @@ const Dashboard = () => {
     //     setOpen(false);
     // }
 
-    const renderListItems = () => {
+    const addToCompleteList = (order) => {
+        fetch(`${ROOT_URL}orders/${order.id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({pending: false})
+        })
+        .then(res => res.json())
+        .then(newData => {
+            const newPendingOrders = pending.filter(order => order.id !== newData.id);
+            
+            setPending(newPendingOrders);
+            setComplete([newData, ...complete])
+        });
+    }
+
+    const renderListItems = (orders) => {
         return ( 
             orders.map(order => {
                 const date = moment(order.created_at)
@@ -86,6 +110,7 @@ const Dashboard = () => {
                                 Orders
                             </Button>
                             <Button
+                                onClick={() => addToCompleteList(order)}
                                 size="small"
                                 variant="contained"
                                 color="secondary"
@@ -108,13 +133,13 @@ const Dashboard = () => {
                     className={classes.root} 
                     subheader={<ListSubheader>Pending Orders</ListSubheader>}
                 >
-                    {renderListItems()}
+                    {renderListItems(pending)}
                 </List>
                 <List
                     className={classes.root}
                     subheader={<ListSubheader>Complete Orders</ListSubheader>}
                 >
-                    
+                    {renderListItems(complete)}
                 </List>
             </div>
 
