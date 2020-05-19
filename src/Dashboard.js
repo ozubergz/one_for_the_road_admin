@@ -26,22 +26,22 @@ const useStyles = makeStyles((theme) => ({
     root: {
       width: '100%',
       maxWidth: '36ch',
-      
+      backgroundColor: theme.palette.background.paper,
     //   backgroundColor: '#3f3f44',
     //   borderRadius: '10px'
-      backgroundColor: theme.palette.background.paper,
-    },
-    inline: {
-        display: 'inline'
     }
+    // inline: {
+    //     display: 'inline'
+    // }
 }));
 
 
 const Dashboard = () => {
+
     const classes = useStyles();
     const [orders, setOrders] = useState([]);
-    const [open, setOpen] = useState(false);
-    const [currItems, setCurrItems] = useState([]);
+    // const [open, setOpen] = useState(false);
+    // const [currItems, setCurrItems] = useState([]);
     
     useEffect(() => {
         fetch(`${ROOT_URL}orders`)
@@ -51,14 +51,14 @@ const Dashboard = () => {
         })
     }, []);
 
-    const handleOpen = (items) => {
-        setOpen(true);
-        setCurrItems(items)
-    }
+    // const handleOpen = (items) => {
+    //     setOpen(true);
+    //     setCurrItems(items)
+    // }
 
-    const handleClose = () => {
-        setOpen(false);
-    }
+    // const handleClose = () => {
+    //     setOpen(false);
+    // }
 
     const renderListItems = () => {
         return ( 
@@ -78,7 +78,7 @@ const Dashboard = () => {
 
                         <div className="btn-group">
                             <Button 
-                                onClick={() => handleOpen(order.items)}
+                                // onClick={() => handleOpen(order.items)}
                                 size="small"
                                 variant="contained" 
                                 color="primary"
@@ -102,14 +102,23 @@ const Dashboard = () => {
     
     return (
         <div>
-            <h1>One for the Road Admin</h1>            
-            <List 
-                className={classes.root} 
-                subheader={<ListSubheader>Pending Orders</ListSubheader>}
-            >
-                {renderListItems()}
-            </List>
-            <Dialog
+            <h1>One for the Road Admin</h1>
+            <div className="list-group">
+                <List 
+                    className={classes.root} 
+                    subheader={<ListSubheader>Pending Orders</ListSubheader>}
+                >
+                    {renderListItems()}
+                </List>
+                <List
+                    className={classes.root}
+                    subheader={<ListSubheader>Complete Orders</ListSubheader>}
+                >
+                    
+                </List>
+            </div>
+
+            {/* <Dialog
                 fullWidth
                 open={open}
                 onClose={handleClose}
@@ -136,7 +145,7 @@ const Dashboard = () => {
                         Close
                     </Button>
                 </DialogActions>
-            </Dialog>
+            </Dialog> */}
         </div>
     );
 }
