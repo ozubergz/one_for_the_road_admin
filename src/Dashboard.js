@@ -114,15 +114,18 @@ const Dashboard = () => {
                                 <Divider className="divider" />
                                 <ol>
                                     {
-                                        items.map(item => {
+                                        items.map(({id, name, select_options}) => {
                                             return( 
-                                                <li key={item.id}>
-                                                    {item.name}
-                                                    {/* <ul>
-                                                        {item.select_options.map(option => {
-                                                            return <li key={option.id}>{option.name}</li>
-                                                        })}
-                                                    </ul> */}
+                                                <li key={id}>
+                                                    {name}
+                                                    {
+                                                        select_options ?
+                                                        select_options.map(option => {
+                                                            return <span 
+                                                                style={{display: 'block'}} 
+                                                                key={option.id}>{option.name}</span>
+                                                        }) : null
+                                                    }
                                                 </li>
                                             )
                                         })
