@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-
+import ListItemText from '@material-ui/core/ListItemText';
 import ListSubheader from '@material-ui/core/ListSubheader';
+
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import ExpandMore from '@material-ui/icons/ExpandMore';
+
 import Button from '@material-ui/core/Button';
 import moment from 'moment';
 
 // import Typography from '@material-ui/core/Typography';
-// import ListItemText from '@material-ui/core/ListItemText';
 
 // import Divider from '@material-ui/core/Divider';
 // import ListItemAvatar from '@material-ui/core/ListItemAvatar';
@@ -21,7 +25,6 @@ import moment from 'moment';
 
 // import Modal from '@material-ui/core/Modal';
 // import EditIcon from '@material-ui/icons/Edit';
-
 
 
 const ROOT_URL = "http://localhost:3000/api/"
@@ -45,6 +48,8 @@ const Dashboard = () => {
     const classes = useStyles();
     const [pending, setPending] = useState([]);
     const [complete, setComplete] = useState([]);
+    const [open, setOpen] = useState(false);
+    const [currId, setCurrId] = useState(null);
     
     useEffect(() => {
         fetch(`${ROOT_URL}orders`)
@@ -58,10 +63,11 @@ const Dashboard = () => {
         })
     }, []);
 
-    // const handleOpen = (items) => {
-    //     setOpen(true);
-    //     setCurrItems(items)
-    // }
+    const handleOpen = (order) => {
+        setOpen(!open);
+        setCurrId(order.id);
+        // setCurrItems(items)
+    }
 
     // const handleClose = () => {
     //     setOpen(false);
@@ -101,14 +107,6 @@ const Dashboard = () => {
                         </ul>
 
                         <div className="btn-group">
-                            <Button 
-                                // onClick={() => handleOpen(order.items)}
-                                size="small"
-                                variant="contained" 
-                                color="primary"
-                                >
-                                Orders
-                            </Button>
                             <Button
                                 onClick={() => addToCompleteList(order)}
                                 size="small"
@@ -117,7 +115,15 @@ const Dashboard = () => {
                             >
                                 Pending
                             </Button>
+                            <ListItem 
+                                button 
+                                onClick={() => handleOpen(order)}
+                            >
+                                <ListItemText primary="Orders" />
+                                {open && currId === order.id ? <ExpandLess /> : <ExpandMore />}
+                            </ListItem>
                         </div>
+                        
                     </ListItem>
                 )
             })
