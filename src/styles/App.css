@@ -30,10 +30,6 @@ body {
     border-radius: 5px;
 }
 
-/* .list-item-body {
-    backgroun-color: green
-} */
-
 .divider {
     margin-top: 10px !important;
     margin-bottom: 10px !important;
@@ -46,9 +42,11 @@ body {
 }
 
 .list-item-body ol {
-    /* list-style-type: none; */
-    /* padding-top: 15px; */
     padding-left: 16px;
+}
+
+.list-item-body ol li {
+    padding-bottom: 5px;
 }
 
 .list-item-body > ul li:first-child {
@@ -64,9 +62,9 @@ body {
     color: gray;
 }
 
-.select-option-li:first-child {
+/* .select-option-li:first-child {
     margin-top: 5px;
-}
+} */
 
 .btn-group {
     height: 77px;
