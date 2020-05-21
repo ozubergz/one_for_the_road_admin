@@ -6,6 +6,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import Collapse from '@material-ui/core/Collapse';
+import Divider from '@material-ui/core/Divider';
 
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
@@ -110,6 +111,7 @@ const Dashboard = () => {
                                 
                             </ul>
                             <Collapse in={open && id === order.id} timeout="auto" unmountOnExit>
+                                <Divider className="divider" />
                                 <ol>
                                     {
                                         items.map(item => {

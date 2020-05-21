@@ -31,13 +31,24 @@ body {
 }
 
 /* .list-item-body {
-
+    backgroun-color: green
 } */
+
+.divider {
+    margin-top: 10px !important;
+    margin-bottom: 10px !important;
+}
 
 .list-item-body > ul {
     list-style-type: none;
     padding-left: 0;
     width: 200px;
+}
+
+.list-item-body ol {
+    /* list-style-type: none; */
+    /* padding-top: 15px; */
+    padding-left: 16px;
 }
 
 .list-item-body > ul li:first-child {
@@ -60,7 +71,6 @@ body {
 
 .btn-group > button {
     float: right;
-    width: 80px;
 }
 
 
