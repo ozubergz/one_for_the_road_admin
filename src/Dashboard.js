@@ -5,6 +5,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListSubheader from '@material-ui/core/ListSubheader';
+import Collapse from '@material-ui/core/Collapse';
 
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
@@ -49,7 +50,8 @@ const Dashboard = () => {
     const [pending, setPending] = useState([]);
     const [complete, setComplete] = useState([]);
     const [open, setOpen] = useState(false);
-    const [currId, setCurrId] = useState(null);
+    const [items, setItems] =useState([])
+    const [id, setId] = useState(null);
     
     useEffect(() => {
         fetch(`${ROOT_URL}orders`)
@@ -65,8 +67,8 @@ const Dashboard = () => {
 
     const handleOpen = (order) => {
         setOpen(!open);
-        setCurrId(order.id);
-        // setCurrItems(items)
+        setId(order.id);
+        setItems(order.items);
     }
 
     // const handleClose = () => {
@@ -104,6 +106,12 @@ const Dashboard = () => {
                             <li>email: {order.email}</li>
                             <li>date: {formatDate}</li>
                             <li>time: {time}</li>
+                            <Collapse in={open && id === order.id} timeout="auto" unmountOnExit>
+                                <ol>
+                                    {items.map(item => <li>{item.name}</li>)}
+                                                                  
+                                </ol>
+                        </Collapse>
                         </ul>
 
                         <div className="btn-group">
@@ -120,9 +128,10 @@ const Dashboard = () => {
                                 onClick={() => handleOpen(order)}
                             >
                                 <ListItemText primary="Orders" />
-                                {open && currId === order.id ? <ExpandLess /> : <ExpandMore />}
+                                {open && id === order.id ? <ExpandLess /> : <ExpandMore />}
                             </ListItem>
                         </div>
+                        
                         
                     </ListItem>
                 )
