@@ -30,23 +30,28 @@ body {
     border-radius: 5px;
 }
 
-.list-item > ul {
+/* .list-item-body {
+
+} */
+
+.list-item-body > ul {
     list-style-type: none;
     padding-left: 0;
-    width: 385px;
+    width: 200px;
 }
 
-.list-item > ul li:first-child {
+.list-item-body > ul li:first-child {
     font-weight: 600;
     margin-bottom: 5px;
 }
 
-.list-item > ul li:nth-child(n+2) {
+.list-item-body > ul li:nth-child(n+2) {
     color: gray;
 }
 
 .btn-group {
     height: 77px;
+    /* background-color: red; */
 }
 
 .btn-group > button:first-child {

@@ -65,10 +65,10 @@ const Dashboard = () => {
         })
     }, []);
 
-    const handleOpen = (order) => {
+    const handleOpen = ({id, items}) => {
         setOpen(!open);
-        setId(order.id);
-        setItems(order.items);
+        setId(id);
+        setItems(items);
     }
 
     // const handleClose = () => {
@@ -101,18 +101,33 @@ const Dashboard = () => {
 
                 return (
                     <ListItem key={order.id} className="list-item">
-                        <ul>
-                            <li>{order.customer}</li>
-                            <li>email: {order.email}</li>
-                            <li>date: {formatDate}</li>
-                            <li>time: {time}</li>
+                        <div className="list-item-body">
+                            <ul>
+                                <li>{order.customer}</li>
+                                <li>email: {order.email}</li>
+                                <li>date: {formatDate}</li>
+                                <li>time: {time}</li>
+                                
+                            </ul>
                             <Collapse in={open && id === order.id} timeout="auto" unmountOnExit>
                                 <ol>
-                                    {items.map(item => <li>{item.name}</li>)}
-                                                                  
+                                    {
+                                        items.map(item => {
+                                            return( 
+                                                <li key={item.id}>
+                                                    {item.name}
+                                                    {/* <ul>
+                                                        {item.select_options.map(option => {
+                                                            return <li key={option.id}>{option.name}</li>
+                                                        })}
+                                                    </ul> */}
+                                                </li>
+                                            )
+                                        })
+                                    }                                                                  
                                 </ol>
-                        </Collapse>
-                        </ul>
+                            </Collapse>
+                        </div>
 
                         <div className="btn-group">
                             <Button
@@ -123,13 +138,15 @@ const Dashboard = () => {
                             >
                                 Pending
                             </Button>
-                            <ListItem 
-                                button 
+                            <Button
+                                // button 
                                 onClick={() => handleOpen(order)}
+                                style={{backgroundColor: 'none'}}
                             >
-                                <ListItemText primary="Orders" />
+                                {/* <ListItemText primary="Orders" /> */}
+                                Orders
                                 {open && id === order.id ? <ExpandLess /> : <ExpandMore />}
-                            </ListItem>
+                            </Button>
                         </div>
                         
                         
