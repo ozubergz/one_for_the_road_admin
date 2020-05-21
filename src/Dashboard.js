@@ -122,8 +122,9 @@ const Dashboard = () => {
                                                         select_options ?
                                                         select_options.map(option => {
                                                             return <span 
+                                                                className="select-option-li"
                                                                 style={{display: 'block'}} 
-                                                                key={option.id}>{option.name}</span>
+                                                                key={option.id}>- {option.name}</span>
                                                         }) : null
                                                     }
                                                 </li>

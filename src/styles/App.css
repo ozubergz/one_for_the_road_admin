@@ -60,6 +60,10 @@ body {
     color: gray;
 }
 
+.select-option-li:first-child {
+    margin-top: 5px;
+}
+
 .btn-group {
     height: 77px;
     /* background-color: red; */
