@@ -3,10 +3,10 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListSubheader from '@material-ui/core/ListSubheader';
-import Collapse from '@material-ui/core/Collapse';
 import Divider from '@material-ui/core/Divider';
+import ListItemText from '@material-ui/core/ListItemText';
+import Collapse from '@material-ui/core/Collapse';
+import ListSubheader from '@material-ui/core/ListSubheader';
 
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
@@ -121,20 +121,22 @@ const Dashboard = () => {
                                 <li>time: {time}</li>
                                 
                             </ul>
-                            {/* <div style={{display: open && id === order.id ? 'block' : "none"}}> */}
                             <div className="collapse" id={order.id} style={{display: 'none'}} ref={setRefs} >
                                 <Divider className="divider" />
                                 <ol>
                                     {order.items.map(({id, name, select_options}, i) => { 
                                        return <li key={i}>
-                                            {name}
+                                            {name}                                                    
                                             {select_options ?
-                                            select_options.map(option => {
-                                                return <span 
-                                                    className="select-option-li"
-                                                    style={{display: 'block'}} 
-                                                    key={option.id}>- {option.name}</span>
-                                            }) : null}
+                                                select_options.map(option => {
+                                                    return <span 
+                                                        className="select-option-li"
+                                                        style={{display: 'block'}} 
+                                                        key={option.id}>- {option.name}</span>
+                                                }) 
+                                                    : 
+                                                null
+                                            }
                                         </li> 
                                     })}
                                 </ol>
@@ -152,9 +154,7 @@ const Dashboard = () => {
                             </Button>
                             <Button
                                 onClick={() => handleToggle(order)}
-                                // style={{backgroundColor: 'none'}}
                             >
-                                {/* <ListItemText primary="Orders" /> */}
                                 Orders
                                 {/* {open && id === order.id ? <ExpandLess /> : <ExpandMore />} */}
                             </Button>
@@ -185,35 +185,6 @@ const Dashboard = () => {
                     {renderListItems(complete)}
                 </List>
             </div>
-
-            {/* <Dialog
-                fullWidth
-                open={open}
-                onClose={handleClose}
-            >
-                <DialogTitle>Items</DialogTitle>
-                <DialogContent>
-                    <ol>
-                        {currItems.map(item => {
-                            return (
-                                <li key={item.id}>
-                                    <span>{item.name}</span>
-                                    <ul>
-                                        {item.select_options.map(option => {
-                                            return <li key={option.id}>{option.name}</li>
-                                        })}
-                                    </ul>
-                                </li>
-                            )
-                        })}
-                    </ol>
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleClose} >
-                        Close
-                    </Button>
-                </DialogActions>
-            </Dialog> */}
         </div>
     );
 }
