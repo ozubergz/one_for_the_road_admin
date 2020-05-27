@@ -51,25 +51,32 @@ const Dashboard = () => {
     const [pending, setPending] = useState([]);
     const [complete, setComplete] = useState([]);
     const [open, setOpen] = useState(false);
-    const [items, setItems] =useState([])
     const [id, setId] = useState(null);
+    // const [items, setItems] =useState([])
     
     useEffect(() => {
         fetch(`${ROOT_URL}orders`)
         .then(res => res.json())
         .then(data => {
-            const pendingOrders = data.filter(order => order.pending);
-            const completeOrders = data.filter(order => !order.pending);
-            
-            setPending(pendingOrders);
-            setComplete(completeOrders);
-        })
+
+            //check if there's an error server
+            if(data.error) {
+                console.error('Error:', data.error)
+            } else {
+                
+                const pendingOrders = data.filter(order => order.pending);
+                const completeOrders = data.filter(order => !order.pending);
+                
+                setPending(pendingOrders);
+                setComplete(completeOrders);
+            }
+        });
     }, []);
 
-    const handleOpen = ({id, items}) => {
+    const handleOpen = ({id}) => {
         setOpen(!open);
         setId(id);
-        setItems(items);
+        // setItems(items);
     }
 
     // const handleClose = () => {
@@ -110,7 +117,13 @@ const Dashboard = () => {
                                 <li>time: {time}</li>
                                 
                             </ul>
-                            <Collapse in={open && id === order.id} timeout="auto" unmountOnExit>
+                            <div style={{display: open && id === order.id ? 'block' : "none"}}>
+                                <Divider className="divider" />
+                                <ol>
+                                    {order.items.map(({id, name}, i) => <li key={i}>{name}</li>)}
+                                </ol>
+                            </div>
+                            {/* <Collapse in={open && id === order.id} timeout="auto" unmountOnExit>
                                 <Divider className="divider" />
                                 <ol>
                                     {
@@ -132,7 +145,7 @@ const Dashboard = () => {
                                         })
                                     }                                                                  
                                 </ol>
-                            </Collapse>
+                            </Collapse> */}
                         </div>
 
                         <div className="btn-group">
