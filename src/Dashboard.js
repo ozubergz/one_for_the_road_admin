@@ -4,16 +4,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import Divider from '@material-ui/core/Divider';
-// import ListItemText from '@material-ui/core/ListItemText';
-// import Collapse from '@material-ui/core/Collapse';
 import ListSubheader from '@material-ui/core/ListSubheader';
-
-import ExpandLess from '@material-ui/icons/ExpandLess';
-import ExpandMore from '@material-ui/icons/ExpandMore';
 
 import Button from '@material-ui/core/Button';
 import moment from 'moment';
-import createBreakpoints from '@material-ui/core/styles/createBreakpoints';
 
 const ROOT_URL = "http://localhost:3000/api/"
 
@@ -23,11 +17,7 @@ const useStyles = makeStyles((theme) => ({
       maxWidth: '36ch',
       backgroundColor: theme.palette.background.paper,
     //   backgroundColor: '#3f3f44',
-    //   borderRadius: '10px'
     }
-    // inline: {
-    //     display: 'inline'
-    // }
 }));
 
 
@@ -71,10 +61,7 @@ const Dashboard = () => {
         //target second button in button group
         const button = topParent.querySelector('#second-btn');
 
-        button.innerHTML = (display === 'none') ? 
-            `Orders<i className="fa fa-angle-up"></i>` 
-                :
-            `Orders <i className="fa fa-angle-down"></i>`
+        button.innerHTML = (display === 'none') ? `Orders <i class="fa fa-angle-up"></i>` : `Orders <i class="fa fa-angle-down"></i>`
 
         element.style.display = (display === 'none') ? 'block' : 'none';        
     }
@@ -154,10 +141,9 @@ const Dashboard = () => {
                                 id="second-btn"
                                 size="small"
                                 varaiant="contained"
-                                style={{background: 'gray'}}
                                 onClick={() => handleToggle(order)}
                             >
-                                Orders <i className="fa fa-angle-down"></i>
+                                Orders <i class="fa fa-angle-down"></i>
                             </Button>
                         </div>                        
                     </ListItem>

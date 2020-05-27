@@ -70,19 +70,21 @@ body {
     /* height: 77px; */
     /* position: relative; */
     /* top: -20px; */
-    background-color: red;
+    /* background-color: red; */
 }
 
 .btn-group > button:first-child {
     margin-bottom: 7px;
 }
 
-/* .btn-group > button:nth-child(2) {
-    background-color: pink;
-} */
-
 .btn-group > button {
     float: right;
+}
+
+.fa {
+    margin-left: 5px;
+    font-size: 25px;
+    /* font-weight: 500; */
 }
 
 
