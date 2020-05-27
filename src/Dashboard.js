@@ -125,32 +125,20 @@ const Dashboard = () => {
                             <div className="collapse" id={order.id} style={{display: 'none'}} ref={setRefs} >
                                 <Divider className="divider" />
                                 <ol>
-                                    {order.items.map(({id, name}, i) => <li key={i}>{name}</li>)}
+                                    {order.items.map(({id, name, select_options}, i) => { 
+                                       return <li key={i}>
+                                            {name}
+                                            {select_options ?
+                                            select_options.map(option => {
+                                                return <span 
+                                                    className="select-option-li"
+                                                    style={{display: 'block'}} 
+                                                    key={option.id}>- {option.name}</span>
+                                            }) : null}
+                                        </li> 
+                                    })}
                                 </ol>
-                            </div>
-                            {/* <Collapse in={open && id === order.id} timeout="auto" unmountOnExit>
-                                <Divider className="divider" />
-                                <ol>
-                                    {
-                                        items.map(({id, name, select_options}) => {
-                                            return( 
-                                                <li key={id}>
-                                                    {name}
-                                                    {
-                                                        select_options ?
-                                                        select_options.map(option => {
-                                                            return <span 
-                                                                className="select-option-li"
-                                                                style={{display: 'block'}} 
-                                                                key={option.id}>- {option.name}</span>
-                                                        }) : null
-                                                    }
-                                                </li>
-                                            )
-                                        })
-                                    }                                                                  
-                                </ol>
-                            </Collapse> */}
+                            </div>                            
                         </div>
 
                         <div className="btn-group">
