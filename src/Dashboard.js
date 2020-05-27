@@ -4,8 +4,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import Divider from '@material-ui/core/Divider';
-import ListItemText from '@material-ui/core/ListItemText';
-import Collapse from '@material-ui/core/Collapse';
+// import ListItemText from '@material-ui/core/ListItemText';
+// import Collapse from '@material-ui/core/Collapse';
 import ListSubheader from '@material-ui/core/ListSubheader';
 
 import ExpandLess from '@material-ui/icons/ExpandLess';
@@ -13,21 +13,7 @@ import ExpandMore from '@material-ui/icons/ExpandMore';
 
 import Button from '@material-ui/core/Button';
 import moment from 'moment';
-
-// import Typography from '@material-ui/core/Typography';
-
-// import Divider from '@material-ui/core/Divider';
-// import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-// import Avatar from '@material-ui/core/Avatar';
-
-// import Dialog from '@material-ui/core/Dialog';
-// import DialogTitle from '@material-ui/core/DialogTitle';
-// import DialogContent from '@material-ui/core/DialogContent';
-// import DialogActions from '@material-ui/core/DialogActions';
-
-// import Modal from '@material-ui/core/Modal';
-// import EditIcon from '@material-ui/icons/Edit';
-
+import createBreakpoints from '@material-ui/core/styles/createBreakpoints';
 
 const ROOT_URL = "http://localhost:3000/api/"
 
@@ -78,7 +64,19 @@ const Dashboard = () => {
     const handleToggle = ({id}) => {
         const element = refs[id];
         const { display } = element.style;
-        element.style.display = display === 'none' ? 'block' : 'none';        
+
+        //target parent of parent
+        const topParent = element.parentNode.parentNode;
+
+        //target second button in button group
+        const button = topParent.querySelector('#second-btn');
+
+        button.innerHTML = (display === 'none') ? 
+            `Orders<i className="fa fa-angle-up"></i>` 
+                :
+            `Orders <i className="fa fa-angle-down"></i>`
+
+        element.style.display = (display === 'none') ? 'block' : 'none';        
     }
 
     //callback fucnttion setting refs(object) as element ids with element
@@ -153,14 +151,15 @@ const Dashboard = () => {
                                 Pending..
                             </Button>
                             <Button
+                                id="second-btn"
+                                size="small"
+                                varaiant="contained"
+                                style={{background: 'gray'}}
                                 onClick={() => handleToggle(order)}
                             >
-                                Orders
-                                {/* {open && id === order.id ? <ExpandLess /> : <ExpandMore />} */}
+                                Orders <i className="fa fa-angle-down"></i>
                             </Button>
-                        </div>
-                        
-                        
+                        </div>                        
                     </ListItem>
                 )
             })
