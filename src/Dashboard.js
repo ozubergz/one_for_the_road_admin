@@ -50,8 +50,11 @@ const Dashboard = () => {
     const classes = useStyles();
     const [pending, setPending] = useState([]);
     const [complete, setComplete] = useState([]);
-    const [open, setOpen] = useState(false);
-    const [id, setId] = useState(null);
+    // const [open, setOpen] = useState(false);
+    // const [id, setId] = useState(null);
+    
+    const refs = {};
+
     // const [items, setItems] =useState([])
     
     useEffect(() => {
@@ -74,14 +77,16 @@ const Dashboard = () => {
     }, []);
 
     const handleOpen = ({id}) => {
-        setOpen(!open);
-        setId(id);
-        // setItems(items);
+        // setOpen(!open);
+
+        const element = refs[id];
+        element.style.display = 'block';
     }
 
-    // const handleClose = () => {
-    //     setOpen(false);
-    // }
+    //callback fucnttion setting refs(object) as element ids with element
+    const setRefs = (element) => {
+        if(element) refs[element.id] = element;
+    }
 
     const addToCompleteList = (order) => {
         fetch(`${ROOT_URL}orders/${order.id}`, {
@@ -117,7 +122,8 @@ const Dashboard = () => {
                                 <li>time: {time}</li>
                                 
                             </ul>
-                            <div style={{display: open && id === order.id ? 'block' : "none"}}>
+                            {/* <div style={{display: open && id === order.id ? 'block' : "none"}}> */}
+                            <div className="collapse" id={order.id} style={{display: 'none'}} ref={setRefs} >
                                 <Divider className="divider" />
                                 <ol>
                                     {order.items.map(({id, name}, i) => <li key={i}>{name}</li>)}
@@ -164,7 +170,7 @@ const Dashboard = () => {
                             >
                                 {/* <ListItemText primary="Orders" /> */}
                                 Orders
-                                {open && id === order.id ? <ExpandLess /> : <ExpandMore />}
+                                {/* {open && id === order.id ? <ExpandLess /> : <ExpandMore />} */}
                             </Button>
                         </div>
                         
