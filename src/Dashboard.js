@@ -50,13 +50,11 @@ const Dashboard = () => {
     const classes = useStyles();
     const [pending, setPending] = useState([]);
     const [complete, setComplete] = useState([]);
+    const refs = {};
     // const [open, setOpen] = useState(false);
     // const [id, setId] = useState(null);
-    
-    const refs = {};
-
     // const [items, setItems] =useState([])
-    
+
     useEffect(() => {
         fetch(`${ROOT_URL}orders`)
         .then(res => res.json())
@@ -76,11 +74,11 @@ const Dashboard = () => {
         });
     }, []);
 
-    const handleOpen = ({id}) => {
-        // setOpen(!open);
-
+    //toggle handler to toggle display order items 
+    const handleToggle = ({id}) => {
         const element = refs[id];
-        element.style.display = 'block';
+        const { display } = element.style;
+        element.style.display = display === 'none' ? 'block' : 'none';        
     }
 
     //callback fucnttion setting refs(object) as element ids with element
@@ -88,6 +86,7 @@ const Dashboard = () => {
         if(element) refs[element.id] = element;
     }
 
+    //update orders to complete
     const addToCompleteList = (order) => {
         fetch(`${ROOT_URL}orders/${order.id}`, {
             method: 'PATCH',
@@ -161,12 +160,11 @@ const Dashboard = () => {
                                 variant="contained"
                                 color="secondary"
                             >
-                                Pending
+                                Pending..
                             </Button>
                             <Button
-                                // button 
-                                onClick={() => handleOpen(order)}
-                                style={{backgroundColor: 'none'}}
+                                onClick={() => handleToggle(order)}
+                                // style={{backgroundColor: 'none'}}
                             >
                                 {/* <ListItemText primary="Orders" /> */}
                                 Orders
