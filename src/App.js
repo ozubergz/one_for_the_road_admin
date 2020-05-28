@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './styles/App.css';
+import './App.css';
 import simpleRestProvider from 'ra-data-simple-rest';
 import authProvider from './AuthProvider';
 
@@ -9,8 +9,12 @@ import { Users } from './Users/index';
 import { Orders } from './Orders/index';
 import { Items } from './Items/index';
 import { Categories } from './Categories/index';
-// import { ItemOptions } from './ItemOptions/index';
 import Dashboard from './Dashboard';
+
+//Material UI Icons
+import PersonIcon from '@material-ui/icons/Person';
+import KitchenIcon from '@material-ui/icons/Kitchen';
+import FastfoodIcon from '@material-ui/icons/Fastfood';
 
 //React Notification Components
 import ReactNotification from 'react-notifications-component';
@@ -75,9 +79,9 @@ class App extends Component {
         <div className="App">
           <ReactNotification />
           <Admin dashboard={Dashboard} dataProvider={dataProvider} authProvider={authProvider} >
-            <Resource name="categories" {...Categories} />
-            <Resource name="items" {...Items} />
-            <Resource name="users" {...Users} />
+            <Resource name="categories" {...Categories} icon={KitchenIcon} />
+            <Resource name="items" {...Items} icon={FastfoodIcon} />
+            <Resource name="users" {...Users} icon={PersonIcon} />
             <Resource name="orders" {...Orders} />
             <Resource name="group_options" />            
           </Admin>

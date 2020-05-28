@@ -24,9 +24,6 @@ body {
     -webkit-box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.3);
     -moz-box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.3);
     box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.3);
-    /* -webkit-box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.3);
-    -moz-box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.3);
-    box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.3); */
 }
 
 .list-group {
@@ -35,15 +32,14 @@ body {
 
 .list-group > ul:first-child {
     margin-right: 20px;
-    border-left: 6px solid rgb(224, 64, 90);
+    border-left: 4px solid rgb(224, 64, 90);
 }
 
 .list-group > ul:nth-child(2) {
-    border-left: 6px solid rgb(9, 177, 9);
+    border-left: 4px solid rgb(9, 177, 9);
 }
 
 .list-item {
-    /* background-color: pink; */
     margin-bottom: 10px;
     border-radius: 5px;
     position: relative;
@@ -81,22 +77,16 @@ body {
     color: gray;
 }
 
-/* .select-option-li:first-child {
-    margin-top: 5px;
-} */
-
 .btn-group {
     display: flex;
     flex-direction: column;
     position: absolute;
     top: 10px;
     right: 15px;
-    /* background-color: red; */
 }
 
 .btn-group > button:first-child {
     margin-bottom: 7px;
-    /* display: block; */
 }
 
 .btn-group > button {
@@ -106,7 +96,11 @@ body {
 .fa {
     margin-left: 5px;
     font-size: 25px;
-    /* font-weight: 500; */
+}
+
+.expand-table {
+    border-left: 4px solid blueviolet;
+    /* background-color: blueviolet; */
 }
 
 
