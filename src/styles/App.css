@@ -28,6 +28,7 @@ body {
     background-color: pink;
     margin-bottom: 10px;
     border-radius: 5px;
+    position: relative;
 }
 
 .divider {
@@ -67,14 +68,17 @@ body {
 } */
 
 .btn-group {
-    /* height: 77px; */
-    /* position: relative; */
-    /* top: -20px; */
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 10px;
+    right: 15px;
     /* background-color: red; */
 }
 
 .btn-group > button:first-child {
     margin-bottom: 7px;
+    /* display: block; */
 }
 
 .btn-group > button {
