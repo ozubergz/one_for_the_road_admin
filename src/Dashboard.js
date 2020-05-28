@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+// import { makeStyles } from '@material-ui/core/styles';
 
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -11,22 +11,22 @@ import moment from 'moment';
 
 const ROOT_URL = "http://localhost:3000/api/"
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-      width: '100%',
-      maxWidth: '36ch',
-      backgroundColor: theme.palette.background.paper,
-    //   backgroundColor: '#3f3f44',
-    }
-}));
+// const useStyles = makeStyles((theme) => ({
+//     root: {
+//       width: '100%',
+//       maxWidth: '36ch',
+//       backgroundColor: theme.palette.background.paper,
+//     //   backgroundColor: '#3f3f44',
+//     }
+// }));
 
 
 const Dashboard = () => {
 
-    const classes = useStyles();
     const [pending, setPending] = useState([]);
     const [complete, setComplete] = useState([]);
     const refs = {};
+    // const classes = useStyles();
     // const [open, setOpen] = useState(false);
     // const [id, setId] = useState(null);
     // const [items, setItems] =useState([])
@@ -158,13 +158,13 @@ const Dashboard = () => {
             <h1>One for the Road Admin</h1>
             <div className="list-group">
                 <List 
-                    className={classes.root} 
+                    className="list" 
                     subheader={<ListSubheader>Pending Orders</ListSubheader>}
                 >
                     {renderListItems(pending)}
                 </List>
                 <List
-                    className={classes.root}
+                    className="list"
                     subheader={<ListSubheader>Complete Orders</ListSubheader>}
                 >
                     {renderListItems(complete)}
