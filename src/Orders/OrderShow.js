@@ -43,12 +43,12 @@ const OrderShow = props => (
             </Tab>
             <Tab label="Delivery Items">
                 <ArrayField source="items">
-                    <Datagrid>
+                    <Datagrid >
                         <TextField source="id" sortable={false} />
                         <TextField source="name" sortable={false} />
                         <TextField source="description" sortable={false} />
                         <ArrayField source="select_options" label="Selected Options" sortable={false} >
-                            <Datagrid>
+                            <Datagrid className="delivery-items">
                                 <TextField label='' source="name" sortable={false}/>
                             </Datagrid>
                         </ArrayField>

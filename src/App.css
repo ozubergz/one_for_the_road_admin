@@ -100,7 +100,10 @@ body {
 
 .expand-table {
     border-left: 4px solid blueviolet;
-    /* background-color: blueviolet; */
+}
+
+.delivery-items {
+    border-left: 4px solid blueviolet;
 }
 
 
