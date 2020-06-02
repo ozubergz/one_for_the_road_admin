@@ -1,49 +1,32 @@
 import React, { useState, useEffect } from 'react';
-// import { makeStyles } from '@material-ui/core/styles';
-
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import Divider from '@material-ui/core/Divider';
 import ListSubheader from '@material-ui/core/ListSubheader';
-
 import Button from '@material-ui/core/Button';
 import moment from 'moment';
 
 const ROOT_URL = "http://localhost:3000/api/"
-
-// const useStyles = makeStyles((theme) => ({
-//     root: {
-//       width: '100%',
-//       maxWidth: '36ch',
-//       backgroundColor: theme.palette.background.paper,
-//     //   backgroundColor: '#3f3f44',
-//     }
-// }));
-
 
 const Dashboard = () => {
 
     const [pending, setPending] = useState([]);
     const [complete, setComplete] = useState([]);
     const refs = {};
-    // const classes = useStyles();
-    // const [open, setOpen] = useState(false);
-    // const [id, setId] = useState(null);
-    // const [items, setItems] =useState([])
 
     useEffect(() => {
         fetch(`${ROOT_URL}orders`)
         .then(res => res.json())
         .then(data => {
-
-            //check if there's an error server
+            //this check if there's an error server
             if(data.error) {
                 console.error('Error:', data.error)
             } else {
-                
+                //this filters orders that are pending
                 const pendingOrders = data.filter(order => order.pending);
+                //this filters orders that are not pending
                 const completeOrders = data.filter(order => !order.pending);
-                
+                //this seperate lists between complete and pending orders
                 setPending(pendingOrders);
                 setComplete(completeOrders);
             }
@@ -71,22 +54,22 @@ const Dashboard = () => {
         if(element) refs[element.id] = element;
     }
 
-    //update orders to complete
+    //update pending orders to false
     const addToCompleteList = (order) => {
-        fetch(`${ROOT_URL}orders/${order.id}`, {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({pending: false})
-        })
-        .then(res => res.json())
-        .then(newData => {
-            const newPendingOrders = pending.filter(order => order.id !== newData.id);
+        // fetch(`${ROOT_URL}orders/${order.id}`, {
+        //     method: 'PATCH',
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify({pending: false})
+        // })
+        // .then(res => res.json())
+        // .then(newData => {
+        //     const newPendingOrders = pending.filter(order => order.id !== newData.id);
             
-            setPending(newPendingOrders);
-            setComplete([newData, ...complete])
-        });
+        //     setPending(newPendingOrders);
+        //     setComplete([newData, ...complete])
+        // });
     }
 
     const renderListItems = (orders) => {
