@@ -4,6 +4,7 @@ import ListItem from '@material-ui/core/ListItem';
 import Divider from '@material-ui/core/Divider';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import Button from '@material-ui/core/Button';
+import Select from '@material-ui/core/Select';
 import moment from 'moment';
 
 const ROOT_URL = "http://localhost:3000/api/"
@@ -12,6 +13,7 @@ const Dashboard = () => {
 
     const [pending, setPending] = useState([]);
     const [complete, setComplete] = useState([]);
+    const [value, setValue] = useState(true);
     const refs = {};
 
     useEffect(() => {
@@ -52,6 +54,10 @@ const Dashboard = () => {
     //callback fucnttion setting refs(object) as element ids with element
     const setRefs = (element) => {
         if(element) refs[element.id] = element;
+    }
+
+    const handleChange = (e) => {
+        setValue(e.target.value)
     }
 
     //update pending orders to false
@@ -112,21 +118,32 @@ const Dashboard = () => {
                         </div>
 
                         <div className="btn-group">
-                            <Button
+                            {/* <Button
                                 onClick={() => addToCompleteList(order)}
                                 size="small"
                                 variant="contained"
                                 color="secondary"
                             >
                                 Pending..
-                            </Button>
+                            </Button> */}
+                            <Select
+                                native
+                                defaultValue={order.pending}
+                                // value={value}
+                                onChange={handleChange}
+                                id="select-input"
+                            >
+                                <option value={"true"}>Pending...</option>
+                                <option value={"false"}>Complete</option>
+                            </Select>
+
                             <Button
                                 id="second-btn"
                                 size="small"
                                 varaiant="contained"
                                 onClick={() => handleToggle(order)}
                             >
-                                Orders <i class="fa fa-angle-down"></i>
+                                Orders <i className="fa fa-angle-down"></i>
                             </Button>
                         </div>                        
                     </ListItem>
