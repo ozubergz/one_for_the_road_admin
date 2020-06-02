@@ -126,7 +126,9 @@ const Dashboard = () => {
                                 native
                                 value={order.pending}
                                 onChange={(e) => handleChange(e, order.id)}
-                                id="select-input"
+                                className="select-input"
+                                disableUnderline={true}
+                                style={{backgroundColor: order.pending ? "#d9455f" : "#a8df65"}}
                             >
                                 <option value={true}>Waiting...</option>
                                 <option value={false}>Complete</option>
