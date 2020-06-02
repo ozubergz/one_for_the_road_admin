@@ -11,8 +11,8 @@ const ROOT_URL = "http://localhost:3000/api/"
 
 const Dashboard = () => {
 
-    const [pending, setPending] = useState([]);
-    const [complete, setComplete] = useState([]);
+    const [pendingList, setPendingList] = useState([]);
+    const [completeList, setCompleteList] = useState([]);
     // const [value, setValue] = useState(true);
     const refs = {};
 
@@ -29,8 +29,8 @@ const Dashboard = () => {
                 //this filters orders that are not pending
                 const completeOrders = data.filter(order => !order.pending);
                 //this seperate lists between complete and pending orders
-                setPending(pendingOrders);
-                setComplete(completeOrders);
+                setPendingList(pendingOrders);
+                setCompleteList(completeOrders);
             }
         });
     }, []);
@@ -68,10 +68,18 @@ const Dashboard = () => {
         })
         .then(res => res.json())
         .then(newData => {
-            const newPendingOrders = pending.filter(order => order.id !== newData.id);
+            const { pending } = newData;
             
-            setPending(newPendingOrders);
-            setComplete([newData, ...complete])
+            if(!pending) {
+                //remove non pending orders and add them to complete list
+                const newPendingOrders = pendingList.filter(order => order.id !== newData.id);
+                setPendingList(newPendingOrders)
+                setCompleteList([newData, ...completeList])
+            } else if(pending) {
+                const newCompleteOrders = completeList.filter(order => order.id !== newData.id);
+                setCompleteList(newCompleteOrders)
+                setPendingList([newData, ...pendingList])
+            }
         });
     }
 
@@ -90,7 +98,6 @@ const Dashboard = () => {
                                 <li>email: {order.email}</li>
                                 <li>date: {formatDate}</li>
                                 <li>time: {time}</li>
-                                
                             </ul>
                             <div className="collapse" id={order.id} style={{display: 'none'}} ref={setRefs} >
                                 <Divider className="divider" />
@@ -115,14 +122,6 @@ const Dashboard = () => {
                         </div>
 
                         <div className="btn-group">
-                            {/* <Button
-                                onClick={() => addToCompleteList(order)}
-                                size="small"
-                                variant="contained"
-                                color="secondary"
-                            >
-                                Pending..
-                            </Button> */}
                             <Select
                                 native
                                 value={order.pending}
@@ -157,13 +156,13 @@ const Dashboard = () => {
                     className="list" 
                     subheader={<ListSubheader>Pending Orders</ListSubheader>}
                 >
-                    {renderListItems(pending)}
+                    {renderListItems(pendingList)}
                 </List>
                 <List
                     className="list"
                     subheader={<ListSubheader>Complete Orders</ListSubheader>}
                 >
-                    {renderListItems(complete)}
+                    {renderListItems(completeList)}
                 </List>
             </div>
         </div>
