@@ -13,7 +13,7 @@ const Dashboard = () => {
 
     const [pending, setPending] = useState([]);
     const [complete, setComplete] = useState([]);
-    const [value, setValue] = useState(true);
+    // const [value, setValue] = useState(true);
     const refs = {};
 
     useEffect(() => {
@@ -56,26 +56,23 @@ const Dashboard = () => {
         if(element) refs[element.id] = element;
     }
 
-    const handleChange = (e) => {
-        setValue(e.target.value)
-    }
-
-    //update pending orders to false
-    const addToCompleteList = (order) => {
-        // fetch(`${ROOT_URL}orders/${order.id}`, {
-        //     method: 'PATCH',
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify({pending: false})
-        // })
-        // .then(res => res.json())
-        // .then(newData => {
-        //     const newPendingOrders = pending.filter(order => order.id !== newData.id);
+    //this toggles if orders is completed or pending
+    const handleChange = (e, id) => {
+        //update pending and complete orders
+        fetch(`${ROOT_URL}orders/${id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({pending: e.target.value})
+        })
+        .then(res => res.json())
+        .then(newData => {
+            const newPendingOrders = pending.filter(order => order.id !== newData.id);
             
-        //     setPending(newPendingOrders);
-        //     setComplete([newData, ...complete])
-        // });
+            setPending(newPendingOrders);
+            setComplete([newData, ...complete])
+        });
     }
 
     const renderListItems = (orders) => {
@@ -128,13 +125,12 @@ const Dashboard = () => {
                             </Button> */}
                             <Select
                                 native
-                                defaultValue={order.pending}
-                                // value={value}
-                                onChange={handleChange}
+                                value={order.pending}
+                                onChange={(e) => handleChange(e, order.id)}
                                 id="select-input"
                             >
-                                <option value={"true"}>Pending...</option>
-                                <option value={"false"}>Complete</option>
+                                <option value={true}>Waiting...</option>
+                                <option value={false}>Complete</option>
                             </Select>
 
                             <Button
