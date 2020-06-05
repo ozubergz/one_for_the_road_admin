@@ -160,9 +160,13 @@ const Dashboard = () => {
                 <List 
                     className="list" 
                     subheader={<ListSubheader className="list-subheader">
+                        <div className="list-header">
+                            Pending Orders
+                        </div>
                          <FormControl className="list-actions">
-                            <InputLabel htmlFor="sort-native-simple">Sort by</InputLabel>
+                            <InputLabel className="native-simple-label" htmlFor="sort-native-simple">Sort by</InputLabel>
                             <NativeSelect
+                                disableUnderline={true}
                                 id="sort-native-simple"
                             >
                                 <option aria-label="None" value="" />
@@ -171,9 +175,7 @@ const Dashboard = () => {
                                 <option value={30}>Thirty</option>
                             </NativeSelect>
                         </FormControl>
-                        <div className="list-header">
-                            Pending Orders
-                        </div>
+                        
                         </ListSubheader>}
                 >
                    
