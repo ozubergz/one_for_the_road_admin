@@ -159,19 +159,24 @@ const Dashboard = () => {
             <div className="list-group">
                 <List 
                     className="list" 
-                    subheader={<ListSubheader>Pending Orders</ListSubheader>}
+                    subheader={<ListSubheader className="list-subheader">
+                         <FormControl className="list-actions">
+                            <InputLabel htmlFor="sort-native-simple">Sort by</InputLabel>
+                            <NativeSelect
+                                id="sort-native-simple"
+                            >
+                                <option aria-label="None" value="" />
+                                <option value={10}>Ten</option>
+                                <option value={20}>Twenty</option>
+                                <option value={30}>Thirty</option>
+                            </NativeSelect>
+                        </FormControl>
+                        <div className="list-header">
+                            Pending Orders
+                        </div>
+                        </ListSubheader>}
                 >
-                    <FormControl className="list-actions">
-                        <InputLabel htmlFor="sort-native-simple">Sort by</InputLabel>
-                        <NativeSelect
-                            id="sort-native-simple"
-                        >
-                            <option aria-label="None" value="" />
-                            <option value={10}>Ten</option>
-                            <option value={20}>Twenty</option>
-                            <option value={30}>Thirty</option>
-                        </NativeSelect>
-                    </FormControl>
+                   
 
                     {renderListItems(pendingList)}
                 </List>
