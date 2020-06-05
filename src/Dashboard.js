@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import Divider from '@material-ui/core/Divider';
 import ListSubheader from '@material-ui/core/ListSubheader';
+import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
 import Select from '@material-ui/core/Select';
 import moment from 'moment';
+import NativeSelect from '@material-ui/core/NativeSelect';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
+
 
 const ROOT_URL = "http://localhost:3000/api/"
 
@@ -133,7 +137,6 @@ const Dashboard = () => {
                                 <option value={true}>Waiting...</option>
                                 <option value={false}>Complete</option>
                             </Select>
-
                             <Button
                                 id="second-btn"
                                 size="small"
@@ -158,6 +161,18 @@ const Dashboard = () => {
                     className="list" 
                     subheader={<ListSubheader>Pending Orders</ListSubheader>}
                 >
+                    <FormControl className="list-actions">
+                        <InputLabel htmlFor="sort-native-simple">Sort by</InputLabel>
+                        <NativeSelect
+                            id="sort-native-simple"
+                        >
+                            <option aria-label="None" value="" />
+                            <option value={10}>Ten</option>
+                            <option value={20}>Twenty</option>
+                            <option value={30}>Thirty</option>
+                        </NativeSelect>
+                    </FormControl>
+
                     {renderListItems(pendingList)}
                 </List>
                 <List
