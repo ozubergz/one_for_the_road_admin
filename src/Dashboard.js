@@ -187,7 +187,12 @@ const Dashboard = () => {
                 </List>
                 <List
                     className="list"
-                    subheader={<ListSubheader className>Complete Orders</ListSubheader>}
+                    subheader={<ListSubheader className="list-subheader">
+                            <div className="list-header">
+                                Complete Orders
+                            </div>
+                            {selectInput()}
+                        </ListSubheader>}
                 >
                     {renderListItems(completeList)}
                 </List>
