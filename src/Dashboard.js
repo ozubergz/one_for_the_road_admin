@@ -17,7 +17,6 @@ const Dashboard = () => {
 
     const [pendingList, setPendingList] = useState([]);
     const [completeList, setCompleteList] = useState([]);
-    // const [value, setValue] = useState(true);
     const refs = {};
 
     useEffect(() => {
@@ -152,6 +151,23 @@ const Dashboard = () => {
         )
     }
 
+    const selectInput = () => {
+        return(
+            <FormControl className="list-actions">
+                <InputLabel className="native-simple-label" htmlFor="sort-native-simple">Sort by</InputLabel>
+                <NativeSelect
+                    disableUnderline={true}
+                    id="sort-native-simple"
+                >
+                    <option aria-label="None" value="" />
+                    <option value={10}>Ten</option>
+                    <option value={20}>Twenty</option>
+                    <option value={30}>Thirty</option>
+                </NativeSelect>
+            </FormControl>
+        )
+    }
+
     
     return (
         <div>
@@ -163,28 +179,15 @@ const Dashboard = () => {
                         <div className="list-header">
                             Pending Orders
                         </div>
-                         <FormControl className="list-actions">
-                            <InputLabel className="native-simple-label" htmlFor="sort-native-simple">Sort by</InputLabel>
-                            <NativeSelect
-                                disableUnderline={true}
-                                id="sort-native-simple"
-                            >
-                                <option aria-label="None" value="" />
-                                <option value={10}>Ten</option>
-                                <option value={20}>Twenty</option>
-                                <option value={30}>Thirty</option>
-                            </NativeSelect>
-                        </FormControl>
-                        
+                        {selectInput()}
                         </ListSubheader>}
                 >
                    
-
                     {renderListItems(pendingList)}
                 </List>
                 <List
                     className="list"
-                    subheader={<ListSubheader>Complete Orders</ListSubheader>}
+                    subheader={<ListSubheader className>Complete Orders</ListSubheader>}
                 >
                     {renderListItems(completeList)}
                 </List>
