@@ -6,8 +6,33 @@ import Button from '@material-ui/core/Button';
 import Select from '@material-ui/core/Select';
 
 const Order = (props) => {
-    const { id, customer, email, items, date, time, pending } = props;
+    
+    const { 
+        id, 
+        customer, 
+        email, 
+        items, 
+        date, 
+        time, 
+        pending,
+        handleChange 
+    } = props;
+
     const refs = {};
+
+    //toggle handler to toggle display order items 
+    const handleToggle = (id) => {
+        const element = refs[id];
+        const { display } = element.style;
+
+        //target parent of parent
+        const topParent = element.parentNode.parentNode;
+
+        //target second button in button group
+        const button = topParent.querySelector('#second-btn');
+        button.innerHTML = (display === 'none') ? `Orders <i class="fa fa-angle-up"></i>` : `Orders <i class="fa fa-angle-down"></i>`
+        element.style.display = (display === 'none') ? 'block' : 'none';        
+    }
 
      //callback function setting refs(object) as element ids with element
      const setRefs = (element) => {
@@ -34,7 +59,7 @@ const Order = (props) => {
                 <Select
                     native
                     value={pending}
-                    // onChange={(e) => handleChange(e, id)}
+                    onChange={(e) => handleChange(e, id)}
                     className="select-input"
                     disableUnderline={true}
                     style={{backgroundColor: pending ? "#d9455f" : "#a8df65"}}
@@ -46,7 +71,7 @@ const Order = (props) => {
                     id="second-btn"
                     size="small"
                     varaiant="contained"
-                    // onClick={() => handleToggle(order)}
+                    onClick={() => handleToggle(id)}
                 >
                     Orders <i className="fa fa-angle-down"></i>
                 </Button>

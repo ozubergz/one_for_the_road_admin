@@ -3,11 +3,11 @@ import Order from "./Order";
 import moment from 'moment';
 
 const OrderContainer = (props) => {
-    const { orders } = props;
+    const { orders, handleChange } = props;
 
     return orders.map(order => {
-        const { id, customer, email, items, pending } = order;
-        const date = moment(order.created_at)
+        const { id, customer, email, items, pending, created_at } = order;
+        const date = moment(created_at)
         const formatDate = date.format('MMMM Do YYYY');
         const time = date.format('h:mm:ss a');
         
@@ -21,6 +21,7 @@ const OrderContainer = (props) => {
                 date={formatDate} 
                 time={time}
                 pending={pending}
+                handleChange={handleChange}
             />
         )
         

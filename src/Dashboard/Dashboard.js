@@ -33,25 +33,7 @@ const Dashboard = () => {
         });
     }, []);
 
-    //toggle handler to toggle display order items 
-    // const handleToggle = ({id}) => {
-    //     const element = refs[id];
-    //     const { display } = element.style;
-
-    //     //target parent of parent
-    //     const topParent = element.parentNode.parentNode;
-
-    //     //target second button in button group
-    //     const button = topParent.querySelector('#second-btn');
-
-    //     button.innerHTML = (display === 'none') ? `Orders <i class="fa fa-angle-up"></i>` : `Orders <i class="fa fa-angle-down"></i>`
-
-    //     element.style.display = (display === 'none') ? 'block' : 'none';        
-    // }
-
-    
-
-    //this toggles if orders is completed or pending
+    //this toggles to update orders whether to set them as complete or pending
     const handleChange = (e, id) => {
         //update pending and complete orders
         fetch(`${ROOT_URL}orders/${id}`, {
@@ -77,8 +59,6 @@ const Dashboard = () => {
             }
         });
     }
-
-
 
     //this is a callback function that sorts objs
     const compare = (key) => {
@@ -126,8 +106,8 @@ const Dashboard = () => {
         <div>
             <h1>One for the Road Admin</h1>
             <div className="list-group">
-                <ListOrder heading="Pending Orders" orders={pendingList} />
-                <ListOrder heading="Complete Orders" orders={completeList} />
+                <ListOrder heading="Pending Orders" orders={pendingList} handleChange={handleChange} />
+                <ListOrder heading="Complete Orders" orders={completeList} handleChange={handleChange} />
             </div>
         </div>
     );

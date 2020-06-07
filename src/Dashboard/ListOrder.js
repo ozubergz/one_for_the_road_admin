@@ -6,8 +6,7 @@ import List from '@material-ui/core/List';
 import ListSubheader from '@material-ui/core/ListSubheader';
 
 const ListOrder = (props) => {
-    const { heading, orders } = props;
-    
+    const { heading, orders, handleChange } = props;
 
     return(
         <List 
@@ -19,7 +18,7 @@ const ListOrder = (props) => {
                 {/* {selectInput("pending")} */}
                 </ListSubheader>}
         >
-            <OrderContainer orders={orders} />
+            <OrderContainer orders={orders} handleChange={handleChange} />
         </List>
     )
 }
