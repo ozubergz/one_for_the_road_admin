@@ -1,26 +1,27 @@
 import React from 'react';
 import ListItem from '@material-ui/core/ListItem';
 import Divider from '@material-ui/core/Divider';
-import Button from '@material-ui/core/Button';
-import Select from '@material-ui/core/Select';
+// import Button from '@material-ui/core/Button';
+// import Select from '@material-ui/core/Select';
 
 const Order = (props) => {
-    const { order, date, time } = props
+    const { id, customer, email, items, date, time } = props;
+
     return (
-        <ListItem key={order.id} className="list-item">
+        <ListItem key={id} className="list-item">
             <div className="list-item-body">
                 <ul>
-                    <li>{order.customer}</li>
-                    <li>email: {order.email}</li>
+                    <li>{customer}</li>
+                    <li>email: {email}</li>
                     <li>date: {date}</li>
                     <li>time: {time}</li>
                 </ul>
                 {/* <div className="collapse" id={order.id} style={{display: 'none'}} ref={setRefs} > */}
-                <div className="collapse" id={order.id} style={{display: 'none'}} >
+                <div className="collapse" id={id} style={{display: 'none'}} >
 
                     <Divider className="divider" />
                     <ol>
-                        {order.items.map(({id, name, select_options}, i) => { 
+                        {items.map(({id, name, select_options}, i) => { 
                             return <li key={i}>
                                 {name}                                                    
                                 {select_options ?

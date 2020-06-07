@@ -19,23 +19,8 @@ const ListOrder = (props) => {
                 </ListSubheader>}
         >
             <OrderContainer orders={orders} />
-            {/* {renderListItems(pendingList)} */}
         </List>
     )
 }
 
 export default ListOrder;
-
-// const renderListItems = (orders) => {
-//     return ( 
-//         orders.map(order => {
-//             const date = moment(order.created_at)
-//             const formatDate = date.format('MMMM Do YYYY');
-//             const time = date.format('h:mm:ss a');
-
-//             return (
-                
-//             )
-//         })
-//     )
-// }
