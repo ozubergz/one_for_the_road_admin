@@ -151,18 +151,25 @@ const Dashboard = () => {
         )
     }
 
-    const selectInput = () => {
+    const handleSort = (e, listType) => {
+        const { value } = e.target;
+        console.log(value, listType)
+    }
+
+    const selectInput = (listType) => {
         return(
             <FormControl className="list-actions">
                 <InputLabel className="native-simple-label" htmlFor="sort-native-simple">Sort by</InputLabel>
                 <NativeSelect
+                    onChange={(e) => handleSort(e, listType)}
                     disableUnderline={true}
                     id="sort-native-simple"
                 >
                     <option aria-label="None" value="" />
-                    <option value={10}>Ten</option>
-                    <option value={20}>Twenty</option>
-                    <option value={30}>Thirty</option>
+                    <option value={"name"}>Name</option>
+                    <option value={"email"}>Email</option>
+                    <option value={"date"}>Date</option>
+                    <option value={"time"}>Time</option>
                 </NativeSelect>
             </FormControl>
         )
@@ -179,7 +186,7 @@ const Dashboard = () => {
                         <div className="list-header">
                             Pending Orders
                         </div>
-                        {selectInput()}
+                        {selectInput("pending")}
                         </ListSubheader>}
                 >
                    
@@ -191,7 +198,7 @@ const Dashboard = () => {
                             <div className="list-header">
                                 Complete Orders
                             </div>
-                            {selectInput()}
+                            {selectInput("complete")}
                         </ListSubheader>}
                 >
                     {renderListItems(completeList)}
