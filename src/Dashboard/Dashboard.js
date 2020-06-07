@@ -13,7 +13,6 @@ const Dashboard = () => {
 
     const [pendingList, setPendingList] = useState([]);
     const [completeList, setCompleteList] = useState([]);
-    const refs = {};
 
     useEffect(() => {
         fetch(`${ROOT_URL}orders`)
@@ -35,25 +34,22 @@ const Dashboard = () => {
     }, []);
 
     //toggle handler to toggle display order items 
-    const handleToggle = ({id}) => {
-        const element = refs[id];
-        const { display } = element.style;
+    // const handleToggle = ({id}) => {
+    //     const element = refs[id];
+    //     const { display } = element.style;
 
-        //target parent of parent
-        const topParent = element.parentNode.parentNode;
+    //     //target parent of parent
+    //     const topParent = element.parentNode.parentNode;
 
-        //target second button in button group
-        const button = topParent.querySelector('#second-btn');
+    //     //target second button in button group
+    //     const button = topParent.querySelector('#second-btn');
 
-        button.innerHTML = (display === 'none') ? `Orders <i class="fa fa-angle-up"></i>` : `Orders <i class="fa fa-angle-down"></i>`
+    //     button.innerHTML = (display === 'none') ? `Orders <i class="fa fa-angle-up"></i>` : `Orders <i class="fa fa-angle-down"></i>`
 
-        element.style.display = (display === 'none') ? 'block' : 'none';        
-    }
+    //     element.style.display = (display === 'none') ? 'block' : 'none';        
+    // }
 
-    //callback fucnttion setting refs(object) as element ids with element
-    const setRefs = (element) => {
-        if(element) refs[element.id] = element;
-    }
+    
 
     //this toggles if orders is completed or pending
     const handleChange = (e, id) => {
