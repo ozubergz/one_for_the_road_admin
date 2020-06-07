@@ -151,27 +151,38 @@ const Dashboard = () => {
         )
     }
 
-    const handleSort = (e, listType) => {
-        const { value } = e.target;
-        if(listType === "pending") {
-            let sortedList = [...pendingList];
-            
-            //sort lists
-            sortedList.sort((a, b) => {
-                //check select value is date
-                if(value === "created_at") {
-                    //only sort from up to down if it's date
-                    if (a[value] > b[value]) return -1
-                    return a[value] < b[value] ? 1 : 0
-                } else {
-                    if (a[value] < b[value]) return -1
-                    return a[value] > b[value] ? 1 : 0
-                }
-            });
-            setPendingList(sortedList)
-        } else if(listType === "complete") {
-            
+    //this is a callback function that sorts objs
+    const compare = (key) => {
+        return (a, b) => {
+            if(key === "created_at") {
+                //only sort descending for date key
+                if (a[key] > b[key]) return -1
+                return a[key] < b[key] ? 1 : 0
+            } else {
+                if (a[key] < b[key]) return -1
+                return a[key] > b[key] ? 1 : 0
+            }
         }
+    }
+
+    //this handles to set the lists that are sorted
+    const handleSelectInput = (e, listType) => {
+        const { value } = e.target;
+        let sortedList = (listType === "pending") ? [...pendingList] : [...completeList];
+        sortedList.sort(compare(value))
+        
+        listType === "pending" ? setPendingList(sortedList) : setCompleteList(sortedList)
+        
+        
+        // if(listType === "pending") {
+        //     sortedList = [...pendingList]
+        //     sortedList.sort(compare(value))
+        //     setPendingList(sortedList)
+        // } else {
+        //     sortedList = [...completeList]
+        //     sortedList.sort(compare(value))
+        //     setCompleteList(sortedList)
+        // }
     }
 
     const selectInput = (listType) => {
@@ -179,7 +190,7 @@ const Dashboard = () => {
             <FormControl className="list-actions">
                 <InputLabel className="native-simple-label" htmlFor="sort-native-simple">Sort by</InputLabel>
                 <NativeSelect
-                    onChange={(e) => handleSort(e, listType)}
+                    onChange={(e) => handleSelectInput(e, listType)}
                     disableUnderline={true}
                     id="sort-native-simple"
                 >
@@ -198,7 +209,7 @@ const Dashboard = () => {
             <h1>One for the Road Admin</h1>
             <div className="list-group">
                 <List 
-                    className="list" 
+                    className="list"
                     subheader={<ListSubheader className="list-subheader">
                         <div className="list-header">
                             Pending Orders
