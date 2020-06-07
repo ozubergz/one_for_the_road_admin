@@ -1,16 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import ListOrder from "./ListOrder";
 
-
-import NativeSelect from '@material-ui/core/NativeSelect';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl';
-
-
 const ROOT_URL = "http://localhost:3000/api/"
 
 const Dashboard = () => {
-
     const [pendingList, setPendingList] = useState([]);
     const [completeList, setCompleteList] = useState([]);
 
@@ -83,31 +76,24 @@ const Dashboard = () => {
         listType === "pending" ? setPendingList(sortedList) : setCompleteList(sortedList)
     }
 
-    const selectInput = (listType) => {
-        return(
-            <FormControl className="list-actions">
-                <InputLabel className="native-simple-label" htmlFor="sort-native-simple">Sort by</InputLabel>
-                <NativeSelect
-                    onChange={(e) => handleSort(e, listType)}
-                    disableUnderline={true}
-                    id="sort-native-simple"
-                >
-                    <option aria-label="None" value="" />
-                    <option value={"customer"}>Name</option>
-                    <option value={"email"}>Email</option>
-                    <option value={"created_at"}>Date</option>
-                </NativeSelect>
-            </FormControl>
-        )
-    }
-
-    
     return (
         <div>
             <h1>One for the Road Admin</h1>
             <div className="list-group">
-                <ListOrder heading="Pending Orders" orders={pendingList} handleChange={handleChange} />
-                <ListOrder heading="Complete Orders" orders={completeList} handleChange={handleChange} />
+                <ListOrder 
+                    heading="Pending Orders" 
+                    listType="pending"
+                    orders={pendingList} 
+                    handleChange={handleChange}
+                    handleSort={handleSort}
+                />
+                <ListOrder 
+                    heading="Complete Orders" 
+                    listType="complete"
+                    orders={completeList} 
+                    handleChange={handleChange} 
+                    handleSort={handleSort}
+                />
             </div>
         </div>
     );
