@@ -153,7 +153,18 @@ const Dashboard = () => {
 
     const handleSort = (e, listType) => {
         const { value } = e.target;
-        console.log(value, listType)
+        if(listType === "pending") {
+            let sortedList = [...pendingList];
+            //sort lists
+            sortedList.sort((a, b) => {
+                if (a.customer < b.customer) return -1
+                return a.customer > b.customer ? 1 : 0
+            });
+            
+            
+            
+            
+        }
     }
 
     const selectInput = (listType) => {
@@ -166,7 +177,7 @@ const Dashboard = () => {
                     id="sort-native-simple"
                 >
                     <option aria-label="None" value="" />
-                    <option value={"name"}>Name</option>
+                    <option value={"customer"}>Name</option>
                     <option value={"email"}>Email</option>
                     <option value={"date"}>Date</option>
                     <option value={"time"}>Time</option>
