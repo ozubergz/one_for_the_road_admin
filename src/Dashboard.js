@@ -155,14 +155,21 @@ const Dashboard = () => {
         const { value } = e.target;
         if(listType === "pending") {
             let sortedList = [...pendingList];
+            
             //sort lists
             sortedList.sort((a, b) => {
-                if (a.customer < b.customer) return -1
-                return a.customer > b.customer ? 1 : 0
+                //check select value is date
+                if(value === "created_at") {
+                    //only sort from up to down if it's date
+                    if (a[value] > b[value]) return -1
+                    return a[value] < b[value] ? 1 : 0
+                } else {
+                    if (a[value] < b[value]) return -1
+                    return a[value] > b[value] ? 1 : 0
+                }
             });
-            
-            
-            
+            setPendingList(sortedList)
+        } else if(listType === "complete") {
             
         }
     }
@@ -179,8 +186,7 @@ const Dashboard = () => {
                     <option aria-label="None" value="" />
                     <option value={"customer"}>Name</option>
                     <option value={"email"}>Email</option>
-                    <option value={"date"}>Date</option>
-                    <option value={"time"}>Time</option>
+                    <option value={"created_at"}>Date</option>
                 </NativeSelect>
             </FormControl>
         )
