@@ -9,7 +9,7 @@ import { Users } from './Users/index';
 import { Orders } from './Orders/index';
 import { Items } from './Items/index';
 import { Categories } from './Categories/index';
-import Dashboard from './Dashboard';
+import Dashboard from './Dashboard/Dashboard';
 
 //Material UI Icons
 import PersonIcon from '@material-ui/icons/Person';
