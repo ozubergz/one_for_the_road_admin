@@ -50,10 +50,14 @@ body {
     margin-bottom: 10px !important;
 }
 
+.list-item-body {
+    margin-left: 50px;
+}
+
 .list-item-body > ul {
     list-style-type: none;
     padding-left: 0;
-    width: 200px;
+    /* width: 200px; */
 }
 
 .list-item-body ol {
@@ -85,8 +89,9 @@ body {
     right: 15px;
 }
 
-.list-checkbox {
-    margin-top: -54px !important;
+.list-checkbox-group {
+    position: absolute;
+    top: -3px;
 }
 
 .fa {

@@ -44,9 +44,9 @@ const Order = (props) => {
 
     return (
         <ListItem className="list-item">
-            <ListItemIcon>
+            <ListItemIcon className="list-checkbox-group">
               <Checkbox
-                className="list-checkbox"
+                
                 edge="start"
                 // checked={checked.indexOf(value) !== -1}
                 // tabIndex={-1}
