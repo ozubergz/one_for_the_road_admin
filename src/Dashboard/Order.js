@@ -4,6 +4,9 @@ import ListItem from '@material-ui/core/ListItem';
 import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
 import Select from '@material-ui/core/Select';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import Checkbox from '@material-ui/core/Checkbox';
+
 
 const Order = (props) => {
     
@@ -41,6 +44,16 @@ const Order = (props) => {
 
     return (
         <ListItem className="list-item">
+            <ListItemIcon>
+              <Checkbox
+                className="list-checkbox"
+                edge="start"
+                // checked={checked.indexOf(value) !== -1}
+                // tabIndex={-1}
+                // inputProps={{ 'aria-labelledby': labelId }}
+              />
+            </ListItemIcon>
+
             <div className="list-item-body">
                 <ul>
                     <li>{customer}</li>
@@ -55,7 +68,7 @@ const Order = (props) => {
                 </div>                       
             </div>
 
-            <div className="btn-group">
+            <div className="list-btn-group">
                 <Select
                     native
                     value={pending}
