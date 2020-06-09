@@ -58,17 +58,18 @@ const ListOrder = (props) => {
                         <Checkbox
                             // checked={state.checkedB}
                             // onChange={handleChange}
-                            // name="checkedB"
-                            // color="primary"
+                            // color="secondary"
+                            size="small"
                         />
                     }
+                    className="select-all"
                     label="Select All"
+                    fontSize="6"
                 />
                 
-                <IconButton edge="end" aria-label="comments">
+                <IconButton aria-label="Delete">
                     <DeleteIcon fontSize="small" />
                 </IconButton>
-                
 
             </ListItem>
 

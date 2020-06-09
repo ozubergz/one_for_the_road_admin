@@ -16,6 +16,8 @@ body {
     font-weight: 400;
 }
 
+/********************** Lists style **********************/
+
 .list {
     width: 100%;
     max-width: 40ch;
@@ -94,6 +96,30 @@ body {
     top: -3px;
 }
 
+.list-subheader {
+    display: flex;
+    background-color: pink !important;
+}
+
+.list-header {
+    padding-top: 8px;
+    width: 75%;
+}
+
+.list-sort {
+    width: 25%;
+}
+
+.list-actions {
+    background-color: gray;
+    /* margin-top: -23px; */
+}
+
+.select-all {
+    font-size: 1px !important;
+}
+
+
 .fa {
     margin-left: 5px;
     font-size: 25px;
@@ -118,19 +144,7 @@ body {
     font-size: 14px !important;
 }
 
-.list-subheader {
-    display: flex;
-    /* margin-bottom: 5px; */
-}
 
-.list-header {
-    padding-top: 8px;
-    width: 75%;
-}
-
-.list-sort {
-    width: 25%;
-}
 
 
 
