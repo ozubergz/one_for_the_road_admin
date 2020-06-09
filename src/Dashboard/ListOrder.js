@@ -10,6 +10,8 @@ import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+
 
 import Checkbox from '@material-ui/core/Checkbox';
 
@@ -50,20 +52,24 @@ const ListOrder = (props) => {
             className="list"
             subheader={renderSelectInput()}
         >
-            <ListItem >
-                <ListItemIcon>
-                    <Checkbox
-                        edge="start"
-                        // onClick={() => handleCheckBox(id)}
-                        // checked={checked.indexOf(id) !== -1}
-                        // tabIndex={-1}
-                        // inputProps={{ 'aria-labelledby': labelId }}
-                    />
-                    Select All
-                </ListItemIcon>
-                <IconButton aria-label="Delete">
-                    <DeleteIcon />
+            <ListItem className="list-actions" >
+                <FormControlLabel
+                    control={
+                        <Checkbox
+                            // checked={state.checkedB}
+                            // onChange={handleChange}
+                            // name="checkedB"
+                            // color="primary"
+                        />
+                    }
+                    label="Select All"
+                />
+                
+                <IconButton edge="end" aria-label="comments">
+                    <DeleteIcon fontSize="small" />
                 </IconButton>
+                
+
             </ListItem>
 
             <OrderContainer 
