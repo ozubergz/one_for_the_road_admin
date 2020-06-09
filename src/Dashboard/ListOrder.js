@@ -74,7 +74,7 @@ const ListOrder = (props) => {
             className="list"
             subheader={renderSelectInput()}
         >
-            
+
             {console.log(checked)}
 
             <ListItem className="list-actions" >
@@ -88,8 +88,8 @@ const ListOrder = (props) => {
                     }
                     label={<span style={{ fontSize: '0.9rem' }}>Select All</span>}
                 />
-                <IconButton disabled={true} aria-label="Delete">
-                    <DeleteIcon color="secondary" fontSize="small" />
+                <IconButton disabled={!(checked.length !== 0)} aria-label="Delete">
+                    <DeleteIcon color={(checked.length !== 0) ? "secondary": "none"} fontSize="small" />
                 </IconButton>
             </ListItem>
 
