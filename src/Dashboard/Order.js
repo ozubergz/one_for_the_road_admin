@@ -1,10 +1,10 @@
 import React from 'react';
 import ItemContainer from "./ItemContainer";
 import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
 import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
 import Select from '@material-ui/core/Select';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import Checkbox from '@material-ui/core/Checkbox';
 
 
@@ -54,7 +54,6 @@ const Order = (props) => {
                 // tabIndex={-1}
                 // inputProps={{ 'aria-labelledby': labelId }}
               />
-              {/* {console.log(checked)} */}
             </ListItemIcon>
 
             <div className="list-item-body">

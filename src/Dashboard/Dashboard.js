@@ -108,6 +108,7 @@ const Dashboard = () => {
                     orders={completeList} 
                     handleChange={handleChange} 
                     handleSort={handleSort}
+                    handleCheckBox={handleCheckBox}
                 />
             </div>
         </div>
