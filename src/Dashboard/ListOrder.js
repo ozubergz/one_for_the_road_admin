@@ -9,7 +9,14 @@ import FormControl from '@material-ui/core/FormControl';
 
 
 const ListOrder = (props) => {
-    const { heading, orders, listType, handleSort, handleChange } = props;
+    const { 
+        heading, 
+        orders, 
+        listType, 
+        handleSort, 
+        handleChange,
+        handleCheckBox
+    } = props;
 
     const renderSelectInput = () => (
         <ListSubheader className="list-subheader">
@@ -37,7 +44,11 @@ const ListOrder = (props) => {
             className="list"
             subheader={renderSelectInput()}
         >
-            <OrderContainer orders={orders} handleChange={handleChange} />
+            <OrderContainer 
+                orders={orders} 
+                handleChange={handleChange} 
+                handleCheckBox={handleCheckBox}
+            />
         </List>
     )
 }

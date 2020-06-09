@@ -18,7 +18,8 @@ const Order = (props) => {
         date, 
         time, 
         pending,
-        handleChange 
+        handleChange,
+        handleCheckBox
     } = props;
 
     const refs = {};
@@ -42,16 +43,18 @@ const Order = (props) => {
         if(element) refs[element.id] = element;
     }
 
+
     return (
         <ListItem className="list-item">
             <ListItemIcon className="list-checkbox-group">
               <Checkbox
-                
                 edge="start"
-                // checked={checked.indexOf(value) !== -1}
+                onClick={() => handleCheckBox(id)}
+                // checked={checked.indexOf(id) !== -1}
                 // tabIndex={-1}
                 // inputProps={{ 'aria-labelledby': labelId }}
               />
+              {/* {console.log(checked)} */}
             </ListItemIcon>
 
             <div className="list-item-body">
