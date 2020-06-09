@@ -98,7 +98,6 @@ body {
 
 .list-subheader {
     display: flex;
-    background-color: pink !important;
 }
 
 .list-header {
@@ -111,12 +110,9 @@ body {
 }
 
 .list-actions {
-    background-color: gray;
+    background-color: rgb(223, 223, 223);
+    margin-bottom: 10px;
     /* margin-top: -23px; */
-}
-
-.select-all {
-    font-size: 1px !important;
 }
 
 

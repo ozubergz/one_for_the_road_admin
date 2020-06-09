@@ -62,9 +62,8 @@ const ListOrder = (props) => {
                             size="small"
                         />
                     }
-                    className="select-all"
-                    label="Select All"
-                    fontSize="6"
+                    // className="select-all-label"
+                    label={<span style={{ fontSize: '0.9rem' }}>Select All</span>}
                 />
                 
                 <IconButton aria-label="Delete">
