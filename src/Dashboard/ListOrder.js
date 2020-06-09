@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import OrderContainer from "./OrderContainer";
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -17,13 +17,13 @@ import Checkbox from '@material-ui/core/Checkbox';
 
 
 const ListOrder = (props) => {
+    const [checked, setChecked] = useState([])
     const { 
         heading, 
         orders, 
         listType, 
         handleSort, 
         handleChange,
-        handleCheckBox
     } = props;
 
     const renderSelectInput = () => (
@@ -47,35 +47,48 @@ const ListOrder = (props) => {
         </ListSubheader>
     )
 
+    const handleCheckBox = (value) => {
+        const currentIndex = checked.indexOf(value)
+        const newChecked = [...checked];
+
+        if(currentIndex === -1) {
+            newChecked.push(value)
+        } else {
+            newChecked.splice(currentIndex, 1)
+        }
+        
+        setChecked(newChecked);
+    }
+
     return(
         <List 
             className="list"
             subheader={renderSelectInput()}
         >
+            {console.log(checked)}
+            
             <ListItem className="list-actions" >
                 <FormControlLabel
                     control={
                         <Checkbox
                             // checked={state.checkedB}
                             // onChange={handleChange}
-                            // color="secondary"
                             size="small"
                         />
                     }
                     // className="select-all-label"
                     label={<span style={{ fontSize: '0.9rem' }}>Select All</span>}
                 />
-                
                 <IconButton aria-label="Delete">
                     <DeleteIcon fontSize="small" />
                 </IconButton>
-
             </ListItem>
 
             <OrderContainer 
                 orders={orders} 
                 handleChange={handleChange} 
                 handleCheckBox={handleCheckBox}
+                checked={checked}
             />
         </List>
     )

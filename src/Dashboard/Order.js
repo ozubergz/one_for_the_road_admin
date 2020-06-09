@@ -19,7 +19,8 @@ const Order = (props) => {
         time, 
         pending,
         handleChange,
-        handleCheckBox
+        handleCheckBox,
+        checked
     } = props;
 
     const refs = {};
@@ -50,7 +51,7 @@ const Order = (props) => {
               <Checkbox
                 edge="start"
                 onClick={() => handleCheckBox(id)}
-                // checked={checked.indexOf(id) !== -1}
+                checked={checked.indexOf(id) !== -1}
                 // tabIndex={-1}
                 // inputProps={{ 'aria-labelledby': labelId }}
               />

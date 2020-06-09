@@ -6,7 +6,7 @@ const ROOT_URL = "http://localhost:3000/api/"
 const Dashboard = () => {
     const [pendingList, setPendingList] = useState([]);
     const [completeList, setCompleteList] = useState([]);
-    const [checked, setChecked] = useState([])
+    // const [checked, setChecked] = useState([])
 
     useEffect(() => {
         fetch(`${ROOT_URL}orders`)
@@ -77,18 +77,18 @@ const Dashboard = () => {
         listType === "pending" ? setPendingList(sortedList) : setCompleteList(sortedList)
     }
 
-    const handleCheckBox = (value) => {
-        const currentIndex = checked.indexOf(value)
-        const newChecked = [...checked];
+    // const handleCheckBox = (value) => {
+    //     const currentIndex = checked.indexOf(value)
+    //     const newChecked = [...checked];
 
-        if(currentIndex === -1) {
-            newChecked.push(value)
-        } else {
-            newChecked.splice(currentIndex, 1)
-        }
+    //     if(currentIndex === -1) {
+    //         newChecked.push(value)
+    //     } else {
+    //         newChecked.splice(currentIndex, 1)
+    //     }
         
-        setChecked(newChecked);
-    }
+    //     setChecked(newChecked);
+    // }
 
     return (
         <div>
@@ -100,7 +100,7 @@ const Dashboard = () => {
                     orders={pendingList} 
                     handleChange={handleChange}
                     handleSort={handleSort}
-                    handleCheckBox={handleCheckBox}
+                    // handleCheckBox={handleCheckBox}
                 />
                 <ListOrder 
                     heading="Complete Orders" 
@@ -108,7 +108,7 @@ const Dashboard = () => {
                     orders={completeList} 
                     handleChange={handleChange} 
                     handleSort={handleSort}
-                    handleCheckBox={handleCheckBox}
+                    // handleCheckBox={handleCheckBox}
                 />
             </div>
         </div>

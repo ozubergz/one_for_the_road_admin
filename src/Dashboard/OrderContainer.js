@@ -3,7 +3,7 @@ import Order from "./Order";
 import moment from 'moment';
 
 const OrderContainer = (props) => {
-    const { orders, handleChange, handleCheckBox } = props;
+    const { orders, handleChange, handleCheckBox, checked } = props;
 
     return orders.map(order => {
 
@@ -32,6 +32,7 @@ const OrderContainer = (props) => {
                 pending={pending}
                 handleChange={handleChange}
                 handleCheckBox={handleCheckBox}
+                checked={checked}
             />
         )
         
