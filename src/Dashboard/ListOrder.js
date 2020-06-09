@@ -18,6 +18,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 
 const ListOrder = (props) => {
     const [checked, setChecked] = useState([])
+    // const [selectAll, setSelectAll] = useState(false)
     const { 
         heading, 
         orders, 
@@ -60,23 +61,30 @@ const ListOrder = (props) => {
         setChecked(newChecked);
     }
 
+    const handleSelectAll = (e) => {
+        const selected = e.target.checked;
+        const allOrders = orders.map(order => order.id)
+        const allChecked = selected ? allOrders : []
+
+        setChecked(allChecked)
+    }
+
     return(
         <List 
             className="list"
             subheader={renderSelectInput()}
         >
-            {console.log(checked)}
-            
+            {/* {console.log(checked)} */}
+
             <ListItem className="list-actions" >
                 <FormControlLabel
                     control={
                         <Checkbox
-                            // checked={state.checkedB}
-                            // onChange={handleChange}
+                            // checked={selectAll}
+                            onChange={handleSelectAll}
                             size="small"
                         />
                     }
-                    // className="select-all-label"
                     label={<span style={{ fontSize: '0.9rem' }}>Select All</span>}
                 />
                 <IconButton aria-label="Delete">
