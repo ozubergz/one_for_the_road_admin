@@ -8,11 +8,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-
-
 import Checkbox from '@material-ui/core/Checkbox';
 
 
@@ -62,25 +58,32 @@ const ListOrder = (props) => {
     }
 
     const handleSelectAll = (e) => {
+        //check if checkbox has been selected
         const selected = e.target.checked;
+
+        //get all order ids
         const allOrders = orders.map(order => order.id)
+
+        //if checkbox has been selected check all boxes, else assign with empty array
         const allChecked = selected ? allOrders : []
 
         setChecked(allChecked)
     }
+
+
 
     return(
         <List 
             className="list"
             subheader={renderSelectInput()}
         >
-            {/* {console.log(checked)} */}
+            {console.log(checked)}
 
             <ListItem className="list-actions" >
                 <FormControlLabel
                     control={
                         <Checkbox
-                            // checked={selectAll}
+                            checked={checked.length === orders.length}
                             onChange={handleSelectAll}
                             size="small"
                         />
