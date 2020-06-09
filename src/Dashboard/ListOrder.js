@@ -29,7 +29,7 @@ const ListOrder = (props) => {
             <div className="list-header">
                 {heading}
             </div>
-            <FormControl className="list-actions">
+            <FormControl className="list-sort">
                 <InputLabel className="native-simple-label" htmlFor="sort-native-simple">Sort by</InputLabel>
                 <NativeSelect
                     onChange={(e) => handleSort(e, listType)}
