@@ -20,6 +20,7 @@ const ListOrder = (props) => {
         listType, 
         handleSort, 
         handleChange,
+        handleDelete
     } = props;
 
     const renderSelectInput = () => (
@@ -69,14 +70,13 @@ const ListOrder = (props) => {
         setChecked(allChecked)
     }
 
+    
+
     return(
         <List 
             className="list"
             subheader={renderSelectInput()}
         >
-
-            {console.log(checked)}
-
             <ListItem className="list-actions" >
                 <FormControlLabel
                     control={
@@ -88,8 +88,15 @@ const ListOrder = (props) => {
                     }
                     label={<span style={{ fontSize: '0.9rem' }}>Select All</span>}
                 />
-                <IconButton disabled={!(checked.length !== 0)} aria-label="Delete">
-                    <DeleteIcon color={(checked.length !== 0) ? "secondary": "none"} fontSize="small" />
+                <IconButton 
+                    disabled={!(checked.length !== 0)} 
+                    aria-label="Delete"
+                    onClick={() => handleDelete(checked)}
+                >
+                    <DeleteIcon 
+                        color={(checked.length !== 0) ? "secondary": "disabled"}
+                        fontSize="small"
+                    />
                 </IconButton>
             </ListItem>
 
