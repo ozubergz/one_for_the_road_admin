@@ -77,7 +77,17 @@ const Dashboard = () => {
     }
 
     const handleDelete = (values) => {
-        console.log(values)
+        fetch(`${ROOT_URL}orders/destroy_all`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ids: values}) // 
+        })
+        .then(res => res.json())
+        .then(({ids}) => {
+            console.log(ids)
+        })
     }
 
     return (
