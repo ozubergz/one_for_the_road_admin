@@ -6,6 +6,9 @@ const ROOT_URL = "http://localhost:3000/api/"
 const Dashboard = () => {
     const [pendingList, setPendingList] = useState([]);
     const [completeList, setCompleteList] = useState([]);
+    // const [pendingChecked, setPendingChecked] = useState([]);
+    // const [completeChecked, setCompleteChecked] = useState([]);
+
 
     useEffect(() => {
         fetch(`${ROOT_URL}orders`)
@@ -91,10 +94,11 @@ const Dashboard = () => {
             let newList = list.filter(order => {
                 return ids.indexOf(order.id) === -1
             });
-
+                        
             listType === "pending" ? setPendingList(newList) : setCompleteList(newList)
         })
     }
+
 
     return (
         <div>
