@@ -80,6 +80,13 @@ const ListOrder = (props) => {
             return false
         }
     }
+    
+    const activate = () => {
+        const orderIds = orders.map(order => order.id)
+        const newChecked = checked.filter(id => orderIds.indexOf(id) !== -1)
+        return newChecked.length !== 0
+    }
+
 
     return(
         <List 
@@ -90,7 +97,6 @@ const ListOrder = (props) => {
                 <FormControlLabel
                     control={
                         <Checkbox
-                            // checked={orders.length !== 0 ? checked.length === orders.length : false}
                             checked={toggleCheck()}
                             onChange={handleSelectAll}
                             size="small"
@@ -99,14 +105,12 @@ const ListOrder = (props) => {
                     label={<span style={{ fontSize: '0.9rem' }}>Select All</span>}
                 />
                 <IconButton 
-                    // disabled={!(checked.length !== 0)} 
-                    disabled
+                    disabled={!activate()}
                     aria-label="Delete"
                     onClick={() => handleDelete(checked, listType)}
                 >
                     <DeleteIcon 
-                        // color={(checked.length !== 0) ? "secondary": "disabled"}
-                        color="secondary"
+                        color={activate() ? "secondary": "disabled"}
                         fontSize="small"
                     />
                 </IconButton>
