@@ -10,7 +10,6 @@ const OrderContainer = (props) => {
         const { 
             id, 
             customer, 
-            email, 
             items, 
             pending, 
             created_at 
@@ -25,7 +24,6 @@ const OrderContainer = (props) => {
                 key={id}
                 id={id}
                 customer={customer}
-                email={email}
                 items={items} 
                 date={formatDate} 
                 time={time}

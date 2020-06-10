@@ -91,7 +91,7 @@ const ListOrder = (props) => {
                 <IconButton 
                     disabled={!(checked.length !== 0)} 
                     aria-label="Delete"
-                    onClick={() => handleDelete(checked)}
+                    onClick={() => handleDelete(checked, listType)}
                 >
                     <DeleteIcon 
                         color={(checked.length !== 0) ? "secondary": "disabled"}

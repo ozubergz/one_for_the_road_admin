@@ -13,7 +13,6 @@ const Order = (props) => {
     const { 
         id, 
         customer, 
-        email, 
         items, 
         date, 
         time, 
@@ -60,7 +59,6 @@ const Order = (props) => {
             <div className="list-item-body">
                 <ul>
                     <li>{customer}</li>
-                    <li>email: {email}</li>
                     <li>date: {date}</li>
                     <li>time: {time}</li>
                 </ul>

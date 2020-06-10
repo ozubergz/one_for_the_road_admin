@@ -76,7 +76,7 @@ const Dashboard = () => {
         listType === "pending" ? setPendingList(sortedList) : setCompleteList(sortedList)
     }
 
-    const handleDelete = (values) => {
+    const handleDelete = (values, listType) => {
         fetch(`${ROOT_URL}orders/destroy_all`, {
             method: 'POST',
             headers: {
@@ -86,7 +86,13 @@ const Dashboard = () => {
         })
         .then(res => res.json())
         .then(({ids}) => {
-            console.log(ids)
+            let list = listType === "pending" ? pendingList : completeList;
+            
+            let newList = list.filter(order => {
+                return ids.indexOf(order.id) === -1
+            });
+
+            listType === "pending" ? setPendingList(newList) : setCompleteList(newList)
         })
     }
 
